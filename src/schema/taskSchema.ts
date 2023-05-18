@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
-export const taskSchema = new mongoose.Schema({
+export const taskSchema = new Schema({
   title: {
     type: String,
     required: true,

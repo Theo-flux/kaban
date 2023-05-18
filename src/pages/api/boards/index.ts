@@ -11,7 +11,7 @@ export default async function handler(
     await connectMongo();
     console.log('CONNECTED TO MONGO');
 
-    res.status(200).json({ name: 'All boards endpoint' });
+    res.status(200).json({ name: 'All Kanban boards cluster' });
   } catch (error) {
     console.log(error);
     res.json({ error });

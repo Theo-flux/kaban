@@ -4,13 +4,13 @@ import { ImEye } from 'react-icons/im';
 import { transition } from '@/utils';
 
 type TShowProps = {
-  showSidebar: Boolean;
+  showsidebar: Boolean;
 };
 
 const ShowTagContainer = styled.div<TShowProps>`
   cursor: pointer;
   position: absolute;
-  left: ${props => (props.showSidebar ? `-400px` : `0px`)};
+  left: ${props => (props.showsidebar ? `-400px` : `0px`)};
   z-index: 5;
   bottom: 30px;
   width: 40px;
@@ -30,13 +30,13 @@ const StyledImEye = styled(ImEye)`
 `;
 
 interface IShowTag {
-  showSidebar: Boolean;
-  handleSetShowSidebar: () => void;
+  showsidebar: Boolean;
+  handleSetshowsidebar: () => void;
 }
 
-function ShowTag({ showSidebar, handleSetShowSidebar }: IShowTag) {
+function ShowTag({ showsidebar, handleSetshowsidebar }: IShowTag) {
   return (
-    <ShowTagContainer showSidebar={showSidebar} onClick={handleSetShowSidebar}>
+    <ShowTagContainer showsidebar={showsidebar} onClick={handleSetshowsidebar}>
       <StyledImEye />
     </ShowTagContainer>
   );

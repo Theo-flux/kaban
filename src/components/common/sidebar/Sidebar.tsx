@@ -16,24 +16,25 @@ import {
   HideSidebarText,
   StyledMoon,
   StyledSun,
+  StyledCreateNew,
   // mobile styles
   MobileContainer,
   MobileInner,
-  MobileSettingsContainer
+  MobileSettingsContainer,
 } from './sidebar.css';
 import { Logo } from '../../../shared';
 import { Switch } from '@mantine/core';
 
 interface ISidebar {
-  showSidebar: Boolean;
-  handleSetShowSidebar: () => void;
+  showsidebar: Boolean;
+  handleSetshowsidebar: () => void;
 }
 
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
 
-const Desktop = ({ showSidebar, handleSetShowSidebar }: ISidebar) => {
+const Desktop = ({ showsidebar, handleSetshowsidebar }: ISidebar) => {
   return (
-    <SidebarContainer showSidebar={showSidebar}>
+    <SidebarContainer showsidebar={showsidebar}>
       <SidebarLogo>
         <Logo />
       </SidebarLogo>
@@ -45,10 +46,19 @@ const Desktop = ({ showSidebar, handleSetShowSidebar }: ISidebar) => {
               return (
                 <SidebarBoard key={index}>
                   <SidebarBoardIcon />
-                  <SidebarBoardName>{board}</SidebarBoardName>
+                  <SidebarBoardName name={board}>{board}</SidebarBoardName>
                 </SidebarBoard>
               );
             })}
+            <SidebarBoard>
+              <SidebarBoardIcon />
+              <SidebarBoardName name={'new'}>
+                <span>
+                  <StyledCreateNew />
+                </span>
+                Create New Board
+              </SidebarBoardName>
+            </SidebarBoard>
           </SidebarBoards>
         </SidebarInner>
         <SettingsContainer>
@@ -57,7 +67,7 @@ const Desktop = ({ showSidebar, handleSetShowSidebar }: ISidebar) => {
             <Switch size="xs" color="violet" />
             <StyledMoon />
           </ThemeToggleContainer>
-          <HideSidebarContainer onClick={() => handleSetShowSidebar()}>
+          <HideSidebarContainer onClick={() => handleSetshowsidebar()}>
             <StyledEyeOff />
             <HideSidebarText>Hide Sidebar</HideSidebarText>
           </HideSidebarContainer>
@@ -77,10 +87,19 @@ const Mobile = () => {
             return (
               <SidebarBoard key={index}>
                 <SidebarBoardIcon />
-                <SidebarBoardName>{board}</SidebarBoardName>
+                <SidebarBoardName name={board}>{board}</SidebarBoardName>
               </SidebarBoard>
             );
           })}
+          <SidebarBoard>
+            <SidebarBoardIcon />
+            <SidebarBoardName name={'new'}>
+              <span>
+                <StyledCreateNew />
+              </span>
+              Create New Board
+            </SidebarBoardName>
+          </SidebarBoard>
         </SidebarBoards>
         <MobileSettingsContainer>
           <ThemeToggleContainer>
@@ -94,15 +113,15 @@ const Mobile = () => {
   );
 };
 
-function Sidebar({ showSidebar, handleSetShowSidebar }: ISidebar) {
+function Sidebar({ showsidebar, handleSetshowsidebar }: ISidebar) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
 
   return isFromTablet ? (
     <Desktop
-      showSidebar={showSidebar}
-      handleSetShowSidebar={handleSetShowSidebar}
+      showsidebar={showsidebar}
+      handleSetshowsidebar={handleSetshowsidebar}
     />
   ) : (
     <Mobile />

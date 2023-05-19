@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NavContainer = styled.nav`
+export const NavContainer = styled.div`
   position: fixed;
   width: 100%;
   background-color: var(--white);

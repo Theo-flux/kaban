@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
-const LogoFigure = styled.figure`
+const LogoFigure = styled.div`
   width: 100%;
   padding: 1.3rem;
   /* border: 1px solid magenta; */
 `;
 
-const NavFigure = styled.figure`
+const NavFigure = styled.div`
   width: fit-content;
 `;
 
@@ -16,7 +16,6 @@ const Img = styled.img`
 `;
 
 const LogoImg = styled.img`
-  /* width: 80%; */
   transform: scale(0.8);
 `;
 

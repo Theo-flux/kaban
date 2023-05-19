@@ -2,20 +2,24 @@ import styled from 'styled-components';
 import { StyledBodyMD, StyledHeadingMD } from '@/shared';
 import { device, transition } from '@/utils';
 import { TbLayoutBoardSplit } from 'react-icons/tb';
-import { RiSunFill, RiEyeOffLine } from 'react-icons/ri';
+import { RiSunFill, RiEyeOffLine, RiAddFill } from 'react-icons/ri';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 
-type sidebarContainerProps = {
-  showSidebar: Boolean;
+type TsidebarContainer = {
+  showsidebar: Boolean;
 };
 
-export const SidebarContainer = styled.aside<sidebarContainerProps>`
+type TCreateNewBoard = {
+  name: String;
+};
+
+export const SidebarContainer = styled.div<TsidebarContainer>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: ${props => (props.showSidebar ? `35%` : `0px`)};
-  transform: ${props => (props.showSidebar ? `scaleX(1)` : `scaleX(0)`)};
+  width: ${props => (props.showsidebar ? `35%` : `0px`)};
+  transform: ${props => (props.showsidebar ? `scaleX(1)` : `scaleX(0)`)};
   transform-origin: left;
   height: 100vh;
   border-right: 1px solid var(--link-water);
@@ -23,19 +27,19 @@ export const SidebarContainer = styled.aside<sidebarContainerProps>`
   ${transition}
 
   @media ${device.md} {
-    width: ${props => (props.showSidebar ? `40%` : `0px`)};
+    width: ${props => (props.showsidebar ? `40%` : `0px`)};
   }
 
   @media ${device.lg} {
-    width: ${props => (props.showSidebar ? `25%` : `0px`)};
+    width: ${props => (props.showsidebar ? `25%` : `0px`)};
   }
 
   @media ${device.xl} {
-    width: ${props => (props.showSidebar ? `15%` : `0px`)};
+    width: ${props => (props.showsidebar ? `15%` : `0px`)};
   }
 
   @media ${device.xxl} {
-    width: ${props => (props.showSidebar ? `10%` : `0px`)};
+    width: ${props => (props.showsidebar ? `10%` : `0px`)};
   }
 `;
 
@@ -74,9 +78,10 @@ export const SidebarBoardIcon = styled(TbLayoutBoardSplit)`
   height: 16px;
 `;
 
-export const SidebarBoardName = styled(StyledHeadingMD)`
+export const SidebarBoardName = styled(StyledHeadingMD)<TCreateNewBoard>`
   margin-left: 1rem;
-  color: var(--regeant-gray);
+  color: ${props =>
+    props.name === 'new' ? `var(--blue-marguerite)` : `var(--regeant-gray)`};
 `;
 
 export const SidebarBoard = styled.div`
@@ -162,4 +167,8 @@ export const MobileInner = styled.div`
 export const MobileSettingsContainer = styled.div`
   padding: 0.5rem 1.1rem;
   width: 100%;
+`;
+
+export const StyledCreateNew = styled(RiAddFill)`
+  color: var(--blue-marguerite);
 `;

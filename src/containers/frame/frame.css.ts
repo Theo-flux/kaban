@@ -7,7 +7,7 @@ export const FrameContainer = styled.div`
   align-items: flex-start;
 `;
 
-export const Aside = styled.aside`
+export const Aside = styled.div`
   position: relative;
   width: 85%;
 `;

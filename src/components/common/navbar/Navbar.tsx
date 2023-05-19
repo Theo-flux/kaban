@@ -8,14 +8,14 @@ import {
 import { NavLogo, Section } from '@/shared';
 
 interface INav {
-  showSidebar: Boolean;
+  showsidebar: Boolean;
 }
 
-function Navbar({ showSidebar }: INav) {
+function Navbar({ showsidebar }: INav) {
   return (
     <NavContainer>
       <NavWrapper>
-        {showSidebar == false && (
+        {showsidebar == false && (
           <NavLogoWrapper>
             <NavLogo />
           </NavLogoWrapper>

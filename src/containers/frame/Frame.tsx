@@ -3,24 +3,24 @@ import { Navbar, Sidebar, ShowTag } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
 
 function Frame() {
-  let [showSidebar, setShowSidebar] = useState(true);
+  let [showsidebar, setshowsidebar] = useState(true);
 
-  const handleSetShowSidebar = () => {
-    setShowSidebar(!showSidebar);
+  const handleSetshowsidebar = () => {
+    setshowsidebar(!showsidebar);
   };
 
   return (
     <FrameContainer>
       <Sidebar
-        showSidebar={showSidebar}
-        handleSetShowSidebar={handleSetShowSidebar}
+        showsidebar={showsidebar}
+        handleSetshowsidebar={handleSetshowsidebar}
       />
       <Aside>
-        <Navbar showSidebar={showSidebar} />
+        <Navbar showsidebar={showsidebar} />
       </Aside>
       <ShowTag
-        showSidebar={showSidebar}
-        handleSetShowSidebar={handleSetShowSidebar}
+        showsidebar={showsidebar}
+        handleSetshowsidebar={handleSetshowsidebar}
       />
     </FrameContainer>
   );

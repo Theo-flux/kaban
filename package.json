@@ -9,16 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@mantine/core": "^6.0.11",
+    "@mantine/hooks": "^6.0.11",
     "@types/mongoose": "^5.11.97",
     "@types/node": "20.2.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "babel-plugin-styled-components": "^2.1.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "mongoose": "^7.1.1",
     "next": "13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
+    "react-responsive": "^9.0.2",
     "styled-components": "^6.0.0-rc.1",
     "typescript": "5.0.4"
   },
@@ -28,5 +34,37 @@
     "@types/styled-components": "^5.1.26",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0"
+  },
+  "babel": {
+    "env": {
+      "development": {
+        "presets": [
+          "next/babel"
+        ],
+        "plugins": [
+          [
+            "styled-components",
+            {
+              "ssr": true,
+              "displayName": true
+            }
+          ]
+        ]
+      },
+      "production": {
+        "presets": [
+          "next/babel"
+        ],
+        "plugins": [
+          [
+            "styled-components",
+            {
+              "ssr": true,
+              "displayName": false
+            }
+          ]
+        ]
+      }
+    }
   }
 }

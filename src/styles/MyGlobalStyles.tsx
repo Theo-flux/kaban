@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
     * {
         margin: 0px;
         padding: 0px;
@@ -16,12 +16,13 @@ export default createGlobalStyle`
         /* Secondary color */
         --charade-secondary: #2B2C37;
         --gun-powder: #3E3F4E;
-        --regent-gray: #828FA3;
+        --regeant-gray: #828FA3;
         --link-water: #E4EBFA;
         --selago: #F4F7FD;
         --white: #FFFFFF;
         --mandy: #EA5555;
         --mona-lisa: #FF9898;
+        --backdrop-color: #979797;
     }
     html {
         font-size: 0.9375rem;
@@ -33,19 +34,20 @@ export default createGlobalStyle`
         font-family: 'Plus Jakarta Sans', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background-color: var(--selago);
     }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
     }
     ::-webkit-scrollbar-track{
-      background: var(--silver);
+      background: var(--stroke-color);
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--gray);
+      background: var(--regeant-gray);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary);
+      background: var(--blue-marguerite);
     }
   
     `;

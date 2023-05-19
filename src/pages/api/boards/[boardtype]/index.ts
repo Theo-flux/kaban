@@ -1,3 +1,4 @@
+import { models, model } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectMongo } from '@/utils';
 import { taskSchema } from '@/schema/taskSchema';
@@ -7,6 +8,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { boardtype } = req.query;
+  const { method } = req;
+
+  // create model based on board type
 
   try {
     await connectMongo();

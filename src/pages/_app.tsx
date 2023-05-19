@@ -1,10 +1,11 @@
 import Head from 'next/head';
+import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/MyGlobalStyles';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <ThemeProvider>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="keywords" content="Kanban Task Management App" />
@@ -15,6 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <Component {...pageProps} />
-    </>
+    </ThemeProvider>
   );
 }

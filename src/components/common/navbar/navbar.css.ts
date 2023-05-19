@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const NavContainer = styled.div`
   position: fixed;
   width: 100%;
-  background-color: var(--white);
-  border-bottom: 1px solid var(--link-water);
+  background-color: var(--side);
+  border-bottom: 1px solid var(--side-border);
 `;
 
 export const NavWrapper = styled.div`

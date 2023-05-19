@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import { useMediaQuery } from 'react-responsive';
 import {
   SidebarContainer,
@@ -26,13 +27,25 @@ import { Logo } from '../../../shared';
 import { Switch } from '@mantine/core';
 
 interface ISidebar {
+  theme: string | undefined;
+  handleOnchangeTheme: () => void;
   showsidebar: Boolean;
   handleSetshowsidebar: () => void;
 }
 
+interface IMobilebar {
+  theme: string | undefined;
+  handleOnchangeTheme: () => void;
+}
+
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
 
-const Desktop = ({ showsidebar, handleSetshowsidebar }: ISidebar) => {
+const Desktop = ({
+  theme,
+  handleOnchangeTheme,
+  showsidebar,
+  handleSetshowsidebar,
+}: ISidebar) => {
   return (
     <SidebarContainer showsidebar={showsidebar}>
       <SidebarLogo>
@@ -64,7 +77,12 @@ const Desktop = ({ showsidebar, handleSetshowsidebar }: ISidebar) => {
         <SettingsContainer>
           <ThemeToggleContainer>
             <StyledSun />
-            <Switch size="xs" color="violet" />
+            <Switch
+              size="xs"
+              color="violet"
+              checked={theme == 'dark' ? true : false}
+              onChange={() => handleOnchangeTheme()}
+            />
             <StyledMoon />
           </ThemeToggleContainer>
           <HideSidebarContainer onClick={() => handleSetshowsidebar()}>
@@ -77,7 +95,7 @@ const Desktop = ({ showsidebar, handleSetshowsidebar }: ISidebar) => {
   );
 };
 
-const Mobile = () => {
+const Mobile = ({ theme, handleOnchangeTheme }: IMobilebar) => {
   return (
     <MobileContainer>
       <MobileInner>
@@ -104,7 +122,12 @@ const Mobile = () => {
         <MobileSettingsContainer>
           <ThemeToggleContainer>
             <StyledSun />
-            <Switch size="xs" color="violet" />
+            <Switch
+              size="xs"
+              color="violet"
+              checked={theme == 'dark' ? true : false}
+              onChange={() => handleOnchangeTheme()}
+            />
             <StyledMoon />
           </ThemeToggleContainer>
         </MobileSettingsContainer>
@@ -118,13 +141,21 @@ function Sidebar({ showsidebar, handleSetshowsidebar }: ISidebar) {
     query: '(min-width: 768px)',
   });
 
+  const { theme, setTheme } = useTheme();
+
+  const handleOnchangeTheme = () => {
+    theme === 'light' || !theme ? setTheme('dark') : setTheme('light');
+  };
+
   return isFromTablet ? (
     <Desktop
+      theme={theme}
+      handleOnchangeTheme={handleOnchangeTheme}
       showsidebar={showsidebar}
       handleSetshowsidebar={handleSetshowsidebar}
     />
   ) : (
-    <Mobile />
+    <Mobile theme={theme} handleOnchangeTheme={handleOnchangeTheme} />
   );
 }
 

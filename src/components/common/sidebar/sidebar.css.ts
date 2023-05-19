@@ -22,8 +22,8 @@ export const SidebarContainer = styled.div<TsidebarContainer>`
   transform: ${props => (props.showsidebar ? `scaleX(1)` : `scaleX(0)`)};
   transform-origin: left;
   height: 100vh;
-  border-right: 1px solid var(--link-water);
-  background-color: var(--white);
+  border-right: 1px solid var(--side-border);
+  background-color: var(--side);
   ${transition}
 
   @media ${device.md} {
@@ -116,7 +116,7 @@ export const ThemeToggleContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background-color: var(--selago);
+  background-color: var(--body);
   padding: 0.75rem;
   margin-bottom: 1rem;
 `;
@@ -153,7 +153,7 @@ export const MobileContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100vh;
-  background-color: var(--backdrop-color);
+  /* background-color: var(--backdrop-color); */
 `;
 
 export const MobileInner = styled.div`

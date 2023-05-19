@@ -23,6 +23,16 @@ export const GlobalStyles = createGlobalStyle`
         --mandy: #EA5555;
         --mona-lisa: #FF9898;
         --backdrop-color: #979797;
+
+        --body: var(--selago);
+        --side: var(--white);
+        --side-border: var(--link-water);
+    }
+
+    [data-theme='dark'] {
+      --body: var(--charade-primary);
+      --side: var(--gun-powder);
+      --side-border: var(--backdrop-color);
     }
     html {
         font-size: 0.9375rem;
@@ -34,7 +44,7 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Plus Jakarta Sans', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: var(--selago);
+        background-color: var(--body);
     }
     ::-webkit-scrollbar {
       width: 5px;

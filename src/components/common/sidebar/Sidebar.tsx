@@ -27,6 +27,11 @@ import { Logo } from '../../../shared';
 import { Switch } from '@mantine/core';
 
 interface ISidebar {
+  showsidebar: Boolean;
+  handleSetshowsidebar: () => void;
+}
+
+interface IDesktopbar {
   theme: string | undefined;
   handleOnchangeTheme: () => void;
   showsidebar: Boolean;
@@ -45,7 +50,7 @@ const Desktop = ({
   handleOnchangeTheme,
   showsidebar,
   handleSetshowsidebar,
-}: ISidebar) => {
+}: IDesktopbar) => {
   return (
     <SidebarContainer showsidebar={showsidebar}>
       <SidebarLogo>

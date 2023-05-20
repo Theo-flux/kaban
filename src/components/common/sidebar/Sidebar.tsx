@@ -29,6 +29,8 @@ import { Switch } from '@mantine/core';
 interface ISidebar {
   showsidebar: Boolean;
   handleSetshowsidebar: () => void;
+  openmobilenav: Boolean;
+  handleSetopenmobilenav: () => void;
 }
 
 interface IDesktopbar {
@@ -41,6 +43,8 @@ interface IDesktopbar {
 interface IMobilebar {
   theme: string | undefined;
   handleOnchangeTheme: () => void;
+  openmobilenav: Boolean;
+  handleSetopenmobilenav: () => void;
 }
 
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
@@ -100,15 +104,20 @@ const Desktop = ({
   );
 };
 
-const Mobile = ({ theme, handleOnchangeTheme }: IMobilebar) => {
+const Mobile = ({
+  theme,
+  handleOnchangeTheme,
+  openmobilenav,
+  handleSetopenmobilenav,
+}: IMobilebar) => {
   return (
-    <MobileContainer>
-      <MobileInner>
+    <MobileContainer openmobilenav={openmobilenav}>
+      <MobileInner openmobilenav={openmobilenav}>
         <AllBoardText>ALL BOARDS (0)</AllBoardText>
         <SidebarBoards>
           {boards.map((board, index) => {
             return (
-              <SidebarBoard key={index}>
+              <SidebarBoard key={index} onClick={() => handleSetopenmobilenav()}>
                 <SidebarBoardIcon />
                 <SidebarBoardName name={board}>{board}</SidebarBoardName>
               </SidebarBoard>
@@ -141,7 +150,12 @@ const Mobile = ({ theme, handleOnchangeTheme }: IMobilebar) => {
   );
 };
 
-function Sidebar({ showsidebar, handleSetshowsidebar }: ISidebar) {
+function Sidebar({
+  showsidebar,
+  handleSetshowsidebar,
+  openmobilenav,
+  handleSetopenmobilenav,
+}: ISidebar) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -160,7 +174,12 @@ function Sidebar({ showsidebar, handleSetshowsidebar }: ISidebar) {
       handleSetshowsidebar={handleSetshowsidebar}
     />
   ) : (
-    <Mobile theme={theme} handleOnchangeTheme={handleOnchangeTheme} />
+    <Mobile
+      theme={theme}
+      handleOnchangeTheme={handleOnchangeTheme}
+      openmobilenav={openmobilenav}
+      handleSetopenmobilenav={handleSetopenmobilenav}
+    />
   );
 }
 

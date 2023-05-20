@@ -4,9 +4,14 @@ import { FrameContainer, Aside } from './frame.css';
 
 function Frame() {
   let [showsidebar, setshowsidebar] = useState(true);
+  let [openmobilenav, setopenmobilenav] = useState(false);
 
   const handleSetshowsidebar = () => {
     setshowsidebar(!showsidebar);
+  };
+
+  const handleSetopenmobilenav = () => {
+    setopenmobilenav(!openmobilenav);
   };
 
   return (
@@ -14,9 +19,15 @@ function Frame() {
       <Sidebar
         showsidebar={showsidebar}
         handleSetshowsidebar={handleSetshowsidebar}
+        openmobilenav={openmobilenav}
+        handleSetopenmobilenav={handleSetopenmobilenav}
       />
       <Aside>
-        <Navbar showsidebar={showsidebar} />
+        <Navbar
+          openmobilenav={openmobilenav}
+          showsidebar={showsidebar}
+          handleSetopenmobilenav={handleSetopenmobilenav}
+        />
       </Aside>
       <ShowTag
         showsidebar={showsidebar}

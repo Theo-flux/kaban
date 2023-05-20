@@ -22,17 +22,20 @@ export const GlobalStyles = createGlobalStyle`
         --white: #FFFFFF;
         --mandy: #EA5555;
         --mona-lisa: #FF9898;
-        --backdrop-color: #979797;
+        --backdrop-color: #00000050;
 
         --body: var(--selago);
         --side: var(--white);
         --side-border: var(--link-water);
+        --text: var(--black-russian);
     }
 
     [data-theme='dark'] {
       --body: var(--charade-primary);
       --side: var(--gun-powder);
       --side-border: var(--backdrop-color);
+
+      --text: var(--white);
     }
     html {
         font-size: 0.9375rem;

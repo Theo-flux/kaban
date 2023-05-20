@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { StyledHeadingL } from '@/shared';
+import { RiArrowDownSLine } from 'react-icons/ri';
+import { device } from '@/utils';
 
 export const NavContainer = styled.div`
   position: fixed;
@@ -15,9 +18,24 @@ export const NavWrapper = styled.div`
 
 export const NavLogoWrapper = styled.div`
   padding: 1.5rem 1rem;
-  border-right:  1px solid var(--side-border);
+  border-right: 1px solid var(--side-border);
 `;
 
 export const NavInner = styled.div`
   padding: 1.5rem 1rem;
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+`;
+
+export const NavTitle = styled(StyledHeadingL)`
+  color: var(--text);
+`;
+
+export const NavArrow = styled(RiArrowDownSLine)`
+  display: block;
+  margin-left: 0.5rem;
+  @media ${device.md} {
+    display: none;
+  }
 `;

@@ -4,14 +4,18 @@ import {
   NavWrapper,
   NavLogoWrapper,
   NavInner,
+  NavTitle,
+  NavArrow,
 } from './navbar.css';
 import { NavLogo } from '@/shared';
 
 interface INav {
   showsidebar: Boolean;
+  openmobilenav: Boolean;
+  handleSetopenmobilenav: () => void;
 }
 
-function Navbar({ showsidebar }: INav) {
+function Navbar({ showsidebar, openmobilenav, handleSetopenmobilenav }: INav) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -29,7 +33,10 @@ function Navbar({ showsidebar }: INav) {
             <NavLogo />
           </NavLogoWrapper>
         )}
-        <NavInner>Navbar</NavInner>
+        <NavInner onClick={() => handleSetopenmobilenav()}>
+          <NavTitle>Navbar</NavTitle>
+          <NavArrow />
+        </NavInner>
       </NavWrapper>
     </NavContainer>
   );

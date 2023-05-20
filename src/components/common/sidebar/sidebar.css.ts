@@ -10,7 +10,11 @@ type TsidebarContainer = {
 };
 
 type TCreateNewBoard = {
-  name: String;
+  name: string;
+};
+
+type TMobile = {
+  openmobilenav: Boolean;
 };
 
 export const SidebarContainer = styled.div<TsidebarContainer>`
@@ -120,7 +124,7 @@ export const ThemeToggleContainer = styled.div`
   padding: 0.75rem;
   margin-bottom: 1rem;
 
-  &  div {
+  & div {
     cursor: pointer;
   }
 `;
@@ -153,20 +157,30 @@ export const StyledEyeOff = styled(RiEyeOffLine)`
 `;
 
 // Mobile styles
-export const MobileContainer = styled.div`
+export const MobileContainer = styled.div<TMobile>`
   position: absolute;
   width: 100%;
   height: 100vh;
-  /* background-color: var(--backdrop-color); */
+  background-color: var(--backdrop-color);
+  visibility: ${props => (props.openmobilenav ? 'visible' : 'hidden')};
+  transform: ${props =>
+    props.openmobilenav ? 'translateY(0)' : 'translateY(24px)'};
+  opacity: ${props => (props.openmobilenav ? '1' : '0')};
+  ${transition}
 `;
 
-export const MobileInner = styled.div`
-  background-color: var(--white);
+export const MobileInner = styled.div<TMobile>`
   width: 80%;
   max-width: 270px;
   margin: 8rem auto;
   border-radius: 6px;
   background-color: var(--side);
+  visibility: ${props => (props.openmobilenav ? 'visible' : 'hidden')};
+  transform: ${props =>
+    props.openmobilenav ? 'translateY(0)' : 'translateY(24px)'};
+  opacity: ${props => (props.openmobilenav ? '1' : '0')};
+  ${transition}
+  transition-delay: 350ms;
 `;
 
 export const MobileSettingsContainer = styled.div`

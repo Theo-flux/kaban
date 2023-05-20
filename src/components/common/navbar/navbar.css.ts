@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { StyledHeadingL } from '@/shared';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { device } from '@/utils';
+import { device, transition } from '@/utils';
+
+type TNavarrow = {
+  openmobilenav: boolean;
+};
 
 export const NavContainer = styled.div`
   position: fixed;
@@ -32,9 +36,12 @@ export const NavTitle = styled(StyledHeadingL)`
   color: var(--text);
 `;
 
-export const NavArrow = styled(RiArrowDownSLine)`
+export const NavArrow = styled(RiArrowDownSLine)<TNavarrow>`
   display: block;
   margin-left: 0.5rem;
+  transform: ${props => (props.openmobilenav ? 'rotate(180deg)' : 'rotate(0)')};
+  ${transition}
+  
   @media ${device.md} {
     display: none;
   }

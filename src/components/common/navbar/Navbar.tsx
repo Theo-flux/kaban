@@ -35,7 +35,7 @@ function Navbar({ showsidebar, openmobilenav, handleSetopenmobilenav }: INav) {
         )}
         <NavInner onClick={() => handleSetopenmobilenav()}>
           <NavTitle>Navbar</NavTitle>
-          <NavArrow />
+          <NavArrow openmobilenav={openmobilenav}/>
         </NavInner>
       </NavWrapper>
     </NavContainer>

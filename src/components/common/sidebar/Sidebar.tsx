@@ -111,13 +111,19 @@ const Mobile = ({
   handleSetopenmobilenav,
 }: IMobilebar) => {
   return (
-    <MobileContainer openmobilenav={openmobilenav}>
+    <MobileContainer
+      openmobilenav={openmobilenav}
+      onClick={() => handleSetopenmobilenav()}
+    >
       <MobileInner openmobilenav={openmobilenav}>
         <AllBoardText>ALL BOARDS (0)</AllBoardText>
         <SidebarBoards>
           {boards.map((board, index) => {
             return (
-              <SidebarBoard key={index} onClick={() => handleSetopenmobilenav()}>
+              <SidebarBoard
+                key={index}
+                onClick={() => handleSetopenmobilenav()}
+              >
                 <SidebarBoardIcon />
                 <SidebarBoardName name={board}>{board}</SidebarBoardName>
               </SidebarBoard>

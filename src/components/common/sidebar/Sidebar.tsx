@@ -27,23 +27,23 @@ import { Logo } from '../../../shared';
 import { Switch } from '@mantine/core';
 
 interface ISidebar {
-  showsidebar: Boolean;
+  showsidebar: boolean;
   handleSetshowsidebar: () => void;
-  openmobilenav: Boolean;
+  openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
 }
 
 interface IDesktopbar {
   theme: string | undefined;
   handleOnchangeTheme: () => void;
-  showsidebar: Boolean;
+  showsidebar: boolean;
   handleSetshowsidebar: () => void;
 }
 
 interface IMobilebar {
   theme: string | undefined;
   handleOnchangeTheme: () => void;
-  openmobilenav: Boolean;
+  openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
 }
 

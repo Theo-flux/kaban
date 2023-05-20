@@ -10,8 +10,8 @@ import {
 import { NavLogo } from '@/shared';
 
 interface INav {
-  showsidebar: Boolean;
-  openmobilenav: Boolean;
+  showsidebar: boolean;
+  openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
 }
 

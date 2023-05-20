@@ -6,7 +6,7 @@ import { RiSunFill, RiEyeOffLine, RiAddFill } from 'react-icons/ri';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 
 type TsidebarContainer = {
-  showsidebar: Boolean;
+  showsidebar: boolean;
 };
 
 type TCreateNewBoard = {
@@ -14,7 +14,7 @@ type TCreateNewBoard = {
 };
 
 type TMobile = {
-  openmobilenav: Boolean;
+  openmobilenav: boolean;
 };
 
 export const SidebarContainer = styled.div<TsidebarContainer>`

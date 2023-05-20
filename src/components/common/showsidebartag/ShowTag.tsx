@@ -4,7 +4,7 @@ import { ImEye } from 'react-icons/im';
 import { device, transition } from '@/utils';
 
 type TShowProps = {
-  showsidebar: Boolean;
+  showsidebar: boolean;
 };
 
 const ShowTagContainer = styled.div<TShowProps>`
@@ -34,7 +34,7 @@ const StyledImEye = styled(ImEye)`
 `;
 
 interface IShowTag {
-  showsidebar: Boolean;
+  showsidebar: boolean;
   handleSetshowsidebar: () => void;
 }
 

@@ -21,7 +21,7 @@ const LogoImg = styled.img`
 `;
 
 export const Logo = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <LogoFigure>
@@ -38,7 +38,7 @@ export const Logo = () => {
 };
 
 export const NavLogo = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });

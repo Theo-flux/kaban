@@ -27,11 +27,11 @@ export const SidebarContainer = styled.div<TsidebarContainer>`
   ${transition}
 
   @media ${device.md} {
-    width: ${props => (props.showsidebar ? `40%` : `0px`)};
+    width: ${props => (props.showsidebar ? `30%` : `0px`)};
   }
 
   @media ${device.lg} {
-    width: ${props => (props.showsidebar ? `25%` : `0px`)};
+    width: ${props => (props.showsidebar ? `20%` : `0px`)};
   }
 
   @media ${device.xl} {
@@ -119,6 +119,10 @@ export const ThemeToggleContainer = styled.div`
   background-color: var(--body);
   padding: 0.75rem;
   margin-bottom: 1rem;
+
+  &  div {
+    cursor: pointer;
+  }
 `;
 
 export const StyledSun = styled(RiSunFill)`
@@ -162,7 +166,7 @@ export const MobileInner = styled.div`
   max-width: 270px;
   margin: 8rem auto;
   border-radius: 6px;
-    background-color: var(--side);
+  background-color: var(--side);
 `;
 
 export const MobileSettingsContainer = styled.div`

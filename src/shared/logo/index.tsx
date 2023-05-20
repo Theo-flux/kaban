@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
@@ -20,14 +21,24 @@ const LogoImg = styled.img`
 `;
 
 export const Logo = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
     <LogoFigure>
-      <Img src={'/images/kanban-logo.svg'} alt="logo-icon" />
+      <Img
+        src={
+          theme == 'dark'
+            ? '/images/kanban-dark-logo.svg'
+            : '/images/kanban-logo.svg'
+        }
+        alt="logo-icon"
+      />
     </LogoFigure>
   );
 };
 
 export const NavLogo = () => {
+  const { theme, setTheme } = useTheme();
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -35,7 +46,11 @@ export const NavLogo = () => {
     <NavFigure>
       <LogoImg
         src={
-          isFromTablet ? '/images/kanban-logo.svg' : '/images/kanban-icon.svg'
+          isFromTablet
+            ? theme == 'dark'
+              ? '/images/kanban-dark-logo.svg'
+              : '/images/kanban-logo.svg'
+            : '/images/kanban-icon.svg'
         }
         alt="logo-icon"
       />

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ImEye } from 'react-icons/im';
-import { transition } from '@/utils';
+import { device, transition } from '@/utils';
 
 type TShowProps = {
   showsidebar: Boolean;
 };
 
 const ShowTagContainer = styled.div<TShowProps>`
+  display: none;
   cursor: pointer;
   position: absolute;
   left: ${props => (props.showsidebar ? `-400px` : `0px`)};
@@ -15,13 +16,16 @@ const ShowTagContainer = styled.div<TShowProps>`
   bottom: 30px;
   width: 40px;
   height: 40px;
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--blue-marguerite);
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
   ${transition}
+
+  @media ${device.md} {
+    display: flex;
+  }
 `;
 
 const StyledImEye = styled(ImEye)`

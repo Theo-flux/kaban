@@ -15,7 +15,7 @@ export const NavWrapper = styled.div`
 
 export const NavLogoWrapper = styled.div`
   padding: 1.5rem 1rem;
-  border-right: 1px solid var(--link-water);
+  border-right:  1px solid var(--side-border);
 `;
 
 export const NavInner = styled.div`

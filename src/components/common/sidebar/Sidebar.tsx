@@ -83,7 +83,7 @@ const Desktop = ({
           <ThemeToggleContainer>
             <StyledSun />
             <Switch
-              size="xs"
+              size="sm"
               color="violet"
               checked={theme == 'dark' ? true : false}
               onChange={() => handleOnchangeTheme()}
@@ -128,7 +128,7 @@ const Mobile = ({ theme, handleOnchangeTheme }: IMobilebar) => {
           <ThemeToggleContainer>
             <StyledSun />
             <Switch
-              size="xs"
+              size="sm"
               color="violet"
               checked={theme == 'dark' ? true : false}
               onChange={() => handleOnchangeTheme()}

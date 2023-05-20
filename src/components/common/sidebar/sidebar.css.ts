@@ -162,6 +162,7 @@ export const MobileInner = styled.div`
   max-width: 270px;
   margin: 8rem auto;
   border-radius: 6px;
+    background-color: var(--side);
 `;
 
 export const MobileSettingsContainer = styled.div`

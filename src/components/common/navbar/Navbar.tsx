@@ -10,12 +10,18 @@ import {
 import { NavLogo } from '@/shared';
 
 interface INav {
+  activeboard: string;
   showsidebar: boolean;
   openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
 }
 
-function Navbar({ showsidebar, openmobilenav, handleSetopenmobilenav }: INav) {
+function Navbar({
+  activeboard,
+  showsidebar,
+  openmobilenav,
+  handleSetopenmobilenav,
+}: INav) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -34,8 +40,8 @@ function Navbar({ showsidebar, openmobilenav, handleSetopenmobilenav }: INav) {
           </NavLogoWrapper>
         )}
         <NavInner onClick={() => handleSetopenmobilenav()}>
-          <NavTitle>Navbar</NavTitle>
-          <NavArrow openmobilenav={openmobilenav}/>
+          <NavTitle>{activeboard}</NavTitle>
+          <NavArrow openmobilenav={openmobilenav} />
         </NavInner>
       </NavWrapper>
     </NavContainer>

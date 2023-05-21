@@ -8,6 +8,7 @@ import {
   AllBoardText,
   SidebarBoards,
   SidebarBoard,
+  CreateNewBoard,
   SidebarBoardIcon,
   SidebarBoardName,
   SettingsContainer,
@@ -27,6 +28,8 @@ import { Logo } from '../../../shared';
 import { Switch } from '@mantine/core';
 
 interface ISidebar {
+  activeboard: string;
+  handleSetActiveBoard: (val: string) => void;
   showsidebar: boolean;
   handleSetshowsidebar: () => void;
   openmobilenav: boolean;
@@ -35,6 +38,8 @@ interface ISidebar {
 
 interface IDesktopbar {
   theme: string | undefined;
+  activeboard: string;
+  handleSetActiveBoard: (val: string) => void;
   handleOnchangeTheme: () => void;
   showsidebar: boolean;
   handleSetshowsidebar: () => void;
@@ -42,6 +47,8 @@ interface IDesktopbar {
 
 interface IMobilebar {
   theme: string | undefined;
+  activeboard: string;
+  handleSetActiveBoard: (val: string) => void;
   handleOnchangeTheme: () => void;
   openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
@@ -51,6 +58,8 @@ const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
 
 const Desktop = ({
   theme,
+  activeboard,
+  handleSetActiveBoard,
   handleOnchangeTheme,
   showsidebar,
   handleSetshowsidebar,
@@ -66,13 +75,18 @@ const Desktop = ({
           <SidebarBoards>
             {boards.map((board, index) => {
               return (
-                <SidebarBoard key={index}>
+                <SidebarBoard
+                  key={index}
+                  activeboard={activeboard}
+                  board={board}
+                  onClick={() => handleSetActiveBoard(board)}
+                >
                   <SidebarBoardIcon />
                   <SidebarBoardName name={board}>{board}</SidebarBoardName>
                 </SidebarBoard>
               );
             })}
-            <SidebarBoard>
+            <CreateNewBoard>
               <SidebarBoardIcon />
               <SidebarBoardName name={'new'}>
                 <span>
@@ -80,7 +94,7 @@ const Desktop = ({
                 </span>
                 Create New Board
               </SidebarBoardName>
-            </SidebarBoard>
+            </CreateNewBoard>
           </SidebarBoards>
         </SidebarInner>
         <SettingsContainer>
@@ -106,6 +120,8 @@ const Desktop = ({
 
 const Mobile = ({
   theme,
+  activeboard,
+  handleSetActiveBoard,
   handleOnchangeTheme,
   openmobilenav,
   handleSetopenmobilenav,
@@ -122,14 +138,16 @@ const Mobile = ({
             return (
               <SidebarBoard
                 key={index}
-                onClick={() => handleSetopenmobilenav()}
+                activeboard={activeboard}
+                board={board}
+                onClick={() => handleSetActiveBoard(board)}
               >
                 <SidebarBoardIcon />
                 <SidebarBoardName name={board}>{board}</SidebarBoardName>
               </SidebarBoard>
             );
           })}
-          <SidebarBoard>
+          <CreateNewBoard>
             <SidebarBoardIcon />
             <SidebarBoardName name={'new'}>
               <span>
@@ -137,7 +155,7 @@ const Mobile = ({
               </span>
               Create New Board
             </SidebarBoardName>
-          </SidebarBoard>
+          </CreateNewBoard>
         </SidebarBoards>
         <MobileSettingsContainer>
           <ThemeToggleContainer>
@@ -157,6 +175,8 @@ const Mobile = ({
 };
 
 function Sidebar({
+  activeboard,
+  handleSetActiveBoard,
   showsidebar,
   handleSetshowsidebar,
   openmobilenav,
@@ -175,6 +195,8 @@ function Sidebar({
   return isFromTablet ? (
     <Desktop
       theme={theme}
+      activeboard={activeboard}
+      handleSetActiveBoard={handleSetActiveBoard}
       handleOnchangeTheme={handleOnchangeTheme}
       showsidebar={showsidebar}
       handleSetshowsidebar={handleSetshowsidebar}
@@ -182,6 +204,8 @@ function Sidebar({
   ) : (
     <Mobile
       theme={theme}
+      activeboard={activeboard}
+      handleSetActiveBoard={handleSetActiveBoard}
       handleOnchangeTheme={handleOnchangeTheme}
       openmobilenav={openmobilenav}
       handleSetopenmobilenav={handleSetopenmobilenav}

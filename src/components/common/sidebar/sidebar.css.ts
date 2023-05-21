@@ -9,12 +9,17 @@ type TsidebarContainer = {
   showsidebar: boolean;
 };
 
-type TCreateNewBoard = {
+type TSidebarBoardName = {
   name: string;
 };
 
 type TMobile = {
   openmobilenav: boolean;
+};
+
+type TSideBoardProps = {
+  activeboard: string;
+  board: string;
 };
 
 export const SidebarContainer = styled.div<TsidebarContainer>`
@@ -82,13 +87,13 @@ export const SidebarBoardIcon = styled(TbLayoutBoardSplit)`
   height: 16px;
 `;
 
-export const SidebarBoardName = styled(StyledHeadingMD)<TCreateNewBoard>`
+export const SidebarBoardName = styled(StyledHeadingMD)<TSidebarBoardName>`
   margin-left: 1rem;
   color: ${props =>
     props.name === 'new' ? `var(--blue-marguerite)` : `var(--regeant-gray)`};
 `;
 
-export const SidebarBoard = styled.div`
+export const SidebarBoard = styled.div<TSideBoardProps>`
   width: 85%;
   padding: 1rem;
   border-top-right-radius: 100px;
@@ -97,7 +102,42 @@ export const SidebarBoard = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  /* background-color: var(--blue-marguerite); */
+  background-color: ${props =>
+    props.activeboard == props.board
+      ? 'var(--blue-marguerite)'
+      : 'transparent'};
+  ${transition}
+
+  &:hover {
+    background-color: ${props =>
+      props.activeboard == props.board
+        ? 'var(--blue-marguerite)'
+        : '#635fc710'};
+  }
+
+  &:hover ${SidebarBoardName}, &:hover ${SidebarBoardIcon} {
+    color: ${props => props.activeboard == props.board ? 'var(--white)' : 'var(--blue-marguerite)'};
+  }
+
+  ${SidebarBoardName}, ${SidebarBoardIcon} {
+    color: ${props =>
+      props.activeboard == props.board
+        ? 'var(--white)'
+        : 'var(--regeant-gray)'};
+
+    ${transition}
+  }
+`;
+
+export const CreateNewBoard = styled.div`
+  width: 85%;
+  padding: 1rem;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   ${transition}
 
   &:hover {

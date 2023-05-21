@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home - Kanban</title>
+        <title>Kanban - Task Manager</title>
         <meta
           name="description"
           content="Kanban is a task management app that helps organise your tasks, activities in a single place."

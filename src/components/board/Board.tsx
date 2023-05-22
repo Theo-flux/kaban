@@ -19,6 +19,7 @@ function Board({ showsidebar }: IBoardProps) {
           This board is empty. Create a new column to get started.
         </EmptyBoardText>
         <ButtonIcon
+          btnType="primary"
           leftIcon={<StyledPlusIcon />}
           text="Add New Column"
           hideTextOnMobile={false}

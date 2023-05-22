@@ -16,12 +16,13 @@ import {
   DeleteText,
 } from './navbar.css';
 import { NavLogo, ButtonIcon, StyledPlusIcon } from '@/shared';
-import { truncateSync } from 'fs';
 
 interface INav {
   activeboard: string;
   showsidebar: boolean;
   openmobilenav: boolean;
+  openDeleteModal: boolean;
+  handleSetOpendDeleteModal: () => void;
   handleSetopenmobilenav: () => void;
 }
 
@@ -29,7 +30,9 @@ function Navbar({
   activeboard,
   showsidebar,
   openmobilenav,
+  openDeleteModal,
   handleSetopenmobilenav,
+  handleSetOpendDeleteModal,
 }: INav) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
@@ -39,7 +42,12 @@ function Navbar({
   const ref = useClickOutside(() => setOpenMore(false));
 
   const handleSetOpenMore = () => {
-    openMore ? setOpenMore(false) : setOpenMore(true);
+    setOpenMore(!openMore);
+  };
+
+  const handleSetOpendDeleteModalWithin = () => {
+    setOpenMore(!openMore);
+    handleSetOpendDeleteModal();
   };
 
   return (
@@ -63,6 +71,7 @@ function Navbar({
 
           <NavOther>
             <ButtonIcon
+              btnType="primary"
               leftIcon={<StyledPlusIcon />}
               text="Add New Task"
               hideTextOnMobile={true}
@@ -73,7 +82,7 @@ function Navbar({
       </NavWrapper>
       <MoreCard ref={ref} openMore={openMore}>
         <EditText onClick={() => setOpenMore(!openMore)}>Edit Board</EditText>
-        <DeleteText onClick={() => setOpenMore(!openMore)}>
+        <DeleteText onClick={() => handleSetOpendDeleteModalWithin()}>
           Delete Board
         </DeleteText>
       </MoreCard>

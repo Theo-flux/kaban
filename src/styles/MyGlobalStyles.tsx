@@ -29,6 +29,13 @@ export const GlobalStyles = createGlobalStyle`
         --side-border: var(--link-water);
         --text: var(--black-russian);
         --sidebar-hover-el: #635fc710;
+        --primary-btn: var(--blue-marguerite);
+        --primary-btn-hover: var(--melrose);
+        --secondary-btn: #635FC710;
+        --secondary-btn-hover: #635FC725;
+        --destructive-btn: var(--mandy);
+        --destructive-btn-hover: var(--mona-lisa);
+    
     }
 
     [data-theme='dark'] {
@@ -37,6 +44,12 @@ export const GlobalStyles = createGlobalStyle`
       --side-border: var(--backdrop-color);
       --text: var(--white);
       --sidebar-hover-el: var(--white);
+      --primary-btn: var(--blue-marguerite);
+      --primary-btn-hover: var(--melrose);
+      --secondary-btn: var(--white);
+      --secondary-btn-hover: var(--white);
+      --destructive-btn: var(--mandy);
+      --destructive-btn-hover: var(--mona-lisa);
     }
     html {
         font-size: 0.9375rem;

@@ -2,11 +2,26 @@ import styled from 'styled-components';
 import { StyledHeadingMD } from '../typography';
 import { device, transition } from '@/utils';
 
+type TButtonContainer = {
+  btnType: 'primary' | 'secondary' | 'destructive';
+};
+
 type TButtonText = {
   hideTextOnMobile: boolean;
 };
 
-export const ButtonContainer = styled.button`
+export const ButtonText = styled(StyledHeadingMD)<TButtonText>`
+  text-align: center;
+  width: 100%;
+  display: ${props => (props.hideTextOnMobile ? 'none' : 'block')};
+  ${props => props.hideTextOnMobile && `margin-left: 0.35rem;`}
+
+  @media ${device.md} {
+    display: block;
+  }
+`;
+
+export const ButtonContainer = styled.button<TButtonContainer>`
   cursor: pointer;
   border: none;
   outline: none;
@@ -15,21 +30,29 @@ export const ButtonContainer = styled.button`
   align-items: center;
   border-radius: 100px;
   padding: 0.5rem 1rem;
-  background-color: var(--blue-marguerite);
-  color: white;
-  ${transition}
+  background-color: ${props =>
+    props.btnType === 'primary'
+      ? 'var(--primary-btn)'
+      : props.btnType === 'secondary'
+      ? 'var(--secondary-btn)'
+      : 'var(--destructive-btn)'};
+
+  ${ButtonText} {
+    color: ${props =>
+      props.btnType === 'primary'
+        ? 'var(--white)'
+        : props.btnType === 'secondary'
+        ? 'var(--blue-marguerite)'
+        : 'var(--white)'};
+    ${transition}
+  }
 
   &:hover {
-    background-color: var(--melrose);
-  }
-`;
-
-export const ButtonText = styled(StyledHeadingMD)<TButtonText>`
-  display: ${props => (props.hideTextOnMobile ? 'none' : 'block')};
-  margin-left: 0.35rem;
-  color: white;
-
-  @media ${device.md} {
-    display: block;
+    background-color: ${props =>
+      props.btnType === 'primary'
+        ? 'var(--primary-btn-hover)'
+        : props.btnType === 'secondary'
+        ? 'var(--secondary-btn-hover)'
+        : 'var(--destructive-btn-hover)'};
   }
 `;

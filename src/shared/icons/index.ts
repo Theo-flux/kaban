@@ -1,4 +1,6 @@
 import styled from 'styled-components';
 import { RiAddFill } from 'react-icons/ri';
 
-export const StyledPlusIcon = styled(RiAddFill)``;
+export const StyledPlusIcon = styled(RiAddFill)`
+    color: var(--white);
+`;

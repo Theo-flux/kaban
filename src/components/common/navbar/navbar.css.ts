@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { StyledBodyL, StyledHeadingL } from '@/shared';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { device, transition } from '@/utils';
-import { RiAddFill } from 'react-icons/ri';
 import { FiMoreVertical } from 'react-icons/fi';
 
 type TNavarrow = {
@@ -50,8 +49,13 @@ export const NavWrapper = styled.div`
 `;
 
 export const NavLogoWrapper = styled.div`
+  cursor: pointer;
   padding: 1rem;
   border-right: 1px solid var(--side-border);
+
+  @media ${device.md} {
+    padding: 1rem 0.2rem;
+  }
 `;
 
 export const NavInner = styled.div`
@@ -78,6 +82,7 @@ export const NavArrowIcon = styled(RiArrowDownSLine)<TNavarrow>`
 `;
 
 export const NavActiveBoard = styled.div`
+  cursor: pointer;
   width: fit-content;
   display: flex;
   justify-items: space-between;
@@ -90,8 +95,6 @@ export const NavOther = styled.div`
   justify-items: space-between;
   align-items: center;
 `;
-
-export const StyledPlusIcon = styled(RiAddFill)``;
 
 export const StyledMoreIcon = styled(FiMoreVertical)`
   cursor: pointer;

@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { StyledHeadingMD } from '../typography';
 import { device, transition } from '@/utils';
 
+type TButtonText = {
+  hideTextOnMobile: boolean;
+};
+
 export const ButtonContainer = styled.button`
   cursor: pointer;
   border: none;
@@ -20,8 +24,8 @@ export const ButtonContainer = styled.button`
   }
 `;
 
-export const ButtonText = styled(StyledHeadingMD)`
-  display: none;
+export const ButtonText = styled(StyledHeadingMD)<TButtonText>`
+  display: ${props => (props.hideTextOnMobile ? 'none' : 'block')};
   margin-left: 0.35rem;
   color: white;
 

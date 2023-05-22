@@ -10,13 +10,13 @@ import {
   NavArrowIcon,
   NavActiveBoard,
   NavOther,
-  StyledPlusIcon,
   StyledMoreIcon,
   MoreCard,
   EditText,
   DeleteText,
 } from './navbar.css';
-import { NavLogo, ButtonIcon } from '@/shared';
+import { NavLogo, ButtonIcon, StyledPlusIcon } from '@/shared';
+import { truncateSync } from 'fs';
 
 interface INav {
   activeboard: string;
@@ -62,7 +62,11 @@ function Navbar({
           </NavActiveBoard>
 
           <NavOther>
-            <ButtonIcon leftIcon={<StyledPlusIcon />} text="Add New Task" />
+            <ButtonIcon
+              leftIcon={<StyledPlusIcon />}
+              text="Add New Task"
+              hideTextOnMobile={true}
+            />
             <StyledMoreIcon onClick={() => handleSetOpenMore()} />
           </NavOther>
         </NavInner>

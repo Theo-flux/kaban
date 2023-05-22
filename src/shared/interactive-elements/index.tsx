@@ -4,13 +4,14 @@ import { ButtonContainer, ButtonText } from './elements.css';
 interface IButton {
   leftIcon?: React.ReactNode;
   text: string;
+  hideTextOnMobile: boolean;
 }
 
-export const ButtonIcon = ({ leftIcon, text }: IButton) => {
+export const ButtonIcon = ({ leftIcon, text, hideTextOnMobile }: IButton) => {
   return (
     <ButtonContainer>
       {leftIcon}
-      <ButtonText>{text}</ButtonText>
+      <ButtonText hideTextOnMobile={hideTextOnMobile}>{text}</ButtonText>
     </ButtonContainer>
   );
 };

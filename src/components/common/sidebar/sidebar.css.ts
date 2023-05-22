@@ -32,7 +32,7 @@ export const SidebarContainer = styled.div<TsidebarContainer>`
   align-items: flex-start;
   width: ${props => (props.showsidebar ? `35%` : `0px`)};
   transform: ${props => (props.showsidebar ? `scale(1)` : `scale(0)`)};
-  transform-origin: top left;
+  transform-origin: left;
   height: 100vh;
   border-right: 1px solid var(--side-border);
   background-color: var(--side);
@@ -157,7 +157,7 @@ export const CreateNewBoard = styled.div`
 `;
 
 export const SettingsContainer = styled.div`
-  width: 100%;
+  width: 85%;
 `;
 
 export const ThemeToggleContainer = styled.div`
@@ -167,7 +167,8 @@ export const ThemeToggleContainer = styled.div`
   border-radius: 6px;
   background-color: var(--body);
   padding: 0.75rem;
-  margin: 1.1rem;
+  margin-left: 0.75rem;
+  margin-bottom: 0.75rem;
 
   & div {
     cursor: pointer;
@@ -195,7 +196,7 @@ export const StyledEyeOff = styled(RiEyeOffLine)`
 
 export const HideSidebarContainer = styled.div`
   cursor: pointer;
-  width: 85%;
+  /* width: 85%; */
   padding: 1rem;
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;

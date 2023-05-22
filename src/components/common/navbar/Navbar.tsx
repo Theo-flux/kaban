@@ -1,4 +1,5 @@
 import { useMediaQuery } from 'react-responsive';
+import { Button } from '@mantine/core';
 import {
   NavContainer,
   NavWrapper,
@@ -6,6 +7,8 @@ import {
   NavInner,
   NavTitle,
   NavArrow,
+  NavActiveBoard,
+  NavOther,
 } from './navbar.css';
 import { NavLogo } from '@/shared';
 
@@ -27,7 +30,7 @@ function Navbar({
   });
 
   return (
-    <NavContainer>
+    <NavContainer showsidebar={showsidebar}>
       <NavWrapper>
         {isFromTablet || (
           <NavLogoWrapper>
@@ -39,9 +42,17 @@ function Navbar({
             <NavLogo />
           </NavLogoWrapper>
         )}
-        <NavInner onClick={() => handleSetopenmobilenav()}>
-          <NavTitle>{activeboard}</NavTitle>
-          <NavArrow openmobilenav={openmobilenav} />
+        <NavInner>
+          <NavActiveBoard onClick={() => handleSetopenmobilenav()}>
+            <NavTitle>{activeboard}</NavTitle>
+            <NavArrow openmobilenav={openmobilenav} />
+          </NavActiveBoard>
+
+          <NavOther>
+            <Button radius="xl" color="violet">
+              Add New Task
+            </Button>
+          </NavOther>
         </NavInner>
       </NavWrapper>
     </NavContainer>

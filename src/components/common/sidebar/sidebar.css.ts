@@ -23,13 +23,16 @@ type TSideBoardProps = {
 };
 
 export const SidebarContainer = styled.div<TsidebarContainer>`
+  position: fixed;
+  left: 0px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: ${props => (props.showsidebar ? `35%` : `0px`)};
-  transform: ${props => (props.showsidebar ? `scaleX(1)` : `scaleX(0)`)};
-  transform-origin: left;
+  transform: ${props => (props.showsidebar ? `scale(1)` : `scale(0)`)};
+  transform-origin: top left;
   height: 100vh;
   border-right: 1px solid var(--side-border);
   background-color: var(--side);
@@ -116,7 +119,10 @@ export const SidebarBoard = styled.div<TSideBoardProps>`
   }
 
   &:hover ${SidebarBoardName}, &:hover ${SidebarBoardIcon} {
-    color: ${props => props.activeboard == props.board ? 'var(--white)' : 'var(--blue-marguerite)'};
+    color: ${props =>
+      props.activeboard == props.board
+        ? 'var(--white)'
+        : 'var(--blue-marguerite)'};
   }
 
   ${SidebarBoardName}, ${SidebarBoardIcon} {
@@ -199,6 +205,7 @@ export const StyledEyeOff = styled(RiEyeOffLine)`
 // Mobile styles
 export const MobileContainer = styled.div<TMobile>`
   position: absolute;
+  z-index: 5;
   width: 100%;
   height: 100vh;
   background-color: var(--backdrop-color);

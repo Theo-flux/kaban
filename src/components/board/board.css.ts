@@ -1,22 +1,22 @@
 import styled from 'styled-components';
-import { device } from '@/utils';
+import { device, transition } from '@/utils';
 
-type TAsideProps = {
+type TBoardcontainerProps = {
   showsidebar: boolean;
 };
 
-export const FrameContainer = styled.div`
+export const BoardContainer = styled.div<TBoardcontainerProps>`
+  position: absolute;
+  top: 80px;
+  z-index: 1;
+  right: 0px;
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-`;
-
-export const Aside = styled.div<TAsideProps>`
-  width: 100%;
+  height: 300vh;
+  background-color: var(--body);
+  ${transition}
 
   @media ${device.md} {
-    width: ${props => (props.showsidebar ? `70%` : `1000%`)};
+    width: ${props => (props.showsidebar ? `70%` : `100%`)};
   }
 
   @media ${device.lg} {

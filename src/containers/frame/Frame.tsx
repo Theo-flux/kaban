@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navbar, Sidebar, ShowTag } from '../../components';
+import { Navbar, Sidebar, ShowTag, Board } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
 import { usePersistState } from '@/hooks';
 
@@ -34,18 +34,20 @@ function Frame() {
         openmobilenav={openmobilenav}
         handleSetopenmobilenav={handleSetopenmobilenav}
       />
-      <Aside>
+      <ShowTag
+        showsidebar={showsidebar}
+        handleSetshowsidebar={handleSetshowsidebar}
+      />
+
+      <Aside showsidebar={showsidebar}>
         <Navbar
           activeboard={activeboard}
           openmobilenav={openmobilenav}
           showsidebar={showsidebar}
           handleSetopenmobilenav={handleSetopenmobilenav}
         />
+        <Board showsidebar={showsidebar} />
       </Aside>
-      <ShowTag
-        showsidebar={showsidebar}
-        handleSetshowsidebar={handleSetshowsidebar}
-      />
     </FrameContainer>
   );
 }

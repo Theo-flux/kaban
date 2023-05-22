@@ -72,7 +72,7 @@ export const Wrapper = styled.div`
 
 export const SidebarInner = styled.div`
   /* border: 1px solid magenta; */
-  height: 90%;
+  height: 85%;
   width: 100%;
 `;
 
@@ -115,7 +115,7 @@ export const SidebarBoard = styled.div<TSideBoardProps>`
     background-color: ${props =>
       props.activeboard == props.board
         ? 'var(--blue-marguerite)'
-        : '#635fc710'};
+        : 'var(--sidebar-hover-el)'};
   }
 
   &:hover ${SidebarBoardName}, &:hover ${SidebarBoardIcon} {
@@ -157,7 +157,6 @@ export const CreateNewBoard = styled.div`
 `;
 
 export const SettingsContainer = styled.div`
-  padding: 1.1rem;
   width: 100%;
 `;
 
@@ -168,7 +167,7 @@ export const ThemeToggleContainer = styled.div`
   border-radius: 6px;
   background-color: var(--body);
   padding: 0.75rem;
-  margin-bottom: 1rem;
+  margin: 1.1rem;
 
   & div {
     cursor: pointer;
@@ -185,14 +184,6 @@ export const StyledMoon = styled(BsFillMoonStarsFill)`
   color: var(--regeant-gray);
 `;
 
-export const HideSidebarContainer = styled.div`
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-`;
-
 export const HideSidebarText = styled(StyledHeadingMD)`
   color: var(--regeant-gray);
 `;
@@ -200,6 +191,33 @@ export const HideSidebarText = styled(StyledHeadingMD)`
 export const StyledEyeOff = styled(RiEyeOffLine)`
   margin-right: 1rem;
   color: var(--regeant-gray);
+`;
+
+export const HideSidebarContainer = styled.div`
+  cursor: pointer;
+  width: 85%;
+  padding: 1rem;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+  ${transition}
+
+  &:hover {
+    background-color: var(--sidebar-hover-el);
+  }
+
+  &:hover ${HideSidebarText}, &:hover ${StyledEyeOff} {
+    color: var(--blue-marguerite);
+  }
+
+  ${HideSidebarText}, ${StyledEyeOff} {
+    color: var(--regeant-gray);
+
+    ${transition}
+  }
 `;
 
 // Mobile styles

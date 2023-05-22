@@ -91,6 +91,5 @@ export const StyledPlusIcon = styled(RiAddFill)``;
 
 export const StyledMoreIcon = styled(FiMoreVertical)`
   cursor: pointer;
-  color: var(--white);
   margin-left: 0.5rem;
 `;

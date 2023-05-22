@@ -28,14 +28,15 @@ export const GlobalStyles = createGlobalStyle`
         --side: var(--white);
         --side-border: var(--link-water);
         --text: var(--black-russian);
+        --sidebar-hover-el: #635fc710;
     }
 
     [data-theme='dark'] {
       --body: var(--charade-primary);
       --side: var(--gun-powder);
       --side-border: var(--backdrop-color);
-
       --text: var(--white);
+      --sidebar-hover-el: var(--white);
     }
     html {
         font-size: 0.9375rem;

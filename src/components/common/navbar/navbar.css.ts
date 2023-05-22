@@ -13,7 +13,7 @@ type TNavcontainerProps = {
 };
 
 type TMoreCard = {
-  openMore: boolean;
+  openmore: boolean;
 };
 
 export const NavContainer = styled.div<TNavcontainerProps>`
@@ -111,9 +111,9 @@ export const MoreCard = styled.div<TMoreCard>`
   box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
   border-radius: 8px;
   transform: ${props =>
-    props.openMore ? 'translateY(0px)' : 'translateY(-20px)'};
-  visibility: ${props => (props.openMore ? 'visible' : 'hidden')};
-  opacity: ${props => (props.openMore ? '1' : '0')};
+    props.openmore ? 'translateY(0px)' : 'translateY(-20px)'};
+  visibility: ${props => (props.openmore ? 'visible' : 'hidden')};
+  opacity: ${props => (props.openmore ? '1' : '0')};
   ${transition}
 `;
 

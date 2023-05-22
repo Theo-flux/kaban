@@ -38,15 +38,15 @@ function Navbar({
     query: '(min-width: 768px)',
   });
 
-  const [openMore, setOpenMore] = useState(false);
-  const ref = useClickOutside(() => setOpenMore(false));
+  const [openmore, setopenmore] = useState(false);
+  const ref = useClickOutside(() => setopenmore(false));
 
-  const handleSetOpenMore = () => {
-    setOpenMore(!openMore);
+  const handleSetopenmore = () => {
+    setopenmore(!openmore);
   };
 
   const handleSetOpendDeleteModalWithin = () => {
-    setOpenMore(!openMore);
+    setopenmore(!openmore);
     handleSetOpendDeleteModal();
   };
 
@@ -76,12 +76,12 @@ function Navbar({
               text="Add New Task"
               hideTextOnMobile={true}
             />
-            <StyledMoreIcon onClick={() => handleSetOpenMore()} />
+            <StyledMoreIcon onClick={() => handleSetopenmore()} />
           </NavOther>
         </NavInner>
       </NavWrapper>
-      <MoreCard ref={ref} openMore={openMore}>
-        <EditText onClick={() => setOpenMore(!openMore)}>Edit Board</EditText>
+      <MoreCard ref={ref} openmore={openmore}>
+        <EditText onClick={() => setopenmore(!openmore)}>Edit Board</EditText>
         <DeleteText onClick={() => handleSetOpendDeleteModalWithin()}>
           Delete Board
         </DeleteText>

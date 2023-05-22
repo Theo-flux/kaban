@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledHeadingL } from '@/shared';
+import { StyledBodyL, StyledHeadingL } from '@/shared';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { device, transition } from '@/utils';
 import { RiAddFill } from 'react-icons/ri';
@@ -11,6 +11,10 @@ type TNavarrow = {
 
 type TNavcontainerProps = {
   showsidebar: boolean;
+};
+
+type TMoreCard = {
+  openMore: boolean;
 };
 
 export const NavContainer = styled.div<TNavcontainerProps>`
@@ -92,4 +96,31 @@ export const StyledPlusIcon = styled(RiAddFill)``;
 export const StyledMoreIcon = styled(FiMoreVertical)`
   cursor: pointer;
   margin-left: 0.5rem;
+`;
+
+export const MoreCard = styled.div<TMoreCard>`
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 190px;
+  padding: 0.75rem 1rem;
+  background-color: var(--body);
+  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  border-radius: 8px;
+  transform: ${props =>
+    props.openMore ? 'translateY(0px)' : 'translateY(-20px)'};
+  visibility: ${props => (props.openMore ? 'visible' : 'hidden')};
+  opacity: ${props => (props.openMore ? '1' : '0')};
+  ${transition}
+`;
+
+export const EditText = styled(StyledBodyL)`
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+`;
+
+export const DeleteText = styled(StyledBodyL)`
+  cursor: pointer;
+  color: var(--mandy);
 `;

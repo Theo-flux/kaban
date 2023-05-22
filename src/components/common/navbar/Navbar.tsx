@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useClickOutside } from '@mantine/hooks';
 import { useMediaQuery } from 'react-responsive';
 import {
   NavContainer,
@@ -10,6 +12,9 @@ import {
   NavOther,
   StyledPlusIcon,
   StyledMoreIcon,
+  MoreCard,
+  EditText,
+  DeleteText,
 } from './navbar.css';
 import { NavLogo, ButtonIcon } from '@/shared';
 
@@ -29,6 +34,13 @@ function Navbar({
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
+
+  const [openMore, setOpenMore] = useState(false);
+  const ref = useClickOutside(() => setOpenMore(false));
+
+  const handleSetOpenMore = () => {
+    openMore ? setOpenMore(false) : setOpenMore(true);
+  };
 
   return (
     <NavContainer showsidebar={showsidebar}>
@@ -51,10 +63,16 @@ function Navbar({
 
           <NavOther>
             <ButtonIcon leftIcon={<StyledPlusIcon />} text="Add New Task" />
-            <StyledMoreIcon />
+            <StyledMoreIcon onClick={() => handleSetOpenMore()} />
           </NavOther>
         </NavInner>
       </NavWrapper>
+      <MoreCard ref={ref} openMore={openMore}>
+        <EditText onClick={() => setOpenMore(!openMore)}>Edit Board</EditText>
+        <DeleteText onClick={() => setOpenMore(!openMore)}>
+          Delete Board
+        </DeleteText>
+      </MoreCard>
     </NavContainer>
   );
 }

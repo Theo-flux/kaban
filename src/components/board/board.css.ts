@@ -7,7 +7,7 @@ type TBoardcontainerProps = {
 
 export const BoardContainer = styled.div<TBoardcontainerProps>`
   position: absolute;
-  top: 80px;
+  top: 60px;
   z-index: 1;
   right: 0px;
   width: 100%;

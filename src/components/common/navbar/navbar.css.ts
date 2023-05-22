@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { StyledHeadingL } from '@/shared';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { device, transition } from '@/utils';
+import { RiAddFill } from 'react-icons/ri';
+import { FiMoreVertical } from 'react-icons/fi';
 
 type TNavarrow = {
   openmobilenav: boolean;
@@ -44,13 +46,13 @@ export const NavWrapper = styled.div`
 `;
 
 export const NavLogoWrapper = styled.div`
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   border-right: 1px solid var(--side-border);
 `;
 
 export const NavInner = styled.div`
   width: 100%;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,7 +62,7 @@ export const NavTitle = styled(StyledHeadingL)`
   color: var(--text);
 `;
 
-export const NavArrow = styled(RiArrowDownSLine)<TNavarrow>`
+export const NavArrowIcon = styled(RiArrowDownSLine)<TNavarrow>`
   display: block;
   margin-left: 0.5rem;
   transform: ${props => (props.openmobilenav ? 'rotate(180deg)' : 'rotate(0)')};
@@ -78,4 +80,17 @@ export const NavActiveBoard = styled.div`
   align-items: center;
 `;
 
-export const NavOther = styled.div``;
+export const NavOther = styled.div`
+  width: fit-content;
+  display: flex;
+  justify-items: space-between;
+  align-items: center;
+`;
+
+export const StyledPlusIcon = styled(RiAddFill)``;
+
+export const StyledMoreIcon = styled(FiMoreVertical)`
+  cursor: pointer;
+  color: var(--white);
+  margin-left: 0.5rem;
+`;

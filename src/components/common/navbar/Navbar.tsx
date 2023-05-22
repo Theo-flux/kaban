@@ -1,16 +1,17 @@
 import { useMediaQuery } from 'react-responsive';
-import { Button } from '@mantine/core';
 import {
   NavContainer,
   NavWrapper,
   NavLogoWrapper,
   NavInner,
   NavTitle,
-  NavArrow,
+  NavArrowIcon,
   NavActiveBoard,
   NavOther,
+  StyledPlusIcon,
+  StyledMoreIcon,
 } from './navbar.css';
-import { NavLogo } from '@/shared';
+import { NavLogo, ButtonIcon } from '@/shared';
 
 interface INav {
   activeboard: string;
@@ -45,13 +46,12 @@ function Navbar({
         <NavInner>
           <NavActiveBoard onClick={() => handleSetopenmobilenav()}>
             <NavTitle>{activeboard}</NavTitle>
-            <NavArrow openmobilenav={openmobilenav} />
+            <NavArrowIcon openmobilenav={openmobilenav} />
           </NavActiveBoard>
 
           <NavOther>
-            <Button radius="xl" color="violet">
-              Add New Task
-            </Button>
+            <ButtonIcon leftIcon={<StyledPlusIcon />} text="Add New Task" />
+            <StyledMoreIcon />
           </NavOther>
         </NavInner>
       </NavWrapper>

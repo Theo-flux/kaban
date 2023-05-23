@@ -22,6 +22,7 @@ interface INav {
   showsidebar: boolean;
   openmobilenav: boolean;
   handleDispatchDeleteModal: () => void;
+  handleDispatchAddTaskModal: () => void;
   handleSetopenmobilenav: () => void;
 }
 
@@ -30,6 +31,7 @@ function Navbar({
   showsidebar,
   openmobilenav,
   handleDispatchDeleteModal,
+  handleDispatchAddTaskModal,
   handleSetopenmobilenav,
 }: INav) {
   const isFromTablet = useMediaQuery({
@@ -69,6 +71,7 @@ function Navbar({
 
           <NavOther>
             <ButtonIcon
+              onClick={() => handleDispatchAddTaskModal()}
               btnType="primary"
               leftIcon={<StyledPlusIcon />}
               text="Add New Task"

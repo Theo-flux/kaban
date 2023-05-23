@@ -8,6 +8,7 @@ import {
 } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
 import { usePersistState } from '@/hooks';
+import AddNewTaskModal from '@/components/modals/addnewtaskmodal/AddNewTaskModal';
 
 function Frame() {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
@@ -61,6 +62,11 @@ function Frame() {
     updateModal({ type: 'deleteBoard' });
   };
 
+  // function to handle open/close of deletemodal
+  const handleDispatchAddTaskModal = () => {
+    updateModal({ type: 'addTask' });
+  };
+
   // function to handle onclick hide/show sidebar
   const handleSetshowsidebar = () => {
     setshowsidebar(!showsidebar);
@@ -99,6 +105,7 @@ function Frame() {
           showsidebar={showsidebar}
           handleSetopenmobilenav={handleSetopenmobilenav}
           handleDispatchDeleteModal={handleDispatchDeleteModal}
+          handleDispatchAddTaskModal={handleDispatchAddTaskModal}
         />
         <Board showsidebar={showsidebar} />
       </Aside>
@@ -108,6 +115,11 @@ function Frame() {
         open={openmodal.deleteBoard}
         activeboard={activeboard}
         handleDispatchDeleteModal={handleDispatchDeleteModal}
+      />
+
+      <AddNewTaskModal
+        open={openmodal.addTask}
+        handleDispatchAddTaskModal={handleDispatchAddTaskModal}
       />
     </FrameContainer>
   );

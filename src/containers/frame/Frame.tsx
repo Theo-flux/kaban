@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import {
   Navbar,
   Sidebar,
@@ -14,13 +14,51 @@ function Frame() {
     'activeboard',
     'Platform Launch'
   );
+  function spreadThem<T extends object>(t: T, s: T): T {
+    return { ...(t as object), ...(s as object) } as T;
+  }
   let [showsidebar, setshowsidebar] = useState(true);
   let [openmobilenav, setopenmobilenav] = useState(false);
-  const [openDeleteModal, setOpenDeletemodal] = useState(false);
+  // const [openDeleteModal, setOpenDeletemodal] = useState(false);
+
+  type TModalState = {
+    deleteBoard: boolean;
+    addTask: boolean;
+  };
+
+  type TModalAction = {
+    type: string;
+  };
+
+  const modalInitialState = {
+    deleteBoard: false,
+    addTask: false,
+  };
+
+  const modalReducer = (state: TModalState, action: TModalAction) => {
+    switch (action.type) {
+      case 'deleteBoard': {
+        return {
+          ...state,
+          deleteBoard: !state.deleteBoard,
+        };
+      }
+      case 'addTask': {
+        return {
+          ...state,
+          addTask: !state.addTask,
+        };
+      }
+      default:
+        return state;
+    }
+  };
+
+  const [openmodal, updateModal] = useReducer(modalReducer, modalInitialState);
 
   // function to handle open/close of deletemodal
-  const handleSetOpendDeleteModal = () => {
-    setOpenDeletemodal(!openDeleteModal);
+  const handleDispatchDeleteModal = () => {
+    updateModal({ type: 'deleteBoard' });
   };
 
   // function to handle onclick hide/show sidebar
@@ -56,21 +94,20 @@ function Frame() {
 
       <Aside showsidebar={showsidebar}>
         <Navbar
-          openDeleteModal={openDeleteModal}
           activeboard={activeboard}
           openmobilenav={openmobilenav}
           showsidebar={showsidebar}
           handleSetopenmobilenav={handleSetopenmobilenav}
-          handleSetOpendDeleteModal={handleSetOpendDeleteModal}
+          handleDispatchDeleteModal={handleDispatchDeleteModal}
         />
         <Board showsidebar={showsidebar} />
       </Aside>
 
       {/* Modals */}
       <DeleteBoardModal
-        open={openDeleteModal}
+        open={openmodal.deleteBoard}
         activeboard={activeboard}
-        handleSetOpendDeleteModal={handleSetOpendDeleteModal}
+        handleDispatchDeleteModal={handleDispatchDeleteModal}
       />
     </FrameContainer>
   );

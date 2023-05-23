@@ -10,13 +10,13 @@ import {
 interface IDeleBoardModalProps {
   open: boolean;
   activeboard: string;
-  handleSetOpendDeleteModal: () => void;
+  handleDispatchDeleteModal: () => void;
 }
 
 function DeleteBoardModal({
   open,
   activeboard,
-  handleSetOpendDeleteModal,
+  handleDispatchDeleteModal,
 }: IDeleBoardModalProps) {
   return (
     <ModalContainer open={open}>
@@ -31,7 +31,7 @@ function DeleteBoardModal({
           <BtnWrapper>
             <Button btnType="destructive" text="Delete" />
             <Button
-              onClick={() => handleSetOpendDeleteModal()}
+              onClick={() => handleDispatchDeleteModal()}
               btnType="secondary"
               text="Cancel"
             />

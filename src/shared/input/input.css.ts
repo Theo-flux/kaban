@@ -1,10 +1,37 @@
 import styled from 'styled-components';
+import { IoClose } from 'react-icons/io5';
+import { transition } from '@/utils';
 
 export const InputWrapper = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   margin-bottom: 1rem;
+`;
+
+export const StyledCloseIcon = styled(IoClose)`
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: var(--regeant-gray);
+  ${transition}
+
+  &:hover {
+    color: var(--blue-marguerite);
+    transform: scale(0.8);
+  }
+`;
+
+export const DeletableInputWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & input {
+    width: 92%;
+  }
 `;
 
 export const InputEl = styled.input`

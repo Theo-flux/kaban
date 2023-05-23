@@ -5,10 +5,11 @@ import {
   ShowTag,
   Board,
   DeleteBoardModal,
+  AddNewTaskModal,
+  EditBoardModal,
 } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
 import { usePersistState } from '@/hooks';
-import AddNewTaskModal from '@/components/modals/addnewtaskmodal/AddNewTaskModal';
 
 function Frame() {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
@@ -25,6 +26,7 @@ function Frame() {
   type TModalState = {
     deleteBoard: boolean;
     addTask: boolean;
+    editBoard: boolean;
   };
 
   type TModalAction = {
@@ -34,6 +36,7 @@ function Frame() {
   const modalInitialState = {
     deleteBoard: false,
     addTask: false,
+    editBoard: false,
   };
 
   const modalReducer = (state: TModalState, action: TModalAction) => {
@@ -44,12 +47,19 @@ function Frame() {
           deleteBoard: !state.deleteBoard,
         };
       }
+      case 'editBoard': {
+        return {
+          ...state,
+          editBoard: !state.editBoard,
+        };
+      }
       case 'addTask': {
         return {
           ...state,
           addTask: !state.addTask,
         };
       }
+
       default:
         return state;
     }
@@ -57,14 +67,19 @@ function Frame() {
 
   const [openmodal, updateModal] = useReducer(modalReducer, modalInitialState);
 
-  // function to handle open/close of deletemodal
+  // function to handle open/close of deleteboardmodal
   const handleDispatchDeleteModal = () => {
     updateModal({ type: 'deleteBoard' });
   };
 
-  // function to handle open/close of deletemodal
+  // function to handle open/close of addnewtaskmodal
   const handleDispatchAddTaskModal = () => {
     updateModal({ type: 'addTask' });
+  };
+
+  // function to handle open/close of editboardmodal
+  const handleDispatchEditBoardModal = () => {
+    updateModal({ type: 'editBoard' });
   };
 
   // function to handle onclick hide/show sidebar
@@ -106,6 +121,7 @@ function Frame() {
           handleSetopenmobilenav={handleSetopenmobilenav}
           handleDispatchDeleteModal={handleDispatchDeleteModal}
           handleDispatchAddTaskModal={handleDispatchAddTaskModal}
+          handleDispatchEditBoardModal={handleDispatchEditBoardModal}
         />
         <Board showsidebar={showsidebar} />
       </Aside>
@@ -120,6 +136,11 @@ function Frame() {
       <AddNewTaskModal
         open={openmodal.addTask}
         handleDispatchAddTaskModal={handleDispatchAddTaskModal}
+      />
+
+      <EditBoardModal
+        open={openmodal.editBoard}
+        handleDispatchEditBoardModal={handleDispatchEditBoardModal}
       />
     </FrameContainer>
   );

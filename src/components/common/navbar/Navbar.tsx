@@ -23,6 +23,7 @@ interface INav {
   openmobilenav: boolean;
   handleDispatchDeleteModal: () => void;
   handleDispatchAddTaskModal: () => void;
+  handleDispatchEditBoardModal: () => void;
   handleSetopenmobilenav: () => void;
 }
 
@@ -32,6 +33,7 @@ function Navbar({
   openmobilenav,
   handleDispatchDeleteModal,
   handleDispatchAddTaskModal,
+  handleDispatchEditBoardModal,
   handleSetopenmobilenav,
 }: INav) {
   const isFromTablet = useMediaQuery({
@@ -48,6 +50,11 @@ function Navbar({
   const handleDispatchDeleteModalWithin = () => {
     setopenmore(!openmore);
     handleDispatchDeleteModal();
+  };
+
+  const handleDispatchEditBoardModalWithin = () => {
+    setopenmore(!openmore);
+    handleDispatchEditBoardModal();
   };
 
   return (
@@ -82,7 +89,9 @@ function Navbar({
         </NavInner>
       </NavWrapper>
       <MoreCard ref={ref} openmore={openmore}>
-        <EditText onClick={() => setopenmore(!openmore)}>Edit Board</EditText>
+        <EditText onClick={() => handleDispatchEditBoardModalWithin()}>
+          Edit Board
+        </EditText>
         <DeleteText onClick={() => handleDispatchDeleteModalWithin()}>
           Delete Board
         </DeleteText>

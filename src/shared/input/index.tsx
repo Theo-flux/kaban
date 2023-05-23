@@ -1,11 +1,13 @@
 import React from 'react';
 import {
   InputWrapper,
+  DeletableInputWrapper,
   InputLabel,
   InputEl,
   InputError,
   TextareaEl,
   SelectEl,
+  StyledCloseIcon,
 } from './input.css';
 
 interface IinputProps {
@@ -18,6 +20,13 @@ interface IinputProps {
 
 interface ISelectProps extends IinputProps {
   options: Array<string>;
+}
+
+interface IDeletableInputProps {
+  name: string;
+  value: string;
+  onChange?: React.MouseEvent<HTMLInputElement, MouseEvent>;
+  error?: string;
 }
 
 export const TextInput = ({
@@ -64,7 +73,6 @@ export const TextAreaInput = ({
 export const SelectInput = ({
   label,
   name,
-  placeholder,
   onChange,
   options,
 }: ISelectProps) => {
@@ -80,6 +88,28 @@ export const SelectInput = ({
           );
         })}
       </SelectEl>
+    </InputWrapper>
+  );
+};
+
+export const DeletableInput = ({
+  name,
+  value,
+  onChange,
+  error,
+}: IDeletableInputProps) => {
+  return (
+    <InputWrapper>
+      <DeletableInputWrapper>
+        <InputEl
+          type="text"
+          name={name}
+          value={value}
+          onChange={() => onChange}
+        />
+        <StyledCloseIcon />
+      </DeletableInputWrapper>
+      {error && <InputError>{error}</InputError>}
     </InputWrapper>
   );
 };

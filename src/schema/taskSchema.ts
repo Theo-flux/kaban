@@ -7,7 +7,6 @@ export const taskSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   status: {
     type: String,

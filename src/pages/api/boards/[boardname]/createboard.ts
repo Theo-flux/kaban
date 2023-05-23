@@ -12,10 +12,11 @@ export default async function handler(
 
   if (method == 'GET') {
     try {
-      await connectMongo();
+      connectMongo();
       const myDb = mongoose.connection.useDb('boards');
 
-      let NewBoard = myDb.models.NewBoard || myDb.model(`${boardname}`, taskSchema);
+      let NewBoard =
+        myDb.models.NewBoard || myDb.model(`${boardname}`, taskSchema);
 
       await NewBoard.create();
       console.log('New board created successfully!');

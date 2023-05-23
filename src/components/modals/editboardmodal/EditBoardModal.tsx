@@ -6,8 +6,6 @@ import {
   ModalWrapper,
   ModalTitle,
   TextInput,
-  TextAreaInput,
-  SelectInput,
   ButtonIcon,
   Button,
   StyledPlusIcon,

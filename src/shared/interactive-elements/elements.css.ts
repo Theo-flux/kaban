@@ -12,7 +12,7 @@ type TButtonText = {
 
 export const ButtonText = styled(StyledHeadingMD)<TButtonText>`
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   display: ${props => (props.hideTextOnMobile ? 'none' : 'block')};
   ${props => props.hideTextOnMobile && `margin-left: 0.35rem;`}
 
@@ -26,10 +26,10 @@ export const ButtonContainer = styled.button<TButtonContainer>`
   border: none;
   outline: none;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border-radius: 100px;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   background-color: ${props =>
     props.btnType === 'primary'
       ? 'var(--primary-btn)'

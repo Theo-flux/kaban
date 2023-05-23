@@ -35,6 +35,9 @@ export const GlobalStyles = createGlobalStyle`
         --secondary-btn-hover: #635FC725;
         --destructive-btn: var(--mandy);
         --destructive-btn-hover: var(--mona-lisa);
+        --input-border: #828FA325;
+        --input-placeholder: #00011225;
+        --input-label: var(--regeant-gray);
     
     }
 
@@ -50,6 +53,9 @@ export const GlobalStyles = createGlobalStyle`
       --secondary-btn-hover: var(--white);
       --destructive-btn: var(--mandy);
       --destructive-btn-hover: var(--mona-lisa);
+      --input-border: #828FA325;
+      --input-placeholder: #ffffff25;
+      --input-label: var(--white);
     }
     html {
         font-size: 0.9375rem;

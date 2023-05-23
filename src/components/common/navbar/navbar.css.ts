@@ -50,7 +50,7 @@ export const NavWrapper = styled.div`
 
 export const NavLogoWrapper = styled.div`
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.75rem;
   border-right: 1px solid var(--side-border);
 
   @media ${device.md} {
@@ -60,7 +60,7 @@ export const NavLogoWrapper = styled.div`
 
 export const NavInner = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 0.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

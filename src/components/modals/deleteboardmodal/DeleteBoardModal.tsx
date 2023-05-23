@@ -1,7 +1,12 @@
 import React from 'react';
-import { Button, ModalContainer, ModalWrapper } from '@/shared';
 import {
-  DeleteBoardCard,
+  Button,
+  ModalContainer,
+  ModalBackdrop,
+  ModalWrapper,
+  ModalCard,
+} from '@/shared';
+import {
   StyledDeleteTitle,
   StyledDeleteText,
   BtnWrapper,
@@ -20,7 +25,7 @@ function DeleteBoardModal({
 }: IDeleBoardModalProps) {
   return (
     <ModalContainer open={open}>
-      <DeleteBoardCard open={open}>
+      <ModalCard open={open}>
         <ModalWrapper>
           <StyledDeleteTitle>Delete this board?</StyledDeleteTitle>
           <StyledDeleteText>
@@ -37,7 +42,8 @@ function DeleteBoardModal({
             />
           </BtnWrapper>
         </ModalWrapper>
-      </DeleteBoardCard>
+      </ModalCard>
+      <ModalBackdrop open={open} onClick={() => handleDispatchDeleteModal()} />
     </ModalContainer>
   );
 }

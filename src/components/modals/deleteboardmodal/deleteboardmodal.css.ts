@@ -6,17 +6,6 @@ type TDeleteBoardCardProps = {
   open: boolean;
 };
 
-export const DeleteBoardCard = styled.div<TDeleteBoardCardProps>`
-  width: 80%;
-  max-width: 480px;
-  border-radius: 6px;
-  background-color: var(--side);
-  visibility: ${props => (props.open ? 'visible' : 'hidden')};
-  transform: ${props => (props.open ? 'translateY(0)' : 'translateY(24px)')};
-  opacity: ${props => (props.open ? '1' : '0')};
-  ${transition}
-  transition-delay: 350ms;
-`;
 
 export const StyledDeleteTitle = styled(StyledHeadingL)`
   color: var(--mandy);

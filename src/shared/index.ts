@@ -4,3 +4,4 @@ export * from './containers';
 export * from './logo';
 export * from './icons';
 export * from './modal';
+export * from './input';

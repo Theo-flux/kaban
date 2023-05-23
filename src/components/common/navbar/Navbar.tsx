@@ -21,8 +21,7 @@ interface INav {
   activeboard: string;
   showsidebar: boolean;
   openmobilenav: boolean;
-  openDeleteModal: boolean;
-  handleSetOpendDeleteModal: () => void;
+  handleDispatchDeleteModal: () => void;
   handleSetopenmobilenav: () => void;
 }
 
@@ -30,9 +29,8 @@ function Navbar({
   activeboard,
   showsidebar,
   openmobilenav,
-  openDeleteModal,
+  handleDispatchDeleteModal,
   handleSetopenmobilenav,
-  handleSetOpendDeleteModal,
 }: INav) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
@@ -45,9 +43,9 @@ function Navbar({
     setopenmore(!openmore);
   };
 
-  const handleSetOpendDeleteModalWithin = () => {
+  const handleDispatchDeleteModalWithin = () => {
     setopenmore(!openmore);
-    handleSetOpendDeleteModal();
+    handleDispatchDeleteModal();
   };
 
   return (
@@ -82,7 +80,7 @@ function Navbar({
       </NavWrapper>
       <MoreCard ref={ref} openmore={openmore}>
         <EditText onClick={() => setopenmore(!openmore)}>Edit Board</EditText>
-        <DeleteText onClick={() => handleSetOpendDeleteModalWithin()}>
+        <DeleteText onClick={() => handleDispatchDeleteModalWithin()}>
           Delete Board
         </DeleteText>
       </MoreCard>

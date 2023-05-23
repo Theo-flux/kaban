@@ -39,19 +39,15 @@ export const SidebarContainer = styled.div<TsidebarContainer>`
   ${transition}
 
   @media ${device.md} {
-    width: ${props => (props.showsidebar ? `30%` : `0px`)};
+    width: ${props => (props.showsidebar ? `300px` : `0px`)};
   }
 
   @media ${device.lg} {
-    width: ${props => (props.showsidebar ? `20%` : `0px`)};
+    width: ${props => (props.showsidebar ? `270px` : `0px`)};
   }
 
   @media ${device.xl} {
-    width: ${props => (props.showsidebar ? `15%` : `0px`)};
-  }
-
-  @media ${device.xxl} {
-    width: ${props => (props.showsidebar ? `10%` : `0px`)};
+    width: ${props => (props.showsidebar ? `250px` : `0px`)};
   }
 `;
 

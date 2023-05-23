@@ -16,18 +16,14 @@ export const Aside = styled.div<TAsideProps>`
   width: 100%;
 
   @media ${device.md} {
-    width: ${props => (props.showsidebar ? `70%` : `1000%`)};
+    width: ${props => (props.showsidebar ? `calc(100% - 300px)` : `1000%`)};
   }
 
   @media ${device.lg} {
-    width: ${props => (props.showsidebar ? `80%` : `100%`)};
+    width: ${props => (props.showsidebar ? `calc(100% - 270px)` : `100%`)};
   }
 
   @media ${device.xl} {
-    width: ${props => (props.showsidebar ? `85%` : `100%`)};
-  }
-
-  @media ${device.xxl} {
-    width: ${props => (props.showsidebar ? `90%` : `100%`)};
+    width: ${props => (props.showsidebar ? `calc(100% - 250px)` : `100%`)};
   }
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { transition } from '@/utils';
+import { StyledHeadingL } from '../typography';
 
 type TModalContainerProps = {
   open: boolean;
@@ -7,6 +8,10 @@ type TModalContainerProps = {
 
 type TModalCardProps = {
   open: boolean;
+};
+
+type TModalTitle = {
+  color?: string;
 };
 
 export const ModalContainer = styled.div<TModalContainerProps>`
@@ -38,4 +43,9 @@ export const ModalCard = styled.div<TModalCardProps>`
 
 export const ModalWrapper = styled.div`
   padding: 1.5rem 1rem;
+`;
+
+export const ModalTitle = styled(StyledHeadingL)<TModalTitle>`
+  color: ${props => (props.color ? `${props.color}` : `var(--text)`)};
+  margin-bottom: 1rem;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalContainer, ModalCard, ModalWrapper } from '@/shared';
+import { ModalContainer, ModalCard, ModalWrapper, ModalTitle } from '@/shared';
 
 interface IAddNewTaskModalProps {
   open: boolean;
@@ -11,10 +11,11 @@ function AddNewTaskModal({
   handleDispatchAddTaskModal,
 }: IAddNewTaskModalProps) {
   return (
-    <ModalContainer open={open} onClick={() => handleDispatchAddTaskModal()}>
+    <ModalContainer open={open}>
       <ModalCard open={open}>
         <ModalWrapper>
-          <p>Open add task</p>
+          <ModalTitle>Add New Task</ModalTitle>
+          
         </ModalWrapper>
       </ModalCard>
     </ModalContainer>

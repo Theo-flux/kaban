@@ -13,7 +13,10 @@ type TCollections = {
   collections: Array<String>;
 };
 
-export default function Home() {
+export default function Home({
+  boardCollections,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(boardCollections);
 
   return (
     <React.Fragment>
@@ -25,16 +28,16 @@ export default function Home() {
         />
       </Head>
       <main>
-        <Frame/>
+        <Frame />
       </main>
     </React.Fragment>
   );
 }
 
-// export const getServerSideProps: GetServerSideProps<{
-//   boardCollections: TCollections;
-// }> = async () => {
-//   const res = await fetch('http://localhost:3000/api/boards');
-//   const boardCollections = await res.json();
-//   return { props: { boardCollections } };
-// };
+export const getServerSideProps: GetServerSideProps<{
+  boardCollections: TCollections;
+}> = async () => {
+  const res = await fetch('https://thekanban.vercel.app/api/boards');
+  const boardCollections = await res.json();
+  return { props: { boardCollections } };
+};

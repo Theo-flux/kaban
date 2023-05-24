@@ -17,7 +17,7 @@ interface ICollections {
   boardCollections: { name: String; collections: Array<String> };
 }
 
-function Frame() {
+function Frame({ boardCollections }: ICollections) {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
     'activeboard',
     'Platform Launch'
@@ -98,7 +98,7 @@ function Frame() {
       />
 
       <AddNewTaskModal
-        open={isAddTaskModal}
+        open={isEditBoardModal}
         handleDispatchAddTaskModal={handleDispatchAddTaskModal}
       />
 

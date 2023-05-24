@@ -1,4 +1,6 @@
 import { useReducer, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { modalActions } from '@/app/features/modals/modalSlice';
 import {
   Navbar,
   Sidebar,
@@ -11,75 +13,37 @@ import {
 import { FrameContainer, Aside } from './frame.css';
 import { usePersistState } from '@/hooks';
 
-function Frame() {
+interface ICollections {
+  boardCollections: { name: String; collections: Array<String> };
+}
+
+function Frame({ boardCollections }: ICollections) {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
     'activeboard',
     'Platform Launch'
   );
-  function spreadThem<T extends object>(t: T, s: T): T {
-    return { ...(t as object), ...(s as object) } as T;
-  }
+
+  const { isDeleteBoardModal, isEditBoardModal, isAddTaskModal } =
+    useAppSelector(state => state.modal);
+  const { DELETEBOARD, EDITBOARD, ADDTASK } = modalActions;
+  const dispatch = useAppDispatch();
+
   let [showsidebar, setshowsidebar] = useState(true);
   let [openmobilenav, setopenmobilenav] = useState(false);
-  // const [openDeleteModal, setOpenDeletemodal] = useState(false);
-
-  type TModalState = {
-    deleteBoard: boolean;
-    addTask: boolean;
-    editBoard: boolean;
-  };
-
-  type TModalAction = {
-    type: string;
-  };
-
-  const modalInitialState = {
-    deleteBoard: false,
-    addTask: false,
-    editBoard: false,
-  };
-
-  const modalReducer = (state: TModalState, action: TModalAction) => {
-    switch (action.type) {
-      case 'deleteBoard': {
-        return {
-          ...state,
-          deleteBoard: !state.deleteBoard,
-        };
-      }
-      case 'editBoard': {
-        return {
-          ...state,
-          editBoard: !state.editBoard,
-        };
-      }
-      case 'addTask': {
-        return {
-          ...state,
-          addTask: !state.addTask,
-        };
-      }
-
-      default:
-        return state;
-    }
-  };
-
-  const [openmodal, updateModal] = useReducer(modalReducer, modalInitialState);
 
   // function to handle open/close of deleteboardmodal
   const handleDispatchDeleteModal = () => {
-    updateModal({ type: 'deleteBoard' });
+    dispatch(DELETEBOARD());
   };
 
   // function to handle open/close of addnewtaskmodal
   const handleDispatchAddTaskModal = () => {
-    updateModal({ type: 'addTask' });
+    dispatch(ADDTASK());
   };
 
   // function to handle open/close of editboardmodal
   const handleDispatchEditBoardModal = () => {
-    updateModal({ type: 'editBoard' });
+    dispatch(EDITBOARD());
   };
 
   // function to handle onclick hide/show sidebar
@@ -128,18 +92,18 @@ function Frame() {
 
       {/* Modals */}
       <DeleteBoardModal
-        open={openmodal.deleteBoard}
+        open={isDeleteBoardModal}
         activeboard={activeboard}
         handleDispatchDeleteModal={handleDispatchDeleteModal}
       />
 
       <AddNewTaskModal
-        open={openmodal.addTask}
+        open={isAddTaskModal}
         handleDispatchAddTaskModal={handleDispatchAddTaskModal}
       />
 
       <EditBoardModal
-        open={openmodal.editBoard}
+        open={isEditBoardModal}
         handleDispatchEditBoardModal={handleDispatchEditBoardModal}
       />
     </FrameContainer>

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/MyGlobalStyles';
+import { Providers } from '../app/Provider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/images/kanban-icon.svg" />
       </Head>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <Providers>
+        <Component {...pageProps} />
+      </Providers>
     </ThemeProvider>
   );
 }

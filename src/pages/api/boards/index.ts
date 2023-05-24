@@ -9,11 +9,17 @@ export default async function handler(
   try {
     connectMongo();
 
-    mongoose.connection.useDb('boards');
+    const myDb = mongoose.connection.useDb('boards');
 
-    // console.log(await mongoose.connection.db.listCollections().toArray());
+    let collList = await myDb.db.listCollections().toArray();
 
-    res.status(200).json({ name: 'All Kanban boards cluster' });
+    collList = collList.map(el => {
+      return el.name;
+    });
+
+    res
+      .status(200)
+      .json({ name: 'All Kanban boards cluster', collections: collList });
   } catch (error) {
     console.log(error);
     res.json({ error });

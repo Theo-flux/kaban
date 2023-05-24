@@ -22,6 +22,6 @@ export default async function handler(
       .json({ name: 'All Kanban boards cluster', collections: collList });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: error });
+    res.status(400).json({ message: 'Error getting the collections!' });
   }
 }

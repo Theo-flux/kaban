@@ -28,7 +28,7 @@ export default function Home({
         />
       </Head>
       <main>
-        <Frame />
+        <Frame boardCollections={boardCollections} />
       </main>
     </React.Fragment>
   );

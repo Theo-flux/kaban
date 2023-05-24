@@ -1,4 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import mongoose, { Connection } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectMongo } from '@/utils';
 
@@ -7,9 +7,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log('CONNECTING TO MONGO');
     connectMongo();
-    console.log('CONNECTED TO MONGO');
+
+    mongoose.connection.useDb('boards');
+
+    // console.log(await mongoose.connection.db.listCollections().toArray());
 
     res.status(200).json({ name: 'All Kanban boards cluster' });
   } catch (error) {

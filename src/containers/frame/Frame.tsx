@@ -98,7 +98,7 @@ function Frame({ boardCollections }: ICollections) {
       />
 
       <AddNewTaskModal
-        open={isEditBoardModal}
+        open={isAddTaskModal}
         handleDispatchAddTaskModal={handleDispatchAddTaskModal}
       />
 

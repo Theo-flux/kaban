@@ -17,7 +17,7 @@ interface ICollections {
   boardCollections: { name: String; collections: Array<String> };
 }
 
-function Frame({ boardCollections }: ICollections) {
+function Frame() {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
     'activeboard',
     'Platform Launch'

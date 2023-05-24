@@ -13,10 +13,7 @@ type TCollections = {
   collections: Array<String>;
 };
 
-export default function Home({
-  boardCollections,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(boardCollections);
+export default function Home() {
 
   return (
     <React.Fragment>
@@ -28,16 +25,16 @@ export default function Home({
         />
       </Head>
       <main>
-        <Frame boardCollections={boardCollections} />
+        <Frame/>
       </main>
     </React.Fragment>
   );
 }
 
-export const getServerSideProps: GetServerSideProps<{
-  boardCollections: TCollections;
-}> = async () => {
-  const res = await fetch('http://localhost:3000/api/boards');
-  const boardCollections = await res.json();
-  return { props: { boardCollections } };
-};
+// export const getServerSideProps: GetServerSideProps<{
+//   boardCollections: TCollections;
+// }> = async () => {
+//   const res = await fetch('http://localhost:3000/api/boards');
+//   const boardCollections = await res.json();
+//   return { props: { boardCollections } };
+// };

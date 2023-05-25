@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { modalActions } from '@/app/features/modals/modalSlice';
 import {
@@ -16,7 +16,7 @@ import { usePersistState } from '@/hooks';
 function Frame() {
   let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
     'activeboard',
-    'Platform Launch'
+    'Roadmap'
   );
 
   const { isDeleteBoardModal, isEditBoardModal, isAddTaskModal } =

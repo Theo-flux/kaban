@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -24,8 +25,9 @@ import {
   MobileInner,
   MobileSettingsContainer,
 } from './sidebar.css';
-import { Logo } from '../../../shared';
+import { Logo, StyledLoader } from '../../../shared';
 import { Switch } from '@mantine/core';
+import { useGetAllBoardsQuery } from '@/app/features/api/apiSlice';
 
 interface ISidebar {
   activeboard: string;
@@ -64,6 +66,13 @@ const Desktop = ({
   showsidebar,
   handleSetshowsidebar,
 }: IDesktopbar) => {
+  const { data, isLoading } = useGetAllBoardsQuery();
+  const [boardNumber, setBoardNumber] = useState(0);
+
+  useEffect(() => {
+    data && setBoardNumber(data?.collections?.length);
+  }, [data]);
+
   return (
     <SidebarContainer showsidebar={showsidebar}>
       <SidebarLogo>
@@ -71,21 +80,25 @@ const Desktop = ({
       </SidebarLogo>
       <Wrapper>
         <SidebarInner>
-          <AllBoardText>ALL BOARDS (0)</AllBoardText>
+          <AllBoardText>ALL BOARDS ({boardNumber})</AllBoardText>
           <SidebarBoards>
-            {boards.map((board, index) => {
-              return (
-                <SidebarBoard
-                  key={index}
-                  activeboard={activeboard}
-                  board={board}
-                  onClick={() => handleSetActiveBoard(board)}
-                >
-                  <SidebarBoardIcon />
-                  <SidebarBoardName name={board}>{board}</SidebarBoardName>
-                </SidebarBoard>
-              );
-            })}
+            {isLoading ? (
+              <StyledLoader />
+            ) : (
+              data?.collections?.map((board, index) => {
+                return (
+                  <SidebarBoard
+                    key={index}
+                    activeboard={activeboard}
+                    board={board}
+                    onClick={() => handleSetActiveBoard(board)}
+                  >
+                    <SidebarBoardIcon />
+                    <SidebarBoardName name={board}>{board}</SidebarBoardName>
+                  </SidebarBoard>
+                );
+              })
+            )}
             <CreateNewBoard>
               <SidebarBoardIcon />
               <SidebarBoardName name={'new'}>

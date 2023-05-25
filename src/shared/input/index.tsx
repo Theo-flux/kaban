@@ -10,30 +10,26 @@ import {
   StyledCloseIcon,
 } from './input.css';
 
-interface IinputProps {
+interface IInputProps {
   label: string;
   name: string;
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void ;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }
 
-interface ITnputProps {
-  label: string;
-  name: string;
-  placeholder?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void ;
-  error?: string;
+interface ITextareatProps extends Omit<IInputProps, 'onChange'> {
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-interface ISelectProps extends IinputProps {
+interface ISelectProps extends IInputProps {
   options: Array<string>;
 }
 
 interface IDeletableInputProps {
   name: string;
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }
 
@@ -43,7 +39,7 @@ export const TextInput = ({
   placeholder,
   onChange,
   error,
-}: ITnputProps) => {
+}: IInputProps) => {
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
@@ -51,7 +47,7 @@ export const TextInput = ({
         type="text"
         name={name}
         placeholder={placeholder}
-        onChange={(e) => onChange(e)}
+        onChange={e => onChange(e)}
       />
       {error && <InputError>{error}</InputError>}
     </InputWrapper>
@@ -64,14 +60,14 @@ export const TextAreaInput = ({
   placeholder,
   onChange,
   error,
-}: IinputProps) => {
+}: ITextareatProps) => {
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
       <TextareaEl
         name={name}
         placeholder={placeholder}
-        onChange={(e) => onChange(e)}
+        onChange={e => onChange(e)}
       />
       {error && <InputError>{error}</InputError>}
     </InputWrapper>
@@ -113,7 +109,7 @@ export const DeletableInput = ({
           type="text"
           name={name}
           value={value}
-          onChange={(e) => onChange(e)}
+          onChange={e => onChange(e)}
         />
         <StyledCloseIcon />
       </DeletableInputWrapper>

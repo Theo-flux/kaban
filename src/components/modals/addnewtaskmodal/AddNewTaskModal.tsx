@@ -33,6 +33,7 @@ function AddNewTaskModal({
               label="Title"
               name="title"
               placeholder="e.g Take coffee break"
+              onChange={() => {}}
             />
 
             <TextAreaInput
@@ -40,6 +41,7 @@ function AddNewTaskModal({
               name="description"
               placeholder="e.g. It’s always good to take a break. This 15 minute break will 
             recharge the batteries a little."
+              onChange={() => {}}
             />
           </Group>
 
@@ -57,6 +59,7 @@ function AddNewTaskModal({
               label="Status"
               name="status"
               options={['Todo', 'Done', 'Doing']}
+              onChange={() => {}}
             />
             <Button text="Create Task" btnType="primary" />
           </Group>

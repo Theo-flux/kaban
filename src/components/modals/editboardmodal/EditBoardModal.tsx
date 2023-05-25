@@ -32,14 +32,15 @@ function EditBoardModal({
               label="Board Name"
               name="board-name"
               placeholder="e.g Platform Launch"
+              onChange={() => {}}
             />
           </Group>
 
           <Group>
             <Text>Board Columns</Text>
-            <DeletableInput name="todo" value="Todo" />
-            <DeletableInput name="doing" value="Doing" />
-            <DeletableInput name="done" value="Done" />
+            <DeletableInput name="todo" value="Todo" onChange={() => {}} />
+            <DeletableInput name="doing" value="Doing" onChange={() => {}} />
+            <DeletableInput name="done" value="Done" onChange={() => {}} />
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
               text="Add New Column"

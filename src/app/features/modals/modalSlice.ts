@@ -5,12 +5,14 @@ type TModalState = {
   isDeleteBoardModal: boolean;
   isAddTaskModal: boolean;
   isEditBoardModal: boolean;
+  isAddBoardModal: boolean;
 };
 
 const initialState: TModalState = {
   isDeleteBoardModal: false,
   isAddTaskModal: false,
   isEditBoardModal: false,
+  isAddBoardModal: false,
 };
 
 const modalSlice = createSlice({
@@ -35,6 +37,13 @@ const modalSlice = createSlice({
       return {
         ...state,
         isAddTaskModal: !state.isAddTaskModal,
+      };
+    },
+
+    ADDBOARD: state => {
+      return {
+        ...state,
+        isAddBoardModal: !state.isAddBoardModal,
       };
     },
   },

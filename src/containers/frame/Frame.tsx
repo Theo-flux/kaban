@@ -8,6 +8,7 @@ import {
   Board,
   DeleteBoardModal,
   AddNewTaskModal,
+  AddNewBoardModal,
   EditBoardModal,
 } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
@@ -19,9 +20,13 @@ function Frame() {
     'Roadmap'
   );
 
-  const { isDeleteBoardModal, isEditBoardModal, isAddTaskModal } =
-    useAppSelector(state => state.modal);
-  const { DELETEBOARD, EDITBOARD, ADDTASK } = modalActions;
+  const {
+    isDeleteBoardModal,
+    isEditBoardModal,
+    isAddTaskModal,
+    isAddBoardModal,
+  } = useAppSelector(state => state.modal);
+  const { DELETEBOARD, EDITBOARD, ADDTASK, ADDBOARD } = modalActions;
   const dispatch = useAppDispatch();
 
   let [showsidebar, setshowsidebar] = useState(true);
@@ -40,6 +45,11 @@ function Frame() {
   // function to handle open/close of editboardmodal
   const handleDispatchEditBoardModal = () => {
     dispatch(EDITBOARD());
+  };
+
+  // function to handle open/close of addboardmodal
+  const handleDispatchAddBoardModal = () => {
+    dispatch(ADDBOARD());
   };
 
   // function to handle onclick hide/show sidebar
@@ -67,6 +77,7 @@ function Frame() {
         handleSetshowsidebar={handleSetshowsidebar}
         openmobilenav={openmobilenav}
         handleSetopenmobilenav={handleSetopenmobilenav}
+        handleDispatchAddBoardModal={handleDispatchAddBoardModal}
       />
       <ShowTag
         showsidebar={showsidebar}
@@ -101,6 +112,10 @@ function Frame() {
       <EditBoardModal
         open={isEditBoardModal}
         handleDispatchEditBoardModal={handleDispatchEditBoardModal}
+      />
+      <AddNewBoardModal
+        open={isAddBoardModal}
+        handleDispatchAddBoardModal={handleDispatchAddBoardModal}
       />
     </FrameContainer>
   );

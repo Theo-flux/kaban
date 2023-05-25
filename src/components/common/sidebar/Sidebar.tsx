@@ -36,6 +36,7 @@ interface ISidebar {
   handleSetshowsidebar: () => void;
   openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
+  handleDispatchAddBoardModal: () => void;
 }
 
 interface IDesktopbar {
@@ -45,6 +46,7 @@ interface IDesktopbar {
   handleOnchangeTheme: () => void;
   showsidebar: boolean;
   handleSetshowsidebar: () => void;
+  handleDispatchAddBoardModal: () => void;
 }
 
 interface IMobilebar {
@@ -54,6 +56,7 @@ interface IMobilebar {
   handleOnchangeTheme: () => void;
   openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
+  handleDispatchAddBoardModal: () => void;
 }
 
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
@@ -65,6 +68,7 @@ const Desktop = ({
   handleOnchangeTheme,
   showsidebar,
   handleSetshowsidebar,
+  handleDispatchAddBoardModal,
 }: IDesktopbar) => {
   const { data, isLoading } = useGetAllBoardsQuery();
   const [boardNumber, setBoardNumber] = useState(0);
@@ -99,7 +103,7 @@ const Desktop = ({
                 );
               })
             )}
-            <CreateNewBoard>
+            <CreateNewBoard onClick={() => handleDispatchAddBoardModal()}>
               <SidebarBoardIcon />
               <SidebarBoardName name={'new'}>
                 <span>
@@ -138,6 +142,7 @@ const Mobile = ({
   handleOnchangeTheme,
   openmobilenav,
   handleSetopenmobilenav,
+  handleDispatchAddBoardModal,
 }: IMobilebar) => {
   return (
     <MobileContainer
@@ -160,7 +165,7 @@ const Mobile = ({
               </SidebarBoard>
             );
           })}
-          <CreateNewBoard>
+          <CreateNewBoard onClick={() => handleDispatchAddBoardModal()}>
             <SidebarBoardIcon />
             <SidebarBoardName name={'new'}>
               <span>
@@ -194,6 +199,7 @@ function Sidebar({
   handleSetshowsidebar,
   openmobilenav,
   handleSetopenmobilenav,
+  handleDispatchAddBoardModal,
 }: ISidebar) {
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
@@ -213,6 +219,7 @@ function Sidebar({
       handleOnchangeTheme={handleOnchangeTheme}
       showsidebar={showsidebar}
       handleSetshowsidebar={handleSetshowsidebar}
+      handleDispatchAddBoardModal={handleDispatchAddBoardModal}
     />
   ) : (
     <Mobile
@@ -222,6 +229,7 @@ function Sidebar({
       handleOnchangeTheme={handleOnchangeTheme}
       openmobilenav={openmobilenav}
       handleSetopenmobilenav={handleSetopenmobilenav}
+      handleDispatchAddBoardModal={handleDispatchAddBoardModal}
     />
   );
 }

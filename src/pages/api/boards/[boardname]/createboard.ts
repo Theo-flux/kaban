@@ -10,20 +10,18 @@ export default async function handler(
   const { boardname } = req.query;
   const { method } = req;
 
-  if (method == 'GET') {
-    try {
-      connectMongo();
-      const myDb = mongoose.connection.useDb('boards');
+  try {
+    connectMongo();
+    const myDb = mongoose.connection.useDb('boards');
 
-      let NewBoard =
-        myDb.models.NewBoard ||
-        myDb.model(`${boardname}`, taskSchema, `${boardname}`);
+    let NewBoard =
+      myDb.models.NewBoard ||
+      myDb.model(`${boardname}`, taskSchema, `${boardname}`);
 
-      await NewBoard.createCollection();
+    await NewBoard.createCollection();
 
-      res.status(200).json({ name: boardname, message: 'board created!' });
-    } catch (error) {
-      res.json({ error });
-    }
+    res.status(200).json({ name: boardname, message: 'board created!' });
+  } catch (error) {
+    res.status(400).json({ error });
   }
 }

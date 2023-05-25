@@ -1,17 +1,5 @@
 import { kanbanApi } from '@/app/services/kanbanApi';
-
-type TCollections = {
-  name: string;
-  collections: Array<string>;
-};
-
-type TCreateBoard = {
-  name: string;
-  message: string;
-};
-type TBoard = {
-  name: string;
-};
+import { TCollections, TCreateBoard, TBoard } from './types';
 
 export const kanbanApiSlice = kanbanApi.injectEndpoints({
   endpoints: builder => ({
@@ -20,7 +8,7 @@ export const kanbanApiSlice = kanbanApi.injectEndpoints({
       providesTags: ['Boards'],
     }),
     createNewBoard: builder.mutation<TCreateBoard, TBoard>({
-      query: board => `/boards/${board}/createboard`,
+      query: board => `/boards/${board.name}/createboard`,
       invalidatesTags: ['Boards'],
     }),
   }),

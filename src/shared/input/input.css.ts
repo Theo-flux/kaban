@@ -90,4 +90,7 @@ export const InputLabel = styled.label`
   margin-bottom: 0.7rem;
 `;
 
-export const InputError = styled.small``;
+export const InputError = styled.small`
+  margin-top: 0.3rem;
+  color: var(--mandy);
+`;

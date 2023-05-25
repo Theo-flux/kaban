@@ -14,7 +14,15 @@ interface IinputProps {
   label: string;
   name: string;
   placeholder?: string;
-  onChange?: React.MouseEvent<HTMLInputElement, MouseEvent>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void ;
+  error?: string;
+}
+
+interface ITnputProps {
+  label: string;
+  name: string;
+  placeholder?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void ;
   error?: string;
 }
 
@@ -25,7 +33,7 @@ interface ISelectProps extends IinputProps {
 interface IDeletableInputProps {
   name: string;
   value: string;
-  onChange?: React.MouseEvent<HTMLInputElement, MouseEvent>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }
 
@@ -35,7 +43,7 @@ export const TextInput = ({
   placeholder,
   onChange,
   error,
-}: IinputProps) => {
+}: ITnputProps) => {
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
@@ -43,7 +51,7 @@ export const TextInput = ({
         type="text"
         name={name}
         placeholder={placeholder}
-        onChange={() => onChange}
+        onChange={(e) => onChange(e)}
       />
       {error && <InputError>{error}</InputError>}
     </InputWrapper>
@@ -63,7 +71,7 @@ export const TextAreaInput = ({
       <TextareaEl
         name={name}
         placeholder={placeholder}
-        onChange={() => onChange}
+        onChange={(e) => onChange(e)}
       />
       {error && <InputError>{error}</InputError>}
     </InputWrapper>
@@ -105,7 +113,7 @@ export const DeletableInput = ({
           type="text"
           name={name}
           value={value}
-          onChange={() => onChange}
+          onChange={(e) => onChange(e)}
         />
         <StyledCloseIcon />
       </DeletableInputWrapper>

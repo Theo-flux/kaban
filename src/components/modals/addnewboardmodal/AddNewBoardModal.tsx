@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ModalContainer,
   ModalBackdrop,
@@ -12,6 +12,7 @@ import {
   DeletableInput,
 } from '@/shared';
 import { Group, Text } from './addnewboardmodal.css';
+import { useCreateNewBoardMutation } from '@/app/features/api/apiSlice';
 
 interface IAddNewBoardModalProps {
   open: boolean;
@@ -22,6 +23,24 @@ function AddNewBoardModal({
   open,
   handleDispatchAddBoardModal,
 }: IAddNewBoardModalProps) {
+  const [updateBoard, { isLoading }] = useCreateNewBoardMutation();
+  const [error, setError] = useState('');
+  const [boardName, setBoardName] = useState({ name: '' });
+
+  const handleOnChangeBoardName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBoardName({ ...boardName, name: event.target.value });
+  };
+
+  const handleSubmit = async () => {
+    if (boardName.name == '') {
+      return setError("Board name can't be empty");
+    } else setError('');
+    await updateBoard({ name: boardName.name });
+    handleDispatchAddBoardModal();
+  };
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
@@ -30,8 +49,10 @@ function AddNewBoardModal({
           <Group>
             <TextInput
               label="Board Name"
-              name="board-name"
+              name="boardName"
               placeholder="e.g Platform Launch"
+              onChange={handleOnChangeBoardName}
+              error={error}
             />
           </Group>
 
@@ -49,7 +70,11 @@ function AddNewBoardModal({
           </Group>
 
           <Group>
-            <Button text="Create New Board" btnType="primary" />
+            <Button
+              text="Create New Board"
+              btnType="primary"
+              onClick={() => handleSubmit()}
+            />
           </Group>
         </ModalWrapper>
       </ModalCard>

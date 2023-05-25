@@ -12,3 +12,12 @@ export const Group = styled.div`
     width: 100%;
   }
 `;
+
+export const Text = styled.p`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--input-label);
+  margin-bottom: 0.7rem;
+`;

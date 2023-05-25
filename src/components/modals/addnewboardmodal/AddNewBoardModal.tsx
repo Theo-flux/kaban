@@ -6,13 +6,12 @@ import {
   ModalWrapper,
   ModalTitle,
   TextInput,
-  TextAreaInput,
-  SelectInput,
   ButtonIcon,
   Button,
   StyledPlusIcon,
+  DeletableInput,
 } from '@/shared';
-import { Group } from './addnewboardmodal.css';
+import { Group, Text } from './addnewboardmodal.css';
 
 interface IAddNewBoardModalProps {
   open: boolean;
@@ -30,35 +29,27 @@ function AddNewBoardModal({
           <ModalTitle>Add New Board</ModalTitle>
           <Group>
             <TextInput
-              label="Title"
-              name="title"
-              placeholder="e.g Take coffee break"
-            />
-
-            <TextAreaInput
-              label="Description"
-              name="description"
-              placeholder="e.g. It’s always good to take a break. This 15 minute break will 
-            recharge the batteries a little."
+              label="Board Name"
+              name="board-name"
+              placeholder="e.g Platform Launch"
             />
           </Group>
 
           <Group>
+            <Text>Board Columns</Text>
+            <DeletableInput name="todo" value="Todo" />
+            <DeletableInput name="doing" value="Doing" />
+            <DeletableInput name="done" value="Done" />
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
-              text="Add New Subtask"
+              text="Add New Column"
               hideTextOnMobile={false}
               btnType="secondary"
             />
           </Group>
 
           <Group>
-            <SelectInput
-              label="Status"
-              name="status"
-              options={['Todo', 'Done', 'Doing']}
-            />
-            <Button text="Create Task" btnType="primary" />
+            <Button text="Create New Board" btnType="primary" />
           </Group>
         </ModalWrapper>
       </ModalCard>

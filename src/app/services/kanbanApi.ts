@@ -8,5 +8,6 @@ const baseQuery = fetchBaseQuery({
 export const kanbanApi = createApi({
   reducerPath: 'kanbanApi',
   baseQuery,
+  tagTypes: ['Boards'],
   endpoints: () => ({}),
 });

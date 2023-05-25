@@ -16,12 +16,12 @@ export default async function handler(
       const myDb = mongoose.connection.useDb('boards');
 
       let NewBoard =
-        myDb.models.NewBoard || myDb.model(`${boardname}`, taskSchema);
+        myDb.models.NewBoard ||
+        myDb.model(`${boardname}`, taskSchema, `${boardname}`);
 
-      await NewBoard.create();
-      console.log('New board created successfully!');
+      await NewBoard.createCollection();
 
-      res.status(200).json({ name: boardname, mssg: 'board created!' });
+      res.status(200).json({ name: boardname, message: 'board created!' });
     } catch (error) {
       res.json({ error });
     }

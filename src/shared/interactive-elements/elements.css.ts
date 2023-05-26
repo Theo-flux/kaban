@@ -10,15 +10,22 @@ type TButtonText = {
   hideTextOnMobile: boolean;
 };
 
+type TButtonTextLoader = {
+  isLoading: boolean;
+};
+
 export const ButtonText = styled(StyledHeadingMD)<TButtonText>`
   text-align: center;
-  /* width: 100%; */
   display: ${props => (props.hideTextOnMobile ? 'none' : 'block')};
   ${props => props.hideTextOnMobile && `margin-left: 0.35rem;`}
 
   @media ${device.md} {
     display: block;
   }
+`;
+
+export const ButtonTextLoader = styled(ButtonText)<TButtonTextLoader>`
+  margin-left: ${props => (props.isLoading ? '0.5rem' : '0rem')};
 `;
 
 export const ButtonContainer = styled.button<TButtonContainer>`

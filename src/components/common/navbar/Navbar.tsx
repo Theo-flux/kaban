@@ -17,6 +17,7 @@ import {
 } from './navbar.css';
 import { NavLogo, ButtonIcon, StyledPlusIcon } from '@/shared';
 
+
 interface INav {
   activeboard: string;
   showsidebar: boolean;

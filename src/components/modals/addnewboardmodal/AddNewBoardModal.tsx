@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Loader } from '@mantine/core';
 import {
   ModalContainer,
   ModalBackdrop,
@@ -7,7 +8,7 @@ import {
   ModalTitle,
   TextInput,
   ButtonIcon,
-  Button,
+  ButtonWithLoader,
   StyledPlusIcon,
   DeletableInput,
 } from '@/shared';
@@ -17,11 +18,13 @@ import { useCreateNewBoardMutation } from '@/app/features/api/apiSlice';
 interface IAddNewBoardModalProps {
   open: boolean;
   handleDispatchAddBoardModal: () => void;
+  handleSetActiveBoard: (val: string) => void;
 }
 
 function AddNewBoardModal({
   open,
   handleDispatchAddBoardModal,
+  handleSetActiveBoard,
 }: IAddNewBoardModalProps) {
   const [updateBoard, { isLoading }] = useCreateNewBoardMutation();
   const [error, setError] = useState('');
@@ -38,6 +41,7 @@ function AddNewBoardModal({
       return setError("Board name can't be empty");
     } else setError('');
     await updateBoard({ name: boardName.name });
+    handleSetActiveBoard(boardName.name);
     handleDispatchAddBoardModal();
   };
 
@@ -70,7 +74,9 @@ function AddNewBoardModal({
           </Group>
 
           <Group>
-            <Button
+            <ButtonWithLoader
+              isLoading={isLoading}
+              loaderColor='white'
               text="Create New Board"
               btnType="primary"
               onClick={() => handleSubmit()}

@@ -116,6 +116,7 @@ function Frame() {
       <AddNewBoardModal
         open={isAddBoardModal}
         handleDispatchAddBoardModal={handleDispatchAddBoardModal}
+        handleSetActiveBoard={handleSetActiveBoard}
       />
     </FrameContainer>
   );

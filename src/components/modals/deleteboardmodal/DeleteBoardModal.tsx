@@ -5,12 +5,14 @@ import {
   ModalBackdrop,
   ModalWrapper,
   ModalCard,
+  ButtonWithLoader,
 } from '@/shared';
 import {
   StyledDeleteTitle,
   StyledDeleteText,
   BtnWrapper,
 } from './deleteboardmodal.css';
+import { useDeleteBoardMutation } from '@/app/features/api/apiSlice';
 
 interface IDeleBoardModalProps {
   open: boolean;
@@ -23,6 +25,13 @@ function DeleteBoardModal({
   activeboard,
   handleDispatchDeleteModal,
 }: IDeleBoardModalProps) {
+  const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
+
+  const handleDeleteBoard = async () => {
+    await deleteBoard({ name: activeboard });
+    handleDispatchDeleteModal();
+  };
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
@@ -34,7 +43,13 @@ function DeleteBoardModal({
           </StyledDeleteText>
 
           <BtnWrapper>
-            <Button btnType="destructive" text="Delete" />
+            <ButtonWithLoader
+              isLoading={isLoading}
+              loaderColor="white"
+              btnType="destructive"
+              text="Delete"
+              onClick={() => handleDeleteBoard()}
+            />
             <Button
               onClick={() => handleDispatchDeleteModal()}
               btnType="secondary"

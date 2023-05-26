@@ -8,6 +8,11 @@ export type TCreateBoard = {
   message: string;
 };
 
+export type TDeleteBoard = {
+  status: boolean;
+  message: string | object;
+};
+
 export type TBoard = {
   name: string;
 };

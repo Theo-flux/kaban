@@ -101,6 +101,7 @@ function Frame() {
       <DeleteBoardModal
         open={isDeleteBoardModal}
         activeboard={activeboard}
+        handleSetActiveBoard={handleSetActiveBoard}
         handleDispatchDeleteModal={handleDispatchDeleteModal}
       />
 

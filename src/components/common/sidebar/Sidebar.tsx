@@ -40,6 +40,9 @@ interface ISidebar {
 }
 
 interface IDesktopbar {
+  collections: Array<string> | undefined;
+  boardNumber: number;
+  isLoading: boolean;
   theme: string | undefined;
   activeboard: string;
   handleSetActiveBoard: (val: string) => void;
@@ -50,6 +53,9 @@ interface IDesktopbar {
 }
 
 interface IMobilebar {
+  collections: Array<string> | undefined;
+  boardNumber: number;
+  isLoading: boolean;
   theme: string | undefined;
   activeboard: string;
   handleSetActiveBoard: (val: string) => void;
@@ -59,10 +65,13 @@ interface IMobilebar {
   handleDispatchAddBoardModal: () => void;
 }
 
-const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
+// const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
 
 const Desktop = ({
   theme,
+  boardNumber,
+  isLoading,
+  collections,
   activeboard,
   handleSetActiveBoard,
   handleOnchangeTheme,
@@ -70,13 +79,6 @@ const Desktop = ({
   handleSetshowsidebar,
   handleDispatchAddBoardModal,
 }: IDesktopbar) => {
-  const { data, isLoading } = useGetAllBoardsQuery();
-  const [boardNumber, setBoardNumber] = useState(0);
-
-  useEffect(() => {
-    data && setBoardNumber(data?.collections?.length);
-  }, [data]);
-
   return (
     <SidebarContainer showsidebar={showsidebar}>
       <SidebarLogo>
@@ -89,7 +91,7 @@ const Desktop = ({
             {isLoading ? (
               <StyledLoader />
             ) : (
-              data?.collections?.map((board, index) => {
+              collections?.map((board, index) => {
                 return (
                   <SidebarBoard
                     key={index}
@@ -137,6 +139,9 @@ const Desktop = ({
 
 const Mobile = ({
   theme,
+  boardNumber,
+  isLoading,
+  collections,
   activeboard,
   handleSetActiveBoard,
   handleOnchangeTheme,
@@ -150,9 +155,9 @@ const Mobile = ({
       onClick={() => handleSetopenmobilenav()}
     >
       <MobileInner openmobilenav={openmobilenav}>
-        <AllBoardText>ALL BOARDS (0)</AllBoardText>
+        <AllBoardText>ALL BOARDS ({boardNumber})</AllBoardText>
         <SidebarBoards>
-          {boards.map((board, index) => {
+          {collections?.map((board, index) => {
             return (
               <SidebarBoard
                 key={index}
@@ -201,6 +206,9 @@ function Sidebar({
   handleSetopenmobilenav,
   handleDispatchAddBoardModal,
 }: ISidebar) {
+  const { data, isLoading } = useGetAllBoardsQuery();
+  const [boardNumber, setBoardNumber] = useState(0);
+
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -211,8 +219,15 @@ function Sidebar({
     theme === 'light' || !theme ? setTheme('dark') : setTheme('light');
   };
 
+  useEffect(() => {
+    data && setBoardNumber(data?.collections?.length);
+  }, [data]);
+
   return isFromTablet ? (
     <Desktop
+      collections={data?.collections}
+      isLoading={isLoading}
+      boardNumber={boardNumber}
       theme={theme}
       activeboard={activeboard}
       handleSetActiveBoard={handleSetActiveBoard}
@@ -223,6 +238,9 @@ function Sidebar({
     />
   ) : (
     <Mobile
+      collections={data?.collections}
+      isLoading={isLoading}
+      boardNumber={boardNumber}
       theme={theme}
       activeboard={activeboard}
       handleSetActiveBoard={handleSetActiveBoard}

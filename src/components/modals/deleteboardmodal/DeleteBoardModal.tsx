@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Button,
   ModalContainer,
@@ -12,25 +12,37 @@ import {
   StyledDeleteText,
   BtnWrapper,
 } from './deleteboardmodal.css';
-import { useDeleteBoardMutation } from '@/app/features/api/apiSlice';
+import {
+  useDeleteBoardMutation,
+  useGetAllBoardsQuery,
+} from '@/app/features/api/apiSlice';
 
 interface IDeleBoardModalProps {
   open: boolean;
   activeboard: string;
   handleDispatchDeleteModal: () => void;
+  handleSetActiveBoard: (val: string) => void;
 }
 
 function DeleteBoardModal({
   open,
   activeboard,
   handleDispatchDeleteModal,
+  handleSetActiveBoard,
 }: IDeleBoardModalProps) {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
+  const { data, isLoading: isGetAllBoardLoading } = useGetAllBoardsQuery();
 
   const handleDeleteBoard = async () => {
     await deleteBoard({ name: activeboard });
     handleDispatchDeleteModal();
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      data && handleSetActiveBoard(data?.collections[0]);
+    }
+  }, [isLoading, isGetAllBoardLoading]);
 
   return (
     <ModalContainer open={open}>

@@ -1,8 +1,36 @@
 import React from 'react';
-import { ColumnContainer } from './column.css';
+import {
+  CollectionStatus,
+  ColumnContainer,
+  StatusIndicator,
+  StatusText,
+  Tasks,
+  TaskPod,
+  TaskTitle,
+  SubTasks,
+} from './column.css';
+
+const TaskCard = () => {
+  return (
+    <TaskPod>
+      <TaskTitle>Build UI for onboarding flow</TaskTitle>
+      <SubTasks>0 of 3 substasks</SubTasks>
+    </TaskPod>
+  );
+};
 
 function Column() {
-  return <ColumnContainer>Column</ColumnContainer>;
+  return (
+    <ColumnContainer>
+      <CollectionStatus>
+        <StatusIndicator></StatusIndicator>
+        <StatusText>TODO (1)</StatusText>
+      </CollectionStatus>
+      <Tasks>
+        <TaskCard />
+      </Tasks>
+    </ColumnContainer>
+  );
 }
 
 export default Column;

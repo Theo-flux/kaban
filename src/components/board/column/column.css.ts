@@ -56,11 +56,12 @@ export const Tasks = styled.div`
 `;
 
 export const TaskPod = styled.div`
-  background-color: var(--white);
+  background-color: var(--side);
   width: 280px;
   padding: 1.5rem 1rem;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  margin-bottom: 1rem;
 `;
 
 export const TaskTitle = styled(StyledHeadingMD)`

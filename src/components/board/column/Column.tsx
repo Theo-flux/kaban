@@ -14,7 +14,7 @@ const TaskCard = () => {
   return (
     <TaskPod>
       <TaskTitle>Build UI for onboarding flow</TaskTitle>
-      <SubTasks>0 of 3 substasks</SubTasks>
+      <SubTasks>0 of 3 subtasks</SubTasks>
     </TaskPod>
   );
 };
@@ -27,6 +27,10 @@ function Column() {
         <StatusText>TODO (1)</StatusText>
       </CollectionStatus>
       <Tasks>
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
         <TaskCard />
       </Tasks>
     </ColumnContainer>

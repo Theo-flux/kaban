@@ -1,4 +1,4 @@
-import { NewColumnContainer, StyledNewColumnText } from './board.css';
+import { NewColumnContainer, StyledNewColumnText } from './column.css';
 
 function NewColumn() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import NewColumn from './NewColumn';
+import { NewColumn } from './column';
 import { BoardContainer, BoardWrapper } from './board.css';
 
 interface IBoardProps {

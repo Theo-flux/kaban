@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { device, transition } from '@/utils';
-import { StyledHeadingL } from '@/shared';
+import { StyledHeadingL, StyledHeadingXL } from '@/shared';
 
 type TBoardcontainerProps = {
   showsidebar: boolean;
@@ -30,7 +30,6 @@ export const BoardContainer = styled.div<TBoardcontainerProps>`
 `;
 
 export const EmptyBoardWrapper = styled.div`
-  padding: 0rem 1rem;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -38,10 +37,34 @@ export const EmptyBoardWrapper = styled.div`
   align-items: center;
 `;
 
-export const BoardWrapper = styled.div``;
+export const BoardWrapper = styled.div`
+  padding: 1rem;
+`;
 
+// Empty Board stylig
 export const EmptyBoardText = styled(StyledHeadingL)`
   color: var(--regeant-gray);
   text-align: center;
   margin-bottom: 2rem;
+`;
+
+// Column Styling
+export const StyledNewColumnText = styled(StyledHeadingXL)`
+  color: var(--regeant-gray);
+`;
+
+export const NewColumnContainer = styled.div`
+  cursor: pointer;
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--new-column);
+  border-radius: 6px;
+  ${transition}
+
+  &:hover ${StyledNewColumnText} {
+    color: var(--blue-marguerite);
+  } 
 `;

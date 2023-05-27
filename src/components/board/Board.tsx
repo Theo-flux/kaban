@@ -1,14 +1,18 @@
 import React from 'react';
+import NewColumn from './NewColumn';
 import { BoardContainer, BoardWrapper } from './board.css';
 
 interface IBoardProps {
   showsidebar: boolean;
+  activeboard: string;
 }
 
-function Board({ showsidebar }: IBoardProps) {
+function Board({ activeboard, showsidebar }: IBoardProps) {
   return (
     <BoardContainer showsidebar={showsidebar}>
-      <BoardWrapper>Board wrapper</BoardWrapper>
+      <BoardWrapper>
+        <NewColumn />
+      </BoardWrapper>
     </BoardContainer>
   );
 }

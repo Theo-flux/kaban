@@ -38,6 +38,7 @@ export const GlobalStyles = createGlobalStyle`
         --input-border: #828FA325;
         --input-placeholder: #00011225;
         --input-label: var(--regeant-gray);
+        --new-column: linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.5) 100%);
     
     }
 
@@ -56,6 +57,7 @@ export const GlobalStyles = createGlobalStyle`
       --input-border: #828FA325;
       --input-placeholder: #ffffff25;
       --input-label: var(--white);
+      --new-column: linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.125) 100%);
     }
     html {
         font-size: 0.9375rem;

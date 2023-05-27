@@ -94,7 +94,7 @@ function Frame() {
           handleDispatchAddTaskModal={handleDispatchAddTaskModal}
           handleDispatchEditBoardModal={handleDispatchEditBoardModal}
         />
-        <Board showsidebar={showsidebar} />
+        <Board activeboard={activeboard} showsidebar={showsidebar} />
       </Aside>
 
       {/* Modals */}

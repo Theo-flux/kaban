@@ -39,6 +39,13 @@ export const EmptyBoardWrapper = styled.div`
 
 export const BoardWrapper = styled.div`
   padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100vw;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
 `;
 
 // Empty Board stylig

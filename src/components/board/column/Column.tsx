@@ -1,7 +1,8 @@
 import React from 'react';
+import { ColumnContainer } from './column.css';
 
 function Column() {
-  return <div>Column</div>;
+  return <ColumnContainer>Column</ColumnContainer>;
 }
 
 export default Column;

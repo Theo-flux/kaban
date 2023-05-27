@@ -17,7 +17,7 @@ export const BoardContainer = styled.div<TBoardcontainerProps>`
   ${transition}
 
   @media ${device.md} {
-    width: ${props => (props.showsidebar ? `calc(100% - 300px)` : `1000%`)};
+    width: ${props => (props.showsidebar ? `calc(100% - 300px)` : `100%`)};
   }
 
   @media ${device.lg} {

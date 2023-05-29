@@ -104,9 +104,6 @@ function Column() {
       event.preventDefault();
       event.stopPropagation();
       setDraggableIndex(index);
-      // let element = document.getElementById(id)!;
-      // // event.dataTransfer.clearData();
-      // event.dataTransfer.setData('text', element.innerHTML);
     }, 0);
   }
 
@@ -135,9 +132,6 @@ function Column() {
     let element = document.getElementById(id)!;
     let dragSrc = document.getElementById(srcId)!;
     let srcHTML = dragSrc.innerHTML;
-
-    // console.log('drop-dragsrc:', dragSrc);
-    // console.log('drop-location:', element);
 
     if (srcId != id) {
       dragSrc.innerHTML = element.innerHTML;

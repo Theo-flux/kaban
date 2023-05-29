@@ -56,6 +56,7 @@ export const Tasks = styled.div`
 `;
 
 export const TaskPod = styled.div`
+  cursor: move;
   background-color: var(--side);
   width: 280px;
   padding: 1.5rem 1rem;
@@ -70,5 +71,6 @@ export const TaskTitle = styled(StyledHeadingMD)`
 `;
 
 export const SubTasks = styled(StyledBodyMD)`
+  cursor: pointer;
   color: var(--regeant-gray);
 `;

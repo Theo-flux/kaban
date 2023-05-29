@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CollectionStatus,
   ColumnContainer,
@@ -10,13 +10,13 @@ import {
   SubTasks,
 } from './column.css';
 
-type TTaskCard = {
+interface ITask {
   id: string;
   title: string;
   sub: string;
-};
+}
 
-const taskList: Array<TTaskCard> = [
+const taskList: Array<ITask> = [
   {
     id: 'task-1',
     title: 'Build UI for onboarding flow',
@@ -39,13 +39,31 @@ const taskList: Array<TTaskCard> = [
   },
 ];
 
-const TaskCard = ({ id, title, sub }: TTaskCard) => {
-  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData('text/html', event.currentTarget.id);
-  };
+interface ITaskCard extends ITask {
+  index: number;
+  isDraggableIndex: number;
+  onDragStart: (event: React.DragEvent<HTMLDivElement>, index: number) => void;
+  onDragEnd: (event: React.DragEvent<HTMLDivElement>) => void;
+}
 
+const TaskCard = ({
+  index,
+  isDraggableIndex,
+  id,
+  title,
+  sub,
+  onDragStart,
+  onDragEnd,
+}: ITaskCard) => {
   return (
-    <TaskPod id={id} draggable={true} onDragStart={handleDragStart}>
+    <TaskPod
+      index={index}
+      isDraggableIndex={isDraggableIndex}
+      id={id}
+      draggable={true}
+      onDragStart={e => onDragStart(e, index)}
+      onDragEnd={e => onDragEnd(e)}
+    >
       <TaskTitle>{title}</TaskTitle>
       <SubTasks>{sub}</SubTasks>
     </TaskPod>
@@ -53,20 +71,18 @@ const TaskCard = ({ id, title, sub }: TTaskCard) => {
 };
 
 function Column() {
-  const [dragOver, setDragOver] = React.useState(false);
-  const handleDragOverStart = () => setDragOver(true);
-  const handleDragOverEnd = () => setDragOver(false);
+  const [isDraggableIndex, setDraggableIndex] = useState(-1);
 
-  const handleOnDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
+  function onDragHandleStart(
+    event: React.DragEvent<HTMLDivElement>,
+    index: number
+  ) {
+    setTimeout(() => setDraggableIndex(index), 0);
+  }
 
-  const handleOnDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    const id = event.dataTransfer.getData('text/html');
-    console.log(`Somebody dropped an element with id: ${id}`);
-    event.currentTarget.appendChild(document.getElementById(id)!);
-    setDragOver(false);
-  };
+  function onDragHandleEnd(event: React.DragEvent<HTMLDivElement>) {
+    setDraggableIndex(-1);
+  }
 
   return (
     <ColumnContainer>
@@ -74,10 +90,21 @@ function Column() {
         <StatusIndicator></StatusIndicator>
         <StatusText>TODO (1)</StatusText>
       </CollectionStatus>
-      <Tasks onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
+      <Tasks>
         {taskList.map((task, index) => {
           const { id, title, sub } = task;
-          return <TaskCard key={index} id={id} title={title} sub={sub} />;
+          return (
+            <TaskCard
+              key={index}
+              index={index}
+              isDraggableIndex={isDraggableIndex}
+              id={id}
+              title={title}
+              sub={sub}
+              onDragStart={onDragHandleStart}
+              onDragEnd={onDragHandleEnd}
+            />
+          );
         })}
       </Tasks>
     </ColumnContainer>

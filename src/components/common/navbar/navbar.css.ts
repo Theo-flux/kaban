@@ -81,7 +81,7 @@ export const NavActiveBoard = styled.div`
   cursor: pointer;
   width: fit-content;
   display: flex;
-  justify-items: space-between;
+  justify-content: space-between;
   align-items: center;
 `;
 

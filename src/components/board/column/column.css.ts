@@ -5,6 +5,11 @@ import { StyledBodyMD, StyledHeadingMD, StyledHeadingXL } from '@/shared';
 type TTaskProps = {
   index: number;
   isDraggableIndex: number;
+  hoverIndex: number;
+};
+
+type TSeparatorProps = {
+  active: boolean;
 };
 
 export const StyledNewColumnText = styled(StyledHeadingXL)`
@@ -67,14 +72,13 @@ export const TaskPod = styled.div<TTaskProps>`
   width: 280px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
-  margin-bottom: ${({ index, isDraggableIndex }) =>
-    isDraggableIndex == index ? '0px' : '1rem'};
-  padding: ${({ index, isDraggableIndex }) =>
-    isDraggableIndex == index ? '0px' : '1.5rem 1rem'};
+  margin-bottom: 1rem;
+  padding: 1.5rem 1rem;
   opacity: ${({ index, isDraggableIndex }) =>
-    isDraggableIndex == index ? 0 : 1};
-  height: ${({ index, isDraggableIndex }) =>
-    isDraggableIndex == index ? '0px' : 'auto'};
+    isDraggableIndex == index ? 0.2 : 1};
+  border: ${({ index, hoverIndex }) =>
+    hoverIndex == index ? `1px dashed var(--blue-marguerite)` : `none`};
+  height: auto;
   ${transition}
 `;
 
@@ -86,4 +90,16 @@ export const TaskTitle = styled(StyledHeadingMD)`
 export const SubTasks = styled(StyledBodyMD)`
   cursor: pointer;
   color: var(--regeant-gray);
+`;
+
+export const EndHandler = styled.div``;
+
+export const Separator = styled.div<TSeparatorProps>`
+  height: ${props => (props.active ? `88px` : `0px`)};
+  margin-bottom: ${props => (props.active ? `1rem` : `0rem`)};
+  border-radius: 8px;
+  border: ${props =>
+    props.active ? `1px dashed var(--blue-marguerite)` : `none`};
+
+  ${transition}
 `;

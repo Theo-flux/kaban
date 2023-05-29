@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   CollectionStatus,
   ColumnContainer,
@@ -41,28 +41,47 @@ const taskList: Array<ITask> = [
 
 interface ITaskCard extends ITask {
   index: number;
+  hoverIndex: number;
   isDraggableIndex: number;
-  onDragStart: (event: React.DragEvent<HTMLDivElement>, index: number) => void;
+  onDragStart: (
+    event: React.DragEvent<HTMLDivElement>,
+    index: number,
+    id: string
+  ) => void;
   onDragEnd: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnter: (event: React.DragEvent<HTMLDivElement>, index: number) => void;
+  onDragLeave: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: React.DragEvent<HTMLDivElement>, id: string) => void;
 }
 
 const TaskCard = ({
   index,
+  hoverIndex,
   isDraggableIndex,
   id,
   title,
   sub,
   onDragStart,
+  onDragOver,
   onDragEnd,
+  onDragEnter,
+  onDragLeave,
+  onDrop,
 }: ITaskCard) => {
   return (
     <TaskPod
       index={index}
+      hoverIndex={hoverIndex}
       isDraggableIndex={isDraggableIndex}
       id={id}
       draggable={true}
-      onDragStart={e => onDragStart(e, index)}
+      onDragStart={e => onDragStart(e, index, id)}
       onDragEnd={e => onDragEnd(e)}
+      onDragEnter={e => onDragEnter(e, index)}
+      onDragOver={e => onDragOver(e)}
+      onDragLeave={e => onDragLeave(e)}
+      onDrop={e => onDrop(e, id)}
     >
       <TaskTitle>{title}</TaskTitle>
       <SubTasks>{sub}</SubTasks>
@@ -72,16 +91,60 @@ const TaskCard = ({
 
 function Column() {
   const [isDraggableIndex, setDraggableIndex] = useState(-1);
+  const [hoverIndex, setHoverIndex] = useState(-1);
+
+  // console.log(taskRef);
 
   function onDragHandleStart(
     event: React.DragEvent<HTMLDivElement>,
-    index: number
+    index: number,
+    id: string
   ) {
-    setTimeout(() => setDraggableIndex(index), 0);
+    setTimeout(() => {
+      event.preventDefault();
+      event.stopPropagation();
+      setDraggableIndex(index);
+      // let element = document.getElementById(id)!;
+      // // event.dataTransfer.clearData();
+      // event.dataTransfer.setData('text', element.innerHTML);
+    }, 0);
   }
 
   function onDragHandleEnd(event: React.DragEvent<HTMLDivElement>) {
     setDraggableIndex(-1);
+    setHoverIndex(-1);
+  }
+
+  function onDragHandleEnter(
+    event: React.DragEvent<HTMLDivElement>,
+    index: number
+  ) {
+    setHoverIndex(index);
+  }
+
+  function onDragHandleLeave(event: React.DragEvent<HTMLDivElement>) {}
+
+  function onDragHandleOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    return false;
+  }
+
+  function onDropHandler(event: React.DragEvent<HTMLDivElement>, id: string) {
+    event.stopPropagation();
+    let srcId = `task-${isDraggableIndex + 1}`;
+    let element = document.getElementById(id)!;
+    let dragSrc = document.getElementById(srcId)!;
+    let srcHTML = dragSrc.innerHTML;
+
+    // console.log('drop-dragsrc:', dragSrc);
+    // console.log('drop-location:', element);
+
+    if (srcId != id) {
+      dragSrc.innerHTML = element.innerHTML;
+      element.innerHTML = srcHTML;
+    }
+
+    return false;
   }
 
   return (
@@ -97,12 +160,17 @@ function Column() {
             <TaskCard
               key={index}
               index={index}
+              hoverIndex={hoverIndex}
               isDraggableIndex={isDraggableIndex}
               id={id}
               title={title}
               sub={sub}
               onDragStart={onDragHandleStart}
               onDragEnd={onDragHandleEnd}
+              onDragOver={onDragHandleOver}
+              onDragLeave={onDragHandleLeave}
+              onDragEnter={onDragHandleEnter}
+              onDrop={onDropHandler}
             />
           );
         })}

@@ -20,12 +20,15 @@ export type TBoard = {
 export type TTasks = {
   name: string;
   docs: Array<{
+    _id: string;
     title: string;
     description: string;
     status: string;
     subtasks: Array<{
+      _id: string;
       title: string;
       isCompleted: boolean;
     }>;
+    __v: number;
   }>;
 };

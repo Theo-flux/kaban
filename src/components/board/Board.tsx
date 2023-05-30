@@ -1,6 +1,8 @@
 import React from 'react';
-import { NewColumn, Column } from './column';
-import { BoardContainer, BoardWrapper } from './board.css';
+import { BoardContainer } from './board.css';
+import FilledBoard from './FilledBoard';
+import EmptyBoard from './EmptyBoard';
+import { useGetTasksByCollectionQuery } from '@/app/features/api/apiSlice';
 
 interface IBoardProps {
   showsidebar: boolean;
@@ -8,12 +10,18 @@ interface IBoardProps {
 }
 
 function Board({ activeboard, showsidebar }: IBoardProps) {
+  const { data, isLoading } = useGetTasksByCollectionQuery(activeboard);
+
+  if (isLoading) {
+    console.log('...loading');
+  } else {
+    console.log(data);
+  }
+
   return (
     <BoardContainer showsidebar={showsidebar}>
-      <BoardWrapper>
-        <Column />
-        <NewColumn />
-      </BoardWrapper>
+      {/* <FilledBoard /> */}
+      <EmptyBoard />
     </BoardContainer>
   );
 }

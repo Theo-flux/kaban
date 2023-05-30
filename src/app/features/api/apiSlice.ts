@@ -21,8 +21,8 @@ export const kanbanApiSlice = kanbanApi.injectEndpoints({
       query: board => `/boards/${board.name}/deleteboard`,
       invalidatesTags: ['Boards'],
     }),
-    getTasksByCollection: builder.query<TTasks, TBoard>({
-      query: board => `/boards/${board.name}/createboard`,
+    getTasksByCollection: builder.query<Array<TTasks>, string>({
+      query: board => `/boards/${board}/gettasks`,
     }),
   }),
 });

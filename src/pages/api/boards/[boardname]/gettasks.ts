@@ -3,26 +3,34 @@ import { taskSchema } from '@/schema/taskSchema';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectMongo } from '@/utils';
 
+type TTask = {
+  _id: string;
+  title: string;
+  description: string;
+  status: string;
+  subtasks: Array<{
+    _id: string;
+    title: string;
+    isCompleted: boolean;
+  }>;
+  __v: number;
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // try {
-  //   const boardname: string = req.query.boardname as string;
-  //   let docs: Array<any> = [];
-  //   await connectMongo();
-  //   const myDb = mongoose.connection.useDb('boards');
-  //   let BoardName = myDb.model(`${boardname}`, taskSchema, `${boardname}`);
-  //   await BoardName.find({}, (err, data) => {
-  //     if (err) {
-  //       return console.log(err);
-  //     }
-  //     console.log(data);
-  //     docs = data;
-  //   });
-  //   res.status(200).json({ name: boardname, docs: docs });
-  // } catch (error) {}
+  try {
+    const boardname: string = req.query.boardname as string;
+    await connectMongo();
+    const myDb = mongoose.connection.useDb('boards');
+    let BoardName = myDb.model(`${boardname}`, taskSchema, `${boardname}`);
+    let result: Array<TTask> = await BoardName.find({});
 
-  const boardname: string = req.query.boardname as string;
-  res.status(200).json({ name: boardname });
+    res.status(200).json({ name: boardname, docs: result });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ name: 'error getting the docs in this collection', docs: [] });
+  }
 }

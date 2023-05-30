@@ -16,3 +16,16 @@ export type TDeleteBoard = {
 export type TBoard = {
   name: string;
 };
+
+export type TTasks = {
+  name: string;
+  docs: Array<{
+    title: string;
+    description: string;
+    status: string;
+    subtasks: Array<{
+      title: string;
+      isCompleted: boolean;
+    }>;
+  }>;
+};

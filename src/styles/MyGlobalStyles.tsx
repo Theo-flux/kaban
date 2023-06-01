@@ -70,10 +70,13 @@ export const GlobalStyles = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: var(--body);
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none; 
     }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
+      display: none;
     }
     ::-webkit-scrollbar-track{
       background: var(--stroke-color);

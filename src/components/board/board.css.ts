@@ -43,9 +43,16 @@ export const BoardWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100vw;
+  height: 100%;
   gap: 2rem;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 // Empty Board stylig

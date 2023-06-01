@@ -3,9 +3,9 @@ import { transition } from '@/utils';
 import { StyledBodyMD, StyledHeadingMD, StyledHeadingXL } from '@/shared';
 
 type TTaskProps = {
-  index: number;
-  isDraggableIndex: number;
-  hoverIndex: number;
+  index: string;
+  isDraggableIndex: string;
+  hoverIndex: string;
 };
 
 type TSeparatorProps = {

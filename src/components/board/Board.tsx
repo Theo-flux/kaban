@@ -3,6 +3,7 @@ import { BoardContainer } from './board.css';
 import FilledBoard from './FilledBoard';
 import EmptyBoard from './EmptyBoard';
 import { useGetTasksByCollectionQuery } from '@/app/features/api/apiSlice';
+import { StyledLoader } from '@/shared';
 
 interface IBoardProps {
   showsidebar: boolean;
@@ -12,16 +13,15 @@ interface IBoardProps {
 function Board({ activeboard, showsidebar }: IBoardProps) {
   const { data, isLoading } = useGetTasksByCollectionQuery(activeboard);
 
-  if (isLoading) {
-    console.log('...loading');
-  } else {
-    console.log(data);
-  }
-
   return (
     <BoardContainer showsidebar={showsidebar}>
-      {/* <FilledBoard /> */}
-      <EmptyBoard />
+      {isLoading ? (
+        <StyledLoader />
+      ) : data ? (
+        <FilledBoard boardData={data} />
+      ) : (
+        <EmptyBoard />
+      )}
     </BoardContainer>
   );
 }

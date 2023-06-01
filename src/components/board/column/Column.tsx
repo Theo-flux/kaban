@@ -9,48 +9,30 @@ import {
   TaskTitle,
   SubTasks,
 } from './column.css';
+import { TDocs } from '@/types';
 
 interface ITask {
   id: string;
   title: string;
-  sub: string;
+  sub: Array<{
+    _id: string;
+    title: string;
+    isCompleted: boolean;
+  }>;
 }
 
-const taskList: Array<ITask> = [
-  {
-    id: 'task-1',
-    title: 'Build UI for onboarding flow',
-    sub: '0 of 3 subtasks',
-  },
-  {
-    id: 'task-2',
-    title: 'Build UI for search',
-    sub: '0 of 1 subtasks',
-  },
-  {
-    id: 'task-3',
-    title: 'Create template structures',
-    sub: '0 of 2 subtasks',
-  },
-  {
-    id: 'task-4',
-    title: 'QA and test all major user journeys',
-    sub: '0 of 2 subtasks',
-  },
-];
-
 interface ITaskCard extends ITask {
-  index: number;
-  hoverIndex: number;
-  isDraggableIndex: number;
+  index: string;
+  hoverIndex: string;
+  isDraggableIndex: string;
   onDragStart: (
     event: React.DragEvent<HTMLDivElement>,
-    index: number,
+    index: string,
     id: string
   ) => void;
   onDragEnd: (event: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnter: (event: React.DragEvent<HTMLDivElement>, index: number) => void;
+  onDragEnter: (event: React.DragEvent<HTMLDivElement>, index: string) => void;
   onDragLeave: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>, id: string) => void;
 }
@@ -69,6 +51,7 @@ const TaskCard = ({
   onDragLeave,
   onDrop,
 }: ITaskCard) => {
+  console.log(id);
   return (
     <TaskPod
       index={index}
@@ -78,26 +61,24 @@ const TaskCard = ({
       draggable={true}
       onDragStart={e => onDragStart(e, index, id)}
       onDragEnd={e => onDragEnd(e)}
-      onDragEnter={e => onDragEnter(e, index)}
+      onDragEnter={e => onDragEnter(e, id)}
       onDragOver={e => onDragOver(e)}
       onDragLeave={e => onDragLeave(e)}
       onDrop={e => onDrop(e, id)}
     >
       <TaskTitle>{title}</TaskTitle>
-      <SubTasks>{sub}</SubTasks>
+      {/* <SubTasks>{sub}</SubTasks> */}
     </TaskPod>
   );
 };
 
-function Column() {
-  const [isDraggableIndex, setDraggableIndex] = useState(-1);
-  const [hoverIndex, setHoverIndex] = useState(-1);
-
-  // console.log(taskRef);
+function Column({ docs }: TDocs) {
+  const [isDraggableIndex, setDraggableIndex] = useState('');
+  const [hoverIndex, setHoverIndex] = useState('');
 
   function onDragHandleStart(
     event: React.DragEvent<HTMLDivElement>,
-    index: number,
+    index: string,
     id: string
   ) {
     setTimeout(() => {
@@ -108,13 +89,13 @@ function Column() {
   }
 
   function onDragHandleEnd(event: React.DragEvent<HTMLDivElement>) {
-    setDraggableIndex(-1);
-    setHoverIndex(-1);
+    setDraggableIndex('');
+    setHoverIndex('');
   }
 
   function onDragHandleEnter(
     event: React.DragEvent<HTMLDivElement>,
-    index: number
+    index: string
   ) {
     setHoverIndex(index);
   }
@@ -128,7 +109,7 @@ function Column() {
 
   function onDropHandler(event: React.DragEvent<HTMLDivElement>, id: string) {
     event.stopPropagation();
-    let srcId = `task-${isDraggableIndex + 1}`;
+    let srcId = isDraggableIndex;
     let element = document.getElementById(id)!;
     let dragSrc = document.getElementById(srcId)!;
     let srcHTML = dragSrc.innerHTML;
@@ -148,17 +129,17 @@ function Column() {
         <StatusText>TODO (1)</StatusText>
       </CollectionStatus>
       <Tasks>
-        {taskList.map((task, index) => {
-          const { id, title, sub } = task;
+        {docs.map((task, index) => {
+          const { _id, title, subtasks } = task;
           return (
             <TaskCard
               key={index}
-              index={index}
+              index={_id}
               hoverIndex={hoverIndex}
               isDraggableIndex={isDraggableIndex}
-              id={id}
+              id={_id}
               title={title}
-              sub={sub}
+              sub={subtasks}
               onDragStart={onDragHandleStart}
               onDragEnd={onDragHandleEnd}
               onDragOver={onDragHandleOver}

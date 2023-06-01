@@ -5,7 +5,7 @@ import {
   TDeleteBoard,
   TBoard,
   TTasks,
-} from './types';
+} from '../../../types';
 
 export const kanbanApiSlice = kanbanApi.injectEndpoints({
   endpoints: builder => ({
@@ -21,7 +21,7 @@ export const kanbanApiSlice = kanbanApi.injectEndpoints({
       query: board => `/boards/${board.name}/deleteboard`,
       invalidatesTags: ['Boards'],
     }),
-    getTasksByCollection: builder.query<Array<TTasks>, string>({
+    getTasksByCollection: builder.query<TTasks, string>({
       query: board => `/boards/${board}/gettasks`,
     }),
   }),

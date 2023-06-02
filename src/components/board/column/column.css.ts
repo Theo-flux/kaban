@@ -12,6 +12,10 @@ type TSeparatorProps = {
   active: boolean;
 };
 
+type TStatusIndicatorProps = {
+  status: String;
+};
+
 export const StyledNewColumnText = styled(StyledHeadingXL)`
   color: var(--regeant-gray);
 `;
@@ -42,7 +46,7 @@ export const CollectionStatus = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const StatusIndicator = styled.span`
+export const StatusIndicator = styled.div<TStatusIndicatorProps>`
   position: absolute;
   left: 0%;
   right: 85.29%;
@@ -51,7 +55,8 @@ export const StatusIndicator = styled.span`
   border-radius: 15px;
   width: 15px;
   height: 15px;
-  background: #49c4e5;
+  background: ${({ status }) =>
+    status == 'Todo' ? '#49C4E5' : status == 'Doing' ? '#8471F2' : '#67E2AE'};
 `;
 
 export const StatusText = styled(StyledBodyMD)`
@@ -59,6 +64,7 @@ export const StatusText = styled(StyledBodyMD)`
   line-height: 15px;
   letter-spacing: 2.4px;
   color: var(--regeant-gray);
+  text-transform: uppercase;
 `;
 
 export const Tasks = styled.div`

@@ -134,8 +134,10 @@ function Column({ docs }: TDocs) {
   return (
     <ColumnContainer>
       <CollectionStatus>
-        <StatusIndicator></StatusIndicator>
-        <StatusText>TODO ({docs.length})</StatusText>
+        <StatusIndicator status={docs[0].status}></StatusIndicator>
+        <StatusText>
+          {docs[0].status} ({docs.length})
+        </StatusText>
       </CollectionStatus>
       <Tasks>
         {docs.map((task, index) => {

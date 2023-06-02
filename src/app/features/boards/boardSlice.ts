@@ -1,30 +1,38 @@
+import { TDoc } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
-type TBoardState = {
-  activeBoard: string;
-  boards: Array<string>;
+const initialState: TDoc = {
+  _id: '',
+  title: '',
+  description: '',
+  status: '',
+  subtasks: [
+    {
+      _id: '',
+      title: '',
+      isCompleted: false,
+    },
+  ],
+  __v: 0,
 };
 
-const initialState: TBoardState = {
-  activeBoard: '',
-  boards: [],
+type TAction = {
+  payload: TDoc;
 };
 
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    SETACTIVEBOARD: (state, action) => {
+    SETACTIVETASK: (state: TDoc, action: TAction) => {
+      const { payload } = action;
       return {
-        ...state,
-        activeBoard: action.payload,
-      };
-    },
-
-    SETBOARDS: (state, action) => {
-      return {
-        ...state,
-        boards: action.payload,
+        _id: payload._id,
+        title: payload.title,
+        description: payload.description,
+        status: payload.status,
+        subtasks: [...payload.subtasks],
+        __v: payload.__v,
       };
     },
   },

@@ -9,20 +9,14 @@ import {
   TaskTitle,
   SubTasks,
 } from './column.css';
-import { TDocs } from '@/types';
+import { TDoc, TDocs } from '@/types';
+import { useAppDispatch } from '@/app/hooks';
+import { boardActions } from '@/app/features/boards/boardSlice';
+import { modalActions } from '@/app/features/modals/modalSlice';
 
-interface ITask {
-  id: string;
-  title: string;
-  sub: Array<{
-    _id: string;
-    title: string;
-    isCompleted: boolean;
-  }>;
-}
-
-interface ITaskCard extends ITask {
+interface ITaskCard {
   index: string;
+  task: TDoc;
   hoverIndex: string;
   isDraggableIndex: string;
   onDragStart: (
@@ -41,9 +35,7 @@ const TaskCard = ({
   index,
   hoverIndex,
   isDraggableIndex,
-  id,
-  title,
-  sub,
+  task,
   onDragStart,
   onDragOver,
   onDragEnd,
@@ -51,8 +43,19 @@ const TaskCard = ({
   onDragLeave,
   onDrop,
 }: ITaskCard) => {
-  const completed = sub.reduce((total, subTask) => {
-    const { isCompleted } = subTask;
+  const { _id: id, title, subtasks } = task;
+
+  const { SETACTIVETASK } = boardActions;
+  const { TASKMODAL } = modalActions;
+  const dispatch = useAppDispatch();
+
+  const handleOpenTaskModal = () => {
+    dispatch(SETACTIVETASK(task));
+    dispatch(TASKMODAL());
+  };
+
+  const completed = subtasks.reduce((total, subtask) => {
+    const { isCompleted } = subtask;
     if (isCompleted) {
       total += 1;
     }
@@ -72,10 +75,11 @@ const TaskCard = ({
       onDragOver={e => onDragOver(e)}
       onDragLeave={e => onDragLeave(e)}
       onDrop={e => onDrop(e, id)}
+      onClick={() => handleOpenTaskModal()}
     >
       <TaskTitle>{title}</TaskTitle>
       <SubTasks>
-        {completed} of {sub.length} subtasks
+        {completed} of {subtasks.length} subtasks
       </SubTasks>
     </TaskPod>
   );
@@ -127,8 +131,6 @@ function Column({ docs }: TDocs) {
       dragSrc.innerHTML = element.innerHTML;
       element.innerHTML = srcHTML;
     }
-
-    return false;
   }
 
   return (
@@ -141,16 +143,13 @@ function Column({ docs }: TDocs) {
       </CollectionStatus>
       <Tasks>
         {docs.map((task, index) => {
-          const { _id, title, subtasks } = task;
           return (
             <TaskCard
               key={index}
-              index={_id}
+              index={task._id}
               hoverIndex={hoverIndex}
               isDraggableIndex={isDraggableIndex}
-              id={_id}
-              title={title}
-              sub={subtasks}
+              task={task}
               onDragStart={onDragHandleStart}
               onDragEnd={onDragHandleEnd}
               onDragOver={onDragHandleOver}

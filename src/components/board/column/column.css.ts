@@ -78,7 +78,7 @@ export const TaskTitle = styled(StyledHeadingMD)`
 `;
 
 export const TaskPod = styled.div<TTaskProps>`
-  cursor: move;
+  cursor: grab;
   background-color: var(--side);
   width: 280px;
   border-radius: 8px;

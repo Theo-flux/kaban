@@ -17,33 +17,23 @@ export type TBoard = {
   name: string;
 };
 
-export type TDocs = {
-  docs: Array<{
+export type TDoc = {
+  _id: string;
+  title: string;
+  description: string;
+  status: string;
+  subtasks: Array<{
     _id: string;
     title: string;
-    description: string;
-    status: string;
-    subtasks: Array<{
-      _id: string;
-      title: string;
-      isCompleted: boolean;
-    }>;
-    __v: number;
+    isCompleted: boolean;
   }>;
+  __v: number;
 };
 
-export type TTasks = {
+export type TDocs = {
+  docs: Array<TDoc>;
+};
+
+export type TTasks = TDocs & {
   name: string;
-  docs: Array<{
-    _id: string;
-    title: string;
-    description: string;
-    status: string;
-    subtasks: Array<{
-      _id: string;
-      title: string;
-      isCompleted: boolean;
-    }>;
-    __v: number;
-  }>;
 };

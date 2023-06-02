@@ -10,6 +10,7 @@ import {
   AddNewTaskModal,
   AddNewBoardModal,
   EditBoardModal,
+  TaskModal,
 } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
 import { usePersistState } from '@/hooks';
@@ -25,8 +26,9 @@ function Frame() {
     isEditBoardModal,
     isAddTaskModal,
     isAddBoardModal,
+    isTaskModal,
   } = useAppSelector(state => state.modal);
-  const { DELETEBOARD, EDITBOARD, ADDTASK, ADDBOARD } = modalActions;
+  const { DELETEBOARD, EDITBOARD, ADDTASK, ADDBOARD, TASKMODAL } = modalActions;
   const dispatch = useAppDispatch();
 
   let [showsidebar, setshowsidebar] = useState(true);
@@ -50,6 +52,11 @@ function Frame() {
   // function to handle open/close of addboardmodal
   const handleDispatchAddBoardModal = () => {
     dispatch(ADDBOARD());
+  };
+
+  // function to handle open/close of taskmodal
+  const handleDispatchTaskModal = () => {
+    dispatch(TASKMODAL());
   };
 
   // function to handle onclick hide/show sidebar
@@ -118,6 +125,10 @@ function Frame() {
         open={isAddBoardModal}
         handleDispatchAddBoardModal={handleDispatchAddBoardModal}
         handleSetActiveBoard={handleSetActiveBoard}
+      />
+      <TaskModal
+        open={isTaskModal}
+        handleDispatchTaskModal={handleDispatchTaskModal}
       />
     </FrameContainer>
   );

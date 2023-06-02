@@ -157,19 +157,23 @@ const Mobile = ({
       <MobileInner openmobilenav={openmobilenav}>
         <AllBoardText>ALL BOARDS ({boardNumber})</AllBoardText>
         <SidebarBoards>
-          {collections?.map((board, index) => {
-            return (
-              <SidebarBoard
-                key={index}
-                activeboard={activeboard}
-                board={board}
-                onClick={() => handleSetActiveBoard(board)}
-              >
-                <SidebarBoardIcon />
-                <SidebarBoardName name={board}>{board}</SidebarBoardName>
-              </SidebarBoard>
-            );
-          })}
+          {isLoading ? (
+            <StyledLoader />
+          ) : (
+            collections?.map((board, index) => {
+              return (
+                <SidebarBoard
+                  key={index}
+                  activeboard={activeboard}
+                  board={board}
+                  onClick={() => handleSetActiveBoard(board)}
+                >
+                  <SidebarBoardIcon />
+                  <SidebarBoardName name={board}>{board}</SidebarBoardName>
+                </SidebarBoard>
+              );
+            })
+          )}
           <CreateNewBoard onClick={() => handleDispatchAddBoardModal()}>
             <SidebarBoardIcon />
             <SidebarBoardName name={'new'}>

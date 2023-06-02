@@ -4,14 +4,13 @@ import { Column, NewColumn } from './column';
 import { TTasks } from '../../types';
 
 interface IFilledBoardProps {
-  boardData: TTasks;
+  boardData: TTasks | undefined;
 }
 
 function FilledBoard({ boardData }: IFilledBoardProps) {
-  const { docs } = boardData;
-  let todo = docs.filter(el => el.status == 'Todo');
-  let doing = docs.filter(el => el.status == 'Doing');
-  let done = docs.filter(el => el.status == 'Done');
+  let todo = boardData?.docs.filter(el => el.status == 'Todo') || [];
+  let doing = boardData?.docs.filter(el => el.status == 'Doing') || [];
+  let done = boardData?.docs.filter(el => el.status == 'Done') || [];
   console.log('todo: ', todo.length);
   console.log('doing: ', doing.length);
   console.log('done: ', done.length);

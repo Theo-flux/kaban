@@ -66,6 +66,11 @@ export const Tasks = styled.div`
   ${transition}
 `;
 
+export const TaskTitle = styled(StyledHeadingMD)`
+  color: var(--text);
+  margin-bottom: 0.5rem;
+`;
+
 export const TaskPod = styled.div<TTaskProps>`
   cursor: move;
   background-color: var(--side);
@@ -80,11 +85,10 @@ export const TaskPod = styled.div<TTaskProps>`
     hoverIndex == index ? `1px dashed var(--blue-marguerite)` : `none`};
   height: auto;
   ${transition}
-`;
 
-export const TaskTitle = styled(StyledHeadingMD)`
-  color: var(--text);
-  margin-bottom: 0.5rem;
+  &:hover ${TaskTitle} {
+    color: var(--blue-marguerite);
+  }
 `;
 
 export const SubTasks = styled(StyledBodyMD)`

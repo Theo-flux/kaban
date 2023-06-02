@@ -90,6 +90,9 @@ export const SidebarBoardName = styled(StyledHeadingMD)<TSidebarBoardName>`
   margin-left: 1rem;
   color: ${props =>
     props.name === 'new' ? `var(--blue-marguerite)` : `var(--regeant-gray)`};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const SidebarBoard = styled.div<TSideBoardProps>`

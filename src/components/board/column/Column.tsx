@@ -51,7 +51,14 @@ const TaskCard = ({
   onDragLeave,
   onDrop,
 }: ITaskCard) => {
-  console.log(id);
+  const completed = sub.reduce((total, subTask) => {
+    const { isCompleted } = subTask;
+    if (isCompleted) {
+      total += 1;
+    }
+    return total;
+  }, 0);
+
   return (
     <TaskPod
       index={index}
@@ -67,7 +74,9 @@ const TaskCard = ({
       onDrop={e => onDrop(e, id)}
     >
       <TaskTitle>{title}</TaskTitle>
-      {/* <SubTasks>{sub}</SubTasks> */}
+      <SubTasks>
+        {completed} of {sub.length} subtasks
+      </SubTasks>
     </TaskPod>
   );
 };

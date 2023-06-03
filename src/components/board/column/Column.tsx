@@ -25,10 +25,12 @@ interface ITaskCard {
     id: string
   ) => void;
   onDragEnd: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDragEnter: (event: React.DragEvent<HTMLDivElement>, index: string) => void;
-  onDragLeave: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (event: React.DragEvent<HTMLDivElement>, id: string) => void;
+  onDrop: (
+    event: React.DragEvent<HTMLDivElement>,
+    id: string,
+    task: TDoc
+  ) => void;
 }
 
 const TaskCard = ({
@@ -37,10 +39,8 @@ const TaskCard = ({
   isDraggableIndex,
   task,
   onDragStart,
-  onDragOver,
   onDragEnd,
   onDragEnter,
-  onDragLeave,
   onDrop,
 }: ITaskCard) => {
   const { _id: id, title, subtasks } = task;
@@ -72,15 +72,15 @@ const TaskCard = ({
       onDragStart={e => onDragStart(e, index, id)}
       onDragEnd={e => onDragEnd(e)}
       onDragEnter={e => onDragEnter(e, id)}
-      onDragOver={e => onDragOver(e)}
-      onDragLeave={e => onDragLeave(e)}
-      onDrop={e => onDrop(e, id)}
+      onDrop={e => onDrop(e, id, task)}
       onClick={() => handleOpenTaskModal()}
     >
-      <TaskTitle>{title}</TaskTitle>
-      <SubTasks>
-        {completed} of {subtasks.length} subtasks
-      </SubTasks>
+      <div>
+        <TaskTitle>{title}</TaskTitle>
+        <SubTasks>
+          {completed} of {subtasks.length} subtasks
+        </SubTasks>
+      </div>
     </TaskPod>
   );
 };
@@ -113,14 +113,11 @@ function Column({ docs }: TDocs) {
     setHoverIndex(index);
   }
 
-  function onDragHandleLeave(event: React.DragEvent<HTMLDivElement>) {}
-
-  function onDragHandleOver(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault();
-    return false;
-  }
-
-  function onDropHandler(event: React.DragEvent<HTMLDivElement>, id: string) {
+  function onDropHandler(
+    event: React.DragEvent<HTMLDivElement>,
+    id: string,
+    task: TDoc
+  ) {
     event.stopPropagation();
     let srcId = isDraggableIndex;
     let element = document.getElementById(id)!;
@@ -131,6 +128,8 @@ function Column({ docs }: TDocs) {
       dragSrc.innerHTML = element.innerHTML;
       element.innerHTML = srcHTML;
     }
+    console.log('src: ', isDraggableIndex);
+    console.log(task);
   }
 
   return (
@@ -152,8 +151,6 @@ function Column({ docs }: TDocs) {
               task={task}
               onDragStart={onDragHandleStart}
               onDragEnd={onDragHandleEnd}
-              onDragOver={onDragHandleOver}
-              onDragLeave={onDragHandleLeave}
               onDragEnter={onDragHandleEnter}
               onDrop={onDropHandler}
             />

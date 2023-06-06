@@ -9,7 +9,7 @@ import {
   TaskTitle,
   SubTasks,
 } from './column.css';
-import { TDoc, TDocs } from '@/types';
+import { TDoc, TColumnDatum } from '@/types';
 import { useAppDispatch } from '@/app/hooks';
 import { boardActions } from '@/app/features/boards/boardSlice';
 import { modalActions } from '@/app/features/modals/modalSlice';
@@ -26,66 +26,64 @@ interface ITaskCard {
   ) => void;
   onDragEnd: (event: React.DragEvent<HTMLDivElement>) => void;
   onDragEnter: (event: React.DragEvent<HTMLDivElement>, index: string) => void;
-  onDrop: (
-    event: React.DragEvent<HTMLDivElement>,
-    id: string,
-    task: TDoc
-  ) => void;
+  onDrop: (event: React.DragEvent<HTMLDivElement>, id: string) => void;
 }
 
 const TaskCard = ({
   index,
+  task,
   hoverIndex,
   isDraggableIndex,
-  task,
   onDragStart,
   onDragEnd,
   onDragEnter,
   onDrop,
 }: ITaskCard) => {
-  const { _id: id, title, subtasks } = task;
-
+  const { title, subtasks } = task;
   const { SETACTIVETASK } = boardActions;
   const { TASKMODAL } = modalActions;
   const dispatch = useAppDispatch();
 
   const handleOpenTaskModal = () => {
-    dispatch(SETACTIVETASK(task));
     dispatch(TASKMODAL());
   };
 
-  const completed = subtasks.reduce((total, subtask) => {
-    const { isCompleted } = subtask;
-    if (isCompleted) {
-      total += 1;
+  const completedSubtasks = subtasks.reduce((agr, subtask) => {
+    if (subtask.isCompleted) {
+      agr++;
     }
-    return total;
+    return agr;
   }, 0);
+
+  const totalSubtasks = subtasks.length;
 
   return (
     <TaskPod
       index={index}
       hoverIndex={hoverIndex}
       isDraggableIndex={isDraggableIndex}
-      id={id}
+      id={index}
       draggable={true}
-      onDragStart={e => onDragStart(e, index, id)}
+      onDragStart={e => onDragStart(e, index, index)}
       onDragEnd={e => onDragEnd(e)}
-      onDragEnter={e => onDragEnter(e, id)}
-      onDrop={e => onDrop(e, id, task)}
+      onDragEnter={e => onDragEnter(e, index)}
+      onDrop={e => onDrop(e, index)}
       onClick={() => handleOpenTaskModal()}
     >
-      <div>
-        <TaskTitle>{title}</TaskTitle>
-        <SubTasks>
-          {completed} of {subtasks.length} subtasks
-        </SubTasks>
-      </div>
+      <TaskTitle>{title}</TaskTitle>
+      <SubTasks>
+        {completedSubtasks} of {totalSubtasks} subtasks
+      </SubTasks>
     </TaskPod>
   );
 };
 
-function Column({ docs }: TDocs) {
+interface IColumnProps {
+  docs: TColumnDatum;
+}
+
+function Column({ docs }: IColumnProps) {
+  const { name, tasks } = docs;
   const [isDraggableIndex, setDraggableIndex] = useState('');
   const [hoverIndex, setHoverIndex] = useState('');
 
@@ -113,11 +111,7 @@ function Column({ docs }: TDocs) {
     setHoverIndex(index);
   }
 
-  function onDropHandler(
-    event: React.DragEvent<HTMLDivElement>,
-    id: string,
-    task: TDoc
-  ) {
+  function onDropHandler(event: React.DragEvent<HTMLDivElement>, id: string) {
     event.stopPropagation();
     let srcId = isDraggableIndex;
     let element = document.getElementById(id)!;
@@ -129,26 +123,25 @@ function Column({ docs }: TDocs) {
       element.innerHTML = srcHTML;
     }
     console.log('src: ', isDraggableIndex);
-    console.log(task);
   }
 
   return (
     <ColumnContainer>
       <CollectionStatus>
-        <StatusIndicator status={docs[0].status}></StatusIndicator>
+        <StatusIndicator></StatusIndicator>
         <StatusText>
-          {docs[0].status} ({docs.length})
+          {name} ({tasks.length})
         </StatusText>
       </CollectionStatus>
       <Tasks>
-        {docs.map((task, index) => {
+        {tasks.map((task, index) => {
           return (
             <TaskCard
               key={index}
+              task={task}
               index={task._id}
               hoverIndex={hoverIndex}
               isDraggableIndex={isDraggableIndex}
-              task={task}
               onDragStart={onDragHandleStart}
               onDragEnd={onDragHandleEnd}
               onDragEnter={onDragHandleEnter}

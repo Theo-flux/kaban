@@ -17,20 +17,40 @@ export type TBoard = {
   name: string;
 };
 
+export type TSubtasks = {
+  title: string;
+  isCompleted: boolean;
+};
+
 export type TTask = {
-  index: number;
   title: string;
   description: string;
   status: string;
-  subtasks: Array<{
-    title: string;
-    isCompleted: boolean;
-  }>;
+  subtasks: Array<TSubtasks>;
+  index: number;
 };
 
 export type TColumnTask = {
   name: string;
   tasks: Array<TTask>;
+};
+
+export type TColumnDatum = {
+  _id: string;
+  name: string;
+  tasks: Array<{
+    _id: string;
+    title: string;
+    description: string;
+    status: string;
+    index: number;
+    subtasks: Array<{
+      _id: string;
+      title: string;
+      isCompleted: boolean;
+    }>;
+  }>;
+  __v: number;
 };
 
 export type TDoc = {
@@ -43,13 +63,19 @@ export type TDoc = {
     title: string;
     isCompleted: boolean;
   }>;
-  __v: number;
+  index: number;
 };
 
 export type TDocs = {
   docs: Array<TDoc>;
 };
 
-export type TTasks = TDocs & {
+export type TTasksFromCollection = {
   name: string;
+  docs: Array<{
+    _id: string;
+    name: string;
+    tasks: Array<TDoc>;
+    __v: number;
+  }>;
 };

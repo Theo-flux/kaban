@@ -13,6 +13,7 @@ const initialState: TDoc = {
       isCompleted: false,
     },
   ],
+  index: 0,
   __v: 0,
 };
 
@@ -32,6 +33,7 @@ const boardSlice = createSlice({
         description: payload.description,
         status: payload.status,
         subtasks: [...payload.subtasks],
+        index: payload.index,
         __v: payload.__v,
       };
     },

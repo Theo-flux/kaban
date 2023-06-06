@@ -1,27 +1,19 @@
 import React from 'react';
 import { BoardWrapper } from './board.css';
 import { Column, NewColumn } from './column';
-import { TTasks } from '../../types';
+import { TTasksFromCollection } from '../../types';
 
 interface IFilledBoardProps {
-  boardData: TTasks | undefined;
+  boardData: TTasksFromCollection | undefined;
 }
 
 function FilledBoard({ boardData }: IFilledBoardProps) {
-  let todo = boardData?.docs.filter(el => el.status == 'Todo') || [];
-  let doing = boardData?.docs.filter(el => el.status == 'Doing') || [];
-  let done = boardData?.docs.filter(el => el.status == 'Done') || [];
-  console.log('todo: ', todo.length);
-  console.log('doing: ', doing.length);
-  console.log('done: ', done.length);
+  console.log(boardData?.docs);
   return (
     <BoardWrapper>
-      {todo.length != 0 && <Column docs={todo} />}
-      {doing.length != 0 && <Column docs={doing} />}
-      {done.length != 0 && <Column docs={done} />}
-      {(todo.length != 0 && doing.length != 0 && done.length != 0) || (
-        <NewColumn />
-      )}
+      {boardData?.docs.map((datum, index) => {
+        return <Column key={index} docs={datum} />;
+      })}
     </BoardWrapper>
   );
 }

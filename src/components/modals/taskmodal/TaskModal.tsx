@@ -23,7 +23,6 @@ import {
   Group,
 } from './taskmodal.css';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { truncate } from 'fs';
 import { boardActions } from '@/app/features/boards/boardSlice';
 
 interface ITaskModalProps {

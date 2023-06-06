@@ -7,9 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    await connectMongo();
-
-    const myDb = mongoose.connection.useDb('boards');
+    const myDb = await connectMongo();
 
     let collList = await myDb.db.listCollections().toArray();
 

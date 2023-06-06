@@ -22,8 +22,7 @@ export default async function handler(
 ) {
   try {
     const boardname: string = req.query.boardname as string;
-    await connectMongo();
-    const myDb = mongoose.connection.useDb('boards');
+    const myDb = await connectMongo();
     let BoardName = myDb.model(`${boardname}`, taskSchema, `${boardname}`);
     let result: Array<TTask> = await BoardName.find({});
 

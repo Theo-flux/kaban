@@ -17,6 +17,22 @@ export type TBoard = {
   name: string;
 };
 
+export type TTask = {
+  index: number;
+  title: string;
+  description: string;
+  status: string;
+  subtasks: Array<{
+    title: string;
+    isCompleted: boolean;
+  }>;
+};
+
+export type TColumnTask = {
+  name: string;
+  tasks: Array<TTask>;
+};
+
 export type TDoc = {
   _id: string;
   title: string;

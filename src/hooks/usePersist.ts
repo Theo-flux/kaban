@@ -16,7 +16,7 @@ function usePersistState(key: string, defaultKey: string) {
     if (data !== null) updateValue(JSON.parse(data));
   }, [key, updateValue]);
 
-  return {value, updateValue};
+  return { value, updateValue };
 }
 
 export default usePersistState;

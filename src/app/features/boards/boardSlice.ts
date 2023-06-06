@@ -14,7 +14,6 @@ const initialState: TDoc = {
     },
   ],
   index: 0,
-  __v: 0,
 };
 
 type TAction = {
@@ -34,7 +33,6 @@ const boardSlice = createSlice({
         status: payload.status,
         subtasks: [...payload.subtasks],
         index: payload.index,
-        __v: payload.__v,
       };
     },
   },

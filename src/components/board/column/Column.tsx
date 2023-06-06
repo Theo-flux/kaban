@@ -45,6 +45,7 @@ const TaskCard = ({
   const dispatch = useAppDispatch();
 
   const handleOpenTaskModal = () => {
+    dispatch(SETACTIVETASK(task));
     dispatch(TASKMODAL());
   };
 

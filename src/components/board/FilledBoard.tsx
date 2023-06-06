@@ -8,7 +8,6 @@ interface IFilledBoardProps {
 }
 
 function FilledBoard({ boardData }: IFilledBoardProps) {
-  console.log(boardData?.docs);
   return (
     <BoardWrapper>
       {boardData?.docs.map((datum, index) => {

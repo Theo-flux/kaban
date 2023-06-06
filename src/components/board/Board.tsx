@@ -15,8 +15,6 @@ function Board({ activeboard, showsidebar }: IBoardProps) {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(data);
-
   return (
     <BoardContainer showsidebar={showsidebar}>
       {isLoading ? (

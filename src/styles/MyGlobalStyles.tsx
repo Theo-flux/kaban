@@ -87,5 +87,12 @@ export const GlobalStyles = createGlobalStyle`
     ::-webkit-scrollbar-thumb:hover {
       background: var(--blue-marguerite);
     }
+
+    .mantine-Checkbox-input {
+      cursor: pointer;
+      background-color: var(--side);
+      border: 1px solid rgba(130, 143, 163, 0.248914);
+      border-radius: 2px;
+    }
   
     `;

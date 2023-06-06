@@ -5,6 +5,7 @@ import {
   ModalBackdrop,
   ModalCard,
   ModalWrapper,
+  CheckInput,
   TextInput,
   ButtonIcon,
   Button,
@@ -13,13 +14,17 @@ import {
 } from '@/shared';
 import {
   ModalTitle,
+  ModalSubTitle,
   Row,
   StyledMoreIcon,
   MoreCard,
   EditText,
   DeleteText,
+  Group,
 } from './taskmodal.css';
-import { useAppSelector } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { truncate } from 'fs';
+import { boardActions } from '@/app/features/boards/boardSlice';
 
 interface ITaskModalProps {
   open: boolean;
@@ -30,6 +35,18 @@ function TaskModal({ open, handleDispatchTaskModal }: ITaskModalProps) {
   const { title, description, status, subtasks } = useAppSelector(
     state => state.board
   );
+  let { EDITISCOMPLETE } = boardActions;
+  let dispatch = useAppDispatch();
+
+  const CompletedSubtasks = subtasks.reduce((aggr, subtask) => {
+    if (subtask.isCompleted) {
+      aggr++;
+    }
+
+    return aggr;
+  }, 0);
+
+  const subtaskSize = subtasks.length;
 
   const [openmoremodal, setopenmoremodal] = useState(false);
   const ref = useClickOutside(() => setopenmoremodal(false));
@@ -38,14 +55,51 @@ function TaskModal({ open, handleDispatchTaskModal }: ITaskModalProps) {
     setopenmoremodal(!openmoremodal);
   };
 
+  const handleSubtaskClick = (arg: number, isCompleted: boolean) => {
+    let status = isCompleted;
+    if (isCompleted) {
+      status = false;
+    } else {
+      status = true;
+    }
+
+    dispatch(EDITISCOMPLETE({ index: arg, isCompleted: status }));
+  };
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
         <ModalWrapper>
-          <Row>
-            <ModalTitle>{title}</ModalTitle>
-            <StyledMoreIcon onClick={() => handleSetopenmore()} />
-          </Row>
+          <Group>
+            <Row>
+              <ModalTitle>{title}</ModalTitle>
+              <StyledMoreIcon onClick={() => handleSetopenmore()} />
+            </Row>
+          </Group>
+
+          <Group>
+            <EditText>{description}</EditText>
+          </Group>
+
+          <Group>
+            <ModalSubTitle>
+              Subtasks ({CompletedSubtasks} of {subtaskSize})
+            </ModalSubTitle>
+            {subtasks.map((subtask, index) => {
+              const { isCompleted, title } = subtask;
+              return (
+                <CheckInput
+                  key={index}
+                  label={title}
+                  checked={isCompleted}
+                  index={index}
+                  handleOnclick={handleSubtaskClick}
+                />
+              );
+            })}
+          </Group>
+
+          <Group>status</Group>
         </ModalWrapper>
         <MoreCard ref={ref} openmore={openmoremodal}>
           <EditText onClick={() => handleSetopenmore()}>Edit Board</EditText>

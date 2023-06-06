@@ -1,6 +1,9 @@
 import React from 'react';
+import { Checkbox } from '@mantine/core';
 import {
   InputWrapper,
+  CheckInputWrapper,
+  CheckBoxLabelText,
   DeletableInputWrapper,
   InputLabel,
   InputEl,
@@ -31,6 +34,13 @@ interface IDeletableInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+}
+
+interface ICheckInputProps {
+  label: string;
+  checked: boolean;
+  index: number | 0;
+  handleOnclick: (arg: number, isCompleted: boolean) => void;
 }
 
 export const TextInput = ({
@@ -115,5 +125,23 @@ export const DeletableInput = ({
       </DeletableInputWrapper>
       {error && <InputError>{error}</InputError>}
     </InputWrapper>
+  );
+};
+
+export const CheckInput = ({
+  label,
+  checked,
+  index,
+  handleOnclick,
+}: ICheckInputProps) => {
+  return (
+    <CheckInputWrapper onClick={() => handleOnclick(index, checked)}>
+      <Checkbox
+        color="violet"
+        size="xs"
+        checked={checked}
+        label={<CheckBoxLabelText checked={checked}>{label}</CheckBoxLabelText>}
+      />
+    </CheckInputWrapper>
   );
 };

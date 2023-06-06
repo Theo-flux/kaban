@@ -20,6 +20,13 @@ type TAction = {
   payload: TDoc;
 };
 
+type TSubtaskAction = {
+  payload: {
+    index: number;
+    isCompleted: boolean;
+  };
+};
+
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
@@ -33,6 +40,18 @@ const boardSlice = createSlice({
         status: payload.status,
         subtasks: [...payload.subtasks],
         index: payload.index,
+      };
+    },
+
+    EDITISCOMPLETE: (state: TDoc, action: TSubtaskAction) => {
+      const { payload } = action;
+      return {
+        ...state,
+        subtasks: state.subtasks.map((subtask, i) =>
+          i === payload.index
+            ? { ...subtask, isCompleted: payload.isCompleted }
+            : subtask
+        ),
       };
     },
   },

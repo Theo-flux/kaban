@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { transition } from '@/utils';
 
+type TCheckBoxLabelTextProps = {
+  checked: boolean;
+};
+
 export const InputWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -93,4 +97,28 @@ export const InputLabel = styled.label`
 export const InputError = styled.small`
   margin-top: 0.3rem;
   color: var(--mandy);
+`;
+
+// checkbox wrapper
+export const CheckInputWrapper = styled.div`
+  background-color: var(--body);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  ${transition}
+
+  &:hover {
+    background-color: #635fc725;
+  }
+`;
+
+export const CheckBoxLabelText = styled.p<TCheckBoxLabelTextProps>`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--text);
+  opacity: 0.5;
+  text-decoration: ${({ checked }) => (checked ? `line-through` : `none`)};
 `;

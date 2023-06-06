@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
 import { transition } from '@/utils';
-import { StyledBodyL, StyledHeadingL } from '@/shared';
+import { StyledBodyL, StyledHeadingL, StyledBodyMD } from '@/shared';
 
 type TMoreCard = {
   openmore: boolean;
@@ -10,6 +10,19 @@ type TMoreCard = {
 type TModalTitle = {
   color?: string;
 };
+
+export const Group = styled.div`
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0rem;
+  }
+
+  & button {
+    width: 100%;
+  }
+`;
 
 export const Row = styled.div`
   display: flex;
@@ -52,4 +65,9 @@ export const DeleteText = styled(StyledBodyL)`
 export const ModalTitle = styled(StyledHeadingL)<TModalTitle>`
   color: ${props => (props.color ? `${props.color}` : `var(--text)`)};
   width: 90%;
+`;
+
+export const ModalSubTitle = styled(StyledBodyMD)`
+  color: var(--text);
+  margin-bottom: 1rem;
 `;

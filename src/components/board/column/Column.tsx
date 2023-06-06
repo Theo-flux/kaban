@@ -13,6 +13,7 @@ import { TDoc, TColumnDatum } from '@/types';
 import { useAppDispatch } from '@/app/hooks';
 import { boardActions } from '@/app/features/boards/boardSlice';
 import { modalActions } from '@/app/features/modals/modalSlice';
+import { getRandomColor } from '@/utils';
 
 interface ITaskCard {
   index: string;
@@ -129,7 +130,7 @@ function Column({ docs }: IColumnProps) {
   return (
     <ColumnContainer>
       <CollectionStatus>
-        <StatusIndicator></StatusIndicator>
+        <StatusIndicator color={getRandomColor()}></StatusIndicator>
         <StatusText>
           {name} ({tasks.length})
         </StatusText>

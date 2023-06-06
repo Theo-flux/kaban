@@ -12,6 +12,10 @@ type TSeparatorProps = {
   active: boolean;
 };
 
+type TStatusIndicator = {
+  color: string;
+};
+
 export const StyledNewColumnText = styled(StyledHeadingXL)`
   color: var(--regeant-gray);
 `;
@@ -42,7 +46,7 @@ export const CollectionStatus = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const StatusIndicator = styled.div`
+export const StatusIndicator = styled.div<TStatusIndicator>`
   position: absolute;
   left: 0%;
   right: 85.29%;
@@ -51,6 +55,7 @@ export const StatusIndicator = styled.div`
   border-radius: 15px;
   width: 15px;
   height: 15px;
+  ${({ color }) => `background-color: ${color};`}
 `;
 
 export const StatusText = styled(StyledBodyMD)`

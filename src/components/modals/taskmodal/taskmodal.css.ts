@@ -38,7 +38,7 @@ export const StyledMoreIcon = styled(FiMoreVertical)`
 export const MoreCard = styled.div<TMoreCard>`
   position: absolute;
   top: 60px;
-  right: 20px;
+  right: -60px;
   width: 190px;
   padding: 0.75rem 1rem;
   background-color: var(--body);

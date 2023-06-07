@@ -11,6 +11,7 @@ import {
   Button,
   StyledPlusIcon,
   DeletableInput,
+  SelectInput,
 } from '@/shared';
 import {
   ModalTitle,
@@ -34,6 +35,8 @@ function TaskModal({ open, handleDispatchTaskModal }: ITaskModalProps) {
   const { title, description, status, subtasks } = useAppSelector(
     state => state.board
   );
+  const { allStatus } = useAppSelector(state => state.allStatus);
+
   let { EDITISCOMPLETE } = boardActions;
   let dispatch = useAppDispatch();
 
@@ -98,7 +101,14 @@ function TaskModal({ open, handleDispatchTaskModal }: ITaskModalProps) {
             })}
           </Group>
 
-          <Group>status</Group>
+          <Group>
+            <SelectInput
+              label="Current Status"
+              name="status"
+              options={allStatus || []}
+              onChange={() => {}}
+            />
+          </Group>
         </ModalWrapper>
         <MoreCard ref={ref} openmore={openmoremodal}>
           <EditText onClick={() => handleSetopenmore()}>Edit Board</EditText>

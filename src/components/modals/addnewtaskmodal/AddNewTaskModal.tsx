@@ -13,6 +13,7 @@ import {
   StyledPlusIcon,
 } from '@/shared';
 import { Group } from './addnewtaskmodal.css';
+import { useAppSelector } from '@/app/hooks';
 
 interface IAddNewTaskModalProps {
   open: boolean;
@@ -23,6 +24,8 @@ function AddNewTaskModal({
   open,
   handleDispatchAddTaskModal,
 }: IAddNewTaskModalProps) {
+  const { allStatus } = useAppSelector(state => state.allStatus);
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
@@ -58,7 +61,7 @@ function AddNewTaskModal({
             <SelectInput
               label="Status"
               name="status"
-              options={['Todo', 'Done', 'Doing']}
+              options={allStatus || []}
               onChange={() => {}}
             />
             <Button text="Create Task" btnType="primary" />

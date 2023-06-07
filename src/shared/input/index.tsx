@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Checkbox } from '@mantine/core';
 import {
   InputWrapper,
@@ -31,9 +31,9 @@ interface ISelectProps extends IInputProps {
 
 interface IDeletableInputProps {
   name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  optionalVal?: string;
   error?: string;
+  id: string;
 }
 
 interface ICheckInputProps {
@@ -108,18 +108,20 @@ export const SelectInput = ({
 
 export const DeletableInput = ({
   name,
-  value,
-  onChange,
+  optionalVal,
   error,
+  id,
 }: IDeletableInputProps) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+
   return (
     <InputWrapper>
       <DeletableInputWrapper>
         <InputEl
+          id={id}
           type="text"
           name={name}
-          value={value}
-          onChange={e => onChange(e)}
+          // onChange={e => handleChange(e)}
         />
         <StyledCloseIcon />
       </DeletableInputWrapper>

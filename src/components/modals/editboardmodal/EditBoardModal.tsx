@@ -12,6 +12,7 @@ import {
   DeletableInput,
 } from '@/shared';
 import { Group, Text } from './editboardmodal.css';
+import { useAppSelector } from '@/app/hooks';
 
 interface IEditBoardModalProps {
   open: boolean;
@@ -22,6 +23,8 @@ function EditBoardModal({
   open,
   handleDispatchEditBoardModal,
 }: IEditBoardModalProps) {
+  const { allStatus } = useAppSelector(state => state.allStatus);
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
@@ -38,9 +41,22 @@ function EditBoardModal({
 
           <Group>
             <Text>Board Columns</Text>
-            <DeletableInput name="todo" value="Todo" onChange={() => {}} />
-            <DeletableInput name="doing" value="Doing" onChange={() => {}} />
-            <DeletableInput name="done" value="Done" onChange={() => {}} />
+            {allStatus.map((status, index) => {
+              if (typeof window !== 'undefined') {
+                let inputEl = document.getElementById(status);
+                if (status) {
+                  inputEl?.setAttribute('value', status);
+                }
+              }
+              return (
+                <DeletableInput
+                  key={index}
+                  name={status}
+                  optionalVal={status}
+                  id={status}
+                />
+              );
+            })}
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
               text="Add New Column"

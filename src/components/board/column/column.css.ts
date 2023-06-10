@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { transition } from '@/utils';
 import { StyledBodyMD, StyledHeadingMD, StyledHeadingXL } from '@/shared';
+import { getRandomColor } from '@/utils';
 
 type TTaskProps = {
   index: string;
@@ -10,10 +11,6 @@ type TTaskProps = {
 
 type TSeparatorProps = {
   active: boolean;
-};
-
-type TStatusIndicator = {
-  color: string;
 };
 
 export const StyledNewColumnText = styled(StyledHeadingXL)`
@@ -46,7 +43,7 @@ export const CollectionStatus = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const StatusIndicator = styled.div<TStatusIndicator>`
+export const StatusIndicator = styled.div`
   position: absolute;
   left: 0%;
   right: 85.29%;

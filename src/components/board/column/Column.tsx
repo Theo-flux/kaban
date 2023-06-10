@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   CollectionStatus,
   ColumnContainer,
@@ -127,10 +127,12 @@ function Column({ docs }: IColumnProps) {
     console.log('src: ', isDraggableIndex);
   }
 
+  let color = useRef(getRandomColor());
+
   return (
     <ColumnContainer>
       <CollectionStatus>
-        <StatusIndicator color={getRandomColor()}></StatusIndicator>
+        <StatusIndicator color={color.current}></StatusIndicator>
         <StatusText>
           {name} ({tasks.length})
         </StatusText>

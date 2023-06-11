@@ -16,15 +16,13 @@ import {
   DeleteText,
 } from './navbar.css';
 import { NavLogo, ButtonIcon, StyledPlusIcon } from '@/shared';
-
+import { modalActions } from '@/app/features/modals/modalSlice';
+import { useAppDispatch } from '@/app/hooks';
 
 interface INav {
   activeboard: string;
   showsidebar: boolean;
   openmobilenav: boolean;
-  handleDispatchDeleteModal: () => void;
-  handleDispatchAddTaskModal: () => void;
-  handleDispatchEditBoardModal: () => void;
   handleSetopenmobilenav: () => void;
 }
 
@@ -32,9 +30,6 @@ function Navbar({
   activeboard,
   showsidebar,
   openmobilenav,
-  handleDispatchDeleteModal,
-  handleDispatchAddTaskModal,
-  handleDispatchEditBoardModal,
   handleSetopenmobilenav,
 }: INav) {
   const isFromTablet = useMediaQuery({
@@ -44,8 +39,23 @@ function Navbar({
   const [openmore, setopenmore] = useState(false);
   const ref = useClickOutside(() => setopenmore(false));
 
+  const dispatch = useAppDispatch();
+  const { DELETEBOARD, ADDTASK, EDITBOARD } = modalActions;
+
   const handleSetopenmore = () => {
     setopenmore(!openmore);
+  };
+
+  const handleDispatchDeleteModal = () => {
+    dispatch(DELETEBOARD());
+  };
+
+  const handleDispatchEditBoardModal = () => {
+    dispatch(EDITBOARD());
+  };
+
+  const handleDispatchAddTaskModal = () => {
+    dispatch(ADDTASK());
   };
 
   const handleDispatchDeleteModalWithin = () => {

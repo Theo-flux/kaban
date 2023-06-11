@@ -11,7 +11,7 @@ import {
 } from './column.css';
 import { TDoc, TColumnDatum } from '@/types';
 import { useAppDispatch } from '@/app/hooks';
-import { boardActions } from '@/app/features/boards/boardSlice';
+import { taskActions } from '@/app/features/task/taskSlice';
 import { modalActions } from '@/app/features/modals/modalSlice';
 import { getRandomColor } from '@/utils';
 
@@ -41,7 +41,7 @@ const TaskCard = ({
   onDrop,
 }: ITaskCard) => {
   const { title, subtasks } = task;
-  const { SETACTIVETASK } = boardActions;
+  const { SETACTIVETASK } = taskActions;
   const { TASKMODAL } = modalActions;
   const dispatch = useAppDispatch();
 

@@ -1,8 +1,9 @@
 'use-client';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import modalReducers from './features/modals/modalSlice';
-import boardReducers from './features/boards/boardSlice';
-import allStatusReducers from './features/boards/allStatusSlice';
+import taskReducers from './features/task/taskSlice';
+import allStatusReducers from './features/task/allStatusSlice';
+import boardReducers from './features/board/boardSlice';
 import { kanbanApi } from './services/kanbanApi';
 import {
   persistReducer,
@@ -42,6 +43,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   modal: modalReducers,
+  task: taskReducers,
   board: boardReducers,
   allStatus: allStatusReducers,
   [kanbanApi.reducerPath]: kanbanApi.reducer,

@@ -4,6 +4,7 @@ import FilledBoard from './FilledBoard';
 import EmptyBoard from './EmptyBoard';
 import { useGetTasksByCollectionQuery } from '@/app/features/api/apiSlice';
 import { StyledLoader } from '@/shared';
+import Home from './Home';
 
 interface IBoardProps {
   showsidebar: boolean;
@@ -11,18 +12,22 @@ interface IBoardProps {
 }
 
 function Board({ activeboard, showsidebar }: IBoardProps) {
-  const { data, isLoading } = useGetTasksByCollectionQuery(activeboard, {
+  const { data, isFetching } = useGetTasksByCollectionQuery(activeboard, {
     refetchOnMountOrArgChange: true,
   });
 
   return (
     <BoardContainer showsidebar={showsidebar}>
-      {isLoading ? (
-        <StyledLoader />
-      ) : data?.docs.length != 0 ? (
-        <FilledBoard boardData={data} />
+      {activeboard ? (
+        isFetching ? (
+          <StyledLoader />
+        ) : data?.docs.length != 0 ? (
+          <FilledBoard boardData={data} />
+        ) : (
+          <EmptyBoard />
+        )
       ) : (
-        <EmptyBoard />
+        <Home />
       )}
     </BoardContainer>
   );

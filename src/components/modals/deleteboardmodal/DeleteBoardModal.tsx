@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Button,
   ModalContainer,
@@ -12,10 +12,8 @@ import {
   StyledDeleteText,
   BtnWrapper,
 } from './deleteboardmodal.css';
-import {
-  useDeleteBoardMutation,
-  useGetAllBoardsQuery,
-} from '@/app/features/api/apiSlice';
+import { useDeleteBoardMutation } from '@/app/features/api/apiSlice';
+import { useRouter } from 'next/navigation';
 
 interface IDeleBoardModalProps {
   open: boolean;
@@ -31,18 +29,14 @@ function DeleteBoardModal({
   handleSetActiveBoard,
 }: IDeleBoardModalProps) {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
-  const { data, isLoading: isGetAllBoardLoading } = useGetAllBoardsQuery();
+  const router = useRouter();
 
   const handleDeleteBoard = async () => {
     await deleteBoard({ name: activeboard });
+    handleSetActiveBoard('');
+    router.push('/');
     handleDispatchDeleteModal();
   };
-
-  useEffect(() => {
-    if (!isLoading) {
-      data && handleSetActiveBoard(data?.collections[0]);
-    }
-  }, [isLoading, isGetAllBoardLoading]);
 
   return (
     <ModalContainer open={open}>

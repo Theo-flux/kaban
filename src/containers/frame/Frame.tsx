@@ -1,63 +1,22 @@
-import { useEffect, useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { modalActions } from '@/app/features/modals/modalSlice';
-import {
-  Navbar,
-  Sidebar,
-  ShowTag,
-  Board,
-  DeleteBoardModal,
-  AddNewTaskModal,
-  AddNewBoardModal,
-  EditBoardModal,
-  TaskModal,
-} from '../../components';
+import { Navbar, Sidebar, ShowTag, Board } from '../../components';
 import { FrameContainer, Aside } from './frame.css';
-import { usePersistState } from '@/hooks';
+import { boardActions } from '@/app/features/board/boardSlice';
+import { AddNewBoardModal } from '../../components';
 
-function Frame() {
-  let { value: activeboard, updateValue: setActiveBoard } = usePersistState(
-    'activeboard',
-    'Roadmap'
-  );
-
-  const {
-    isDeleteBoardModal,
-    isEditBoardModal,
-    isAddTaskModal,
-    isAddBoardModal,
-    isTaskModal,
-  } = useAppSelector(state => state.modal);
-  const { DELETEBOARD, EDITBOARD, ADDTASK, ADDBOARD, TASKMODAL } = modalActions;
+function Frame({ children }: { children?: React.ReactNode }) {
+  const { activeboard } = useAppSelector(state => state.board);
+  const { SETACTIVEBOARD } = boardActions;
   const dispatch = useAppDispatch();
+
+  const { isAddBoardModal } = useAppSelector(state => state.modal);
+
+  const { ADDBOARD } = modalActions;
 
   let [showsidebar, setshowsidebar] = useState(true);
   let [openmobilenav, setopenmobilenav] = useState(false);
-
-  // function to handle open/close of deleteboardmodal
-  const handleDispatchDeleteModal = () => {
-    dispatch(DELETEBOARD());
-  };
-
-  // function to handle open/close of addnewtaskmodal
-  const handleDispatchAddTaskModal = () => {
-    dispatch(ADDTASK());
-  };
-
-  // function to handle open/close of editboardmodal
-  const handleDispatchEditBoardModal = () => {
-    dispatch(EDITBOARD());
-  };
-
-  // function to handle open/close of addboardmodal
-  const handleDispatchAddBoardModal = () => {
-    dispatch(ADDBOARD());
-  };
-
-  // function to handle open/close of taskmodal
-  const handleDispatchTaskModal = () => {
-    dispatch(TASKMODAL());
-  };
 
   // function to handle onclick hide/show sidebar
   const handleSetshowsidebar = () => {
@@ -71,8 +30,12 @@ function Frame() {
 
   // function to handle active board
   const handleSetActiveBoard = (val: string) => {
-    setActiveBoard(val);
-    setopenmobilenav(!openmobilenav);
+    dispatch(SETACTIVEBOARD(val));
+  };
+
+  // function to handle open/close of addboardmodal
+  const handleDispatchAddBoardModal = () => {
+    dispatch(ADDBOARD());
   };
 
   return (
@@ -84,7 +47,6 @@ function Frame() {
         handleSetshowsidebar={handleSetshowsidebar}
         openmobilenav={openmobilenav}
         handleSetopenmobilenav={handleSetopenmobilenav}
-        handleDispatchAddBoardModal={handleDispatchAddBoardModal}
       />
       <ShowTag
         showsidebar={showsidebar}
@@ -97,40 +59,15 @@ function Frame() {
           openmobilenav={openmobilenav}
           showsidebar={showsidebar}
           handleSetopenmobilenav={handleSetopenmobilenav}
-          handleDispatchDeleteModal={handleDispatchDeleteModal}
-          handleDispatchAddTaskModal={handleDispatchAddTaskModal}
-          handleDispatchEditBoardModal={handleDispatchEditBoardModal}
         />
         <Board activeboard={activeboard} showsidebar={showsidebar} />
+        <AddNewBoardModal
+          open={isAddBoardModal}
+          handleDispatchAddBoardModal={handleDispatchAddBoardModal}
+          handleSetActiveBoard={handleSetActiveBoard}
+        />
+        {children}
       </Aside>
-
-      {/* Modals */}
-      <DeleteBoardModal
-        open={isDeleteBoardModal}
-        activeboard={activeboard}
-        handleSetActiveBoard={handleSetActiveBoard}
-        handleDispatchDeleteModal={handleDispatchDeleteModal}
-      />
-
-      <AddNewTaskModal
-        open={isAddTaskModal}
-        handleDispatchAddTaskModal={handleDispatchAddTaskModal}
-      />
-
-      <EditBoardModal
-        open={isEditBoardModal}
-        activeboard={activeboard}
-        handleDispatchEditBoardModal={handleDispatchEditBoardModal}
-      />
-      <AddNewBoardModal
-        open={isAddBoardModal}
-        handleDispatchAddBoardModal={handleDispatchAddBoardModal}
-        handleSetActiveBoard={handleSetActiveBoard}
-      />
-      <TaskModal
-        open={isTaskModal}
-        handleDispatchTaskModal={handleDispatchTaskModal}
-      />
     </FrameContainer>
   );
 }

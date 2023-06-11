@@ -24,7 +24,7 @@ import {
   Group,
 } from './taskmodal.css';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { boardActions } from '@/app/features/boards/boardSlice';
+import { taskActions } from '@/app/features/task/taskSlice';
 
 interface ITaskModalProps {
   open: boolean;
@@ -33,11 +33,11 @@ interface ITaskModalProps {
 
 function TaskModal({ open, handleDispatchTaskModal }: ITaskModalProps) {
   const { title, description, status, subtasks } = useAppSelector(
-    state => state.board
+    state => state.task
   );
   const { allStatus } = useAppSelector(state => state.allStatus);
 
-  let { EDITISCOMPLETE } = boardActions;
+  let { EDITISCOMPLETE } = taskActions;
   let dispatch = useAppDispatch();
 
   const CompletedSubtasks = subtasks.reduce((aggr, subtask) => {

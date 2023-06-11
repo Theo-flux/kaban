@@ -4,6 +4,7 @@ import { device, transition } from '@/utils';
 import { TbLayoutBoardSplit } from 'react-icons/tb';
 import { RiSunFill, RiEyeOffLine, RiAddFill } from 'react-icons/ri';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
+import Link from 'next/link';
 
 type TsidebarContainer = {
   showsidebar: boolean;
@@ -95,7 +96,8 @@ export const SidebarBoardName = styled(StyledHeadingMD)<TSidebarBoardName>`
   white-space: nowrap;
 `;
 
-export const SidebarBoard = styled.div<TSideBoardProps>`
+export const SidebarBoard = styled(Link)<TSideBoardProps>`
+  text-decoration: none;
   width: 85%;
   padding: 1rem;
   border-top-right-radius: 100px;

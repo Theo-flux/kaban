@@ -28,6 +28,8 @@ import {
 import { Logo, StyledLoader } from '../../../shared';
 import { Switch } from '@mantine/core';
 import { useGetAllBoardsQuery } from '@/app/features/api/apiSlice';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { modalActions } from '@/app/features/modals/modalSlice';
 
 interface ISidebar {
   activeboard: string;
@@ -36,7 +38,6 @@ interface ISidebar {
   handleSetshowsidebar: () => void;
   openmobilenav: boolean;
   handleSetopenmobilenav: () => void;
-  handleDispatchAddBoardModal: () => void;
 }
 
 interface IDesktopbar {
@@ -65,8 +66,6 @@ interface IMobilebar {
   handleDispatchAddBoardModal: () => void;
 }
 
-// const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
-
 const Desktop = ({
   theme,
   boardNumber,
@@ -94,6 +93,7 @@ const Desktop = ({
               collections?.map((board, index) => {
                 return (
                   <SidebarBoard
+                    href={`/boards/${board}`}
                     key={index}
                     activeboard={activeboard}
                     board={board}
@@ -163,6 +163,7 @@ const Mobile = ({
             collections?.map((board, index) => {
               return (
                 <SidebarBoard
+                  href={`/boards/${board}`}
                   key={index}
                   activeboard={activeboard}
                   board={board}
@@ -208,10 +209,16 @@ function Sidebar({
   handleSetshowsidebar,
   openmobilenav,
   handleSetopenmobilenav,
-  handleDispatchAddBoardModal,
 }: ISidebar) {
   const { data, isLoading } = useGetAllBoardsQuery();
   const [boardNumber, setBoardNumber] = useState(0);
+
+  const dispatch = useAppDispatch();
+  const { ADDBOARD } = modalActions;
+
+  const handleDispatchAddBoardModal = () => {
+    dispatch(ADDBOARD());
+  };
 
   const isFromTablet = useMediaQuery({
     query: '(min-width: 768px)',

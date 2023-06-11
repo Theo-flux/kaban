@@ -14,6 +14,7 @@ import {
 } from '@/shared';
 import { Group, Text } from './addnewboardmodal.css';
 import { useCreateNewBoardMutation } from '@/app/features/api/apiSlice';
+import { useRouter } from 'next/navigation';
 
 interface IAddNewBoardModalProps {
   open: boolean;
@@ -29,6 +30,7 @@ function AddNewBoardModal({
   const [updateBoard, { isLoading }] = useCreateNewBoardMutation();
   const [error, setError] = useState('');
   const [boardName, setBoardName] = useState({ name: '' });
+  const router = useRouter();
 
   const handleOnChangeBoardName = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -41,6 +43,7 @@ function AddNewBoardModal({
       return setError("Board name can't be empty");
     } else setError('');
     await updateBoard({ name: boardName.name });
+    router.push(`/boards/${boardName.name}`);
     handleSetActiveBoard(boardName.name);
     handleDispatchAddBoardModal();
   };

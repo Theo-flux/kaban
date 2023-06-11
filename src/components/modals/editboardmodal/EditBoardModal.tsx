@@ -34,6 +34,11 @@ function EditBoardModal({
     console.log(addNewColumn);
   };
 
+  if (typeof window != 'undefined') {
+    let textInputEl = document.getElementById(`${activeboard}-textinput`);
+    textInputEl?.setAttribute('value', activeboard);
+  }
+
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>
@@ -41,6 +46,7 @@ function EditBoardModal({
           <ModalTitle>Edit Board</ModalTitle>
           <Group>
             <TextInput
+              id={`${activeboard}-textinput`}
               label="Board Name"
               name="board-name"
               placeholder="e.g Platform Launch"

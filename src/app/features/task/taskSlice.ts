@@ -27,7 +27,7 @@ type TSubtaskAction = {
   };
 };
 
-const boardSlice = createSlice({
+const taskSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
@@ -57,5 +57,5 @@ const boardSlice = createSlice({
   },
 });
 
-export default boardSlice.reducer;
-export const boardActions = boardSlice.actions;
+export default taskSlice.reducer;
+export const taskActions = taskSlice.actions;

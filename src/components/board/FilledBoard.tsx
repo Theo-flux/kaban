@@ -3,7 +3,7 @@ import { BoardWrapper } from './board.css';
 import { Column, NewColumn } from './column';
 import { TTasksFromCollection } from '../../types';
 import { useAppDispatch } from '@/app/hooks';
-import { allStatusActions } from '@/app/features/boards/allStatusSlice';
+import { allStatusActions } from '@/app/features/task/allStatusSlice';
 
 interface IFilledBoardProps {
   boardData: TTasksFromCollection | undefined;
@@ -18,7 +18,6 @@ function FilledBoard({ boardData }: IFilledBoardProps) {
     dispatch(SETBOARDALLSTATUS(allStatus));
   }, [allStatus]);
 
-  console.log(allStatus);
   return (
     <BoardWrapper>
       {boardData?.docs.map((datum, index) => {

@@ -19,6 +19,7 @@ interface IInputProps {
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  id?: string;
 }
 
 interface ITextareatProps extends Omit<IInputProps, 'onChange'> {
@@ -53,11 +54,13 @@ export const TextInput = ({
   placeholder,
   onChange,
   error,
+  id,
 }: IInputProps) => {
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
       <InputEl
+        id={id}
         type="text"
         name={name}
         placeholder={placeholder}

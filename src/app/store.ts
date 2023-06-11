@@ -62,5 +62,12 @@ export const store = configureStore({
   },
 });
 
+store.subscribe(() => {
+  sessionStorage.setItem(
+    'activeboard',
+    JSON.stringify(store.getState().board.activeboard)
+  );
+});
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

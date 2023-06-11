@@ -19,15 +19,10 @@ export default function Home() {
   const { activeboard } = useAppSelector(state => state.board);
   const { SETACTIVEBOARD } = boardActions;
 
-  const {
-    isDeleteBoardModal,
-    isEditBoardModal,
-    isAddTaskModal,
-    isAddBoardModal,
-    isTaskModal,
-  } = useAppSelector(state => state.modal);
+  const { isDeleteBoardModal, isEditBoardModal, isAddTaskModal, isTaskModal } =
+    useAppSelector(state => state.modal);
 
-  const { DELETEBOARD, EDITBOARD, ADDTASK, ADDBOARD, TASKMODAL } = modalActions;
+  const { DELETEBOARD, EDITBOARD, ADDTASK, TASKMODAL } = modalActions;
   const dispatch = useAppDispatch();
 
   // function to handle open/close of deleteboardmodal

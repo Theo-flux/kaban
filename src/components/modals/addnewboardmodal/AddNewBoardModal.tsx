@@ -62,9 +62,9 @@ function AddNewBoardModal({
 
           <Group>
             <Text>Board Columns</Text>
-            <DeletableInput name="todo" value="Todo" onChange={() => {}} />
-            <DeletableInput name="doing" value="Doing" onChange={() => {}} />
-            <DeletableInput name="done" value="Done" onChange={() => {}} />
+            <DeletableInput name="todo" onChange={() => {}} />
+            <DeletableInput name="doing" onChange={() => {}} />
+            <DeletableInput name="done" onChange={() => {}} />
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
               text="Add New Column"
@@ -76,7 +76,7 @@ function AddNewBoardModal({
           <Group>
             <ButtonWithLoader
               isLoading={isLoading}
-              loaderColor='white'
+              loaderColor="white"
               text="Create New Board"
               btnType="primary"
               onClick={() => handleSubmit()}

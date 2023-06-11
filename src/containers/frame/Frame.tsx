@@ -119,6 +119,7 @@ function Frame() {
 
       <EditBoardModal
         open={isEditBoardModal}
+        activeboard={activeboard}
         handleDispatchEditBoardModal={handleDispatchEditBoardModal}
       />
       <AddNewBoardModal

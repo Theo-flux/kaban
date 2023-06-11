@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ModalContainer,
   ModalBackdrop,
@@ -9,6 +9,7 @@ import {
   ButtonIcon,
   Button,
   StyledPlusIcon,
+  UnEditableDeletableInput,
   DeletableInput,
 } from '@/shared';
 import { Group, Text } from './editboardmodal.css';
@@ -16,14 +17,22 @@ import { useAppSelector } from '@/app/hooks';
 
 interface IEditBoardModalProps {
   open: boolean;
+  activeboard: string;
   handleDispatchEditBoardModal: () => void;
 }
 
 function EditBoardModal({
   open,
+  activeboard,
   handleDispatchEditBoardModal,
 }: IEditBoardModalProps) {
   const { allStatus } = useAppSelector(state => state.allStatus);
+  const [addNewColumn, setAddNewColumn] = useState<Array<string>>([]);
+
+  const handleAddColumn = () => {
+    setAddNewColumn(prevState => [...prevState, 'New']);
+    console.log(addNewColumn);
+  };
 
   return (
     <ModalContainer open={open}>
@@ -42,19 +51,17 @@ function EditBoardModal({
           <Group>
             <Text>Board Columns</Text>
             {allStatus.map((status, index) => {
-              if (typeof window !== 'undefined') {
-                let inputEl = document.getElementById(status);
-                if (status) {
-                  inputEl?.setAttribute('value', status);
-                }
-              }
               return (
-                <DeletableInput
+                <UnEditableDeletableInput
                   key={index}
-                  name={status}
-                  optionalVal={status}
-                  id={status}
+                  name={`${activeboard}-${status}`}
+                  value={status}
                 />
+              );
+            })}
+            {addNewColumn.map((status, index) => {
+              return (
+                <DeletableInput key={index} name={status} onChange={() => {}} />
               );
             })}
             <ButtonIcon
@@ -62,6 +69,7 @@ function EditBoardModal({
               text="Add New Column"
               hideTextOnMobile={false}
               btnType="secondary"
+              onClick={() => handleAddColumn()}
             />
           </Group>
 

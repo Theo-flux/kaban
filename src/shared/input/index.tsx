@@ -29,11 +29,15 @@ interface ISelectProps extends IInputProps {
   options: Array<string>;
 }
 
+interface IUnEditableDeletableInputProps {
+  name: string;
+  value: string;
+}
+
 interface IDeletableInputProps {
   name: string;
-  optionalVal?: string;
   error?: string;
-  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface ICheckInputProps {
@@ -106,23 +110,29 @@ export const SelectInput = ({
   );
 };
 
-export const DeletableInput = ({
+export const UnEditableDeletableInput = ({
   name,
-  optionalVal,
-  error,
-  id,
-}: IDeletableInputProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
-
+  value,
+}: IUnEditableDeletableInputProps) => {
   return (
     <InputWrapper>
       <DeletableInputWrapper>
-        <InputEl
-          id={id}
-          type="text"
-          name={name}
-          // onChange={e => handleChange(e)}
-        />
+        <InputEl type="text" name={name} value={value} />
+        <StyledCloseIcon />
+      </DeletableInputWrapper>
+    </InputWrapper>
+  );
+};
+
+export const DeletableInput = ({
+  name,
+  error,
+  onChange,
+}: IDeletableInputProps) => {
+  return (
+    <InputWrapper>
+      <DeletableInputWrapper>
+        <InputEl type="text" name={name} onChange={onChange} />
         <StyledCloseIcon />
       </DeletableInputWrapper>
       {error && <InputError>{error}</InputError>}

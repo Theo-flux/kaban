@@ -62,4 +62,10 @@ export const ButtonContainer = styled.button<TButtonContainer>`
         ? 'var(--secondary-btn-hover)'
         : 'var(--destructive-btn-hover)'};
   }
+
+  &:disabled {
+    mix-blend-mode: normal;
+    opacity: 0.25;
+    pointer-events: none;
+  }
 `;

@@ -3,6 +3,7 @@ import { Loader } from '@mantine/core';
 import { ButtonContainer, ButtonText, ButtonTextLoader } from './elements.css';
 
 interface IButtonIcon {
+  disabled?: boolean;
   leftIcon: React.ReactNode;
   text: string;
   hideTextOnMobile: boolean;
@@ -25,6 +26,7 @@ interface IButton {
 }
 
 export const ButtonIcon = ({
+  disabled,
   btnType,
   leftIcon,
   text,
@@ -32,7 +34,7 @@ export const ButtonIcon = ({
   onClick,
 }: IButtonIcon) => {
   return (
-    <ButtonContainer btnType={btnType} onClick={onClick}>
+    <ButtonContainer disabled={disabled} btnType={btnType} onClick={onClick}>
       {leftIcon}
       <ButtonText hideTextOnMobile={hideTextOnMobile}>{text}</ButtonText>
     </ButtonContainer>

@@ -34,10 +34,12 @@ function EditBoardModal({
     console.log(addNewColumn);
   };
 
-  if (typeof window != 'undefined') {
-    let textInputEl = document.getElementById(`${activeboard}-textinput`);
-    textInputEl?.setAttribute('value', activeboard);
-  }
+  useEffect(() => {
+    if (typeof window != 'undefined') {
+      let textInputEl = document.getElementById(`${activeboard}-textinput`);
+      textInputEl?.setAttribute('value', activeboard);
+    }
+  }, [activeboard]);
 
   return (
     <ModalContainer open={open}>

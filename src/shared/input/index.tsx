@@ -26,8 +26,11 @@ interface ITextareatProps extends Omit<IInputProps, 'onChange'> {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-interface ISelectProps extends IInputProps {
+interface ISelectProps {
+  label: string;
+  name: string;
   options: Array<string>;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 interface IUnEditableDeletableInputProps {
@@ -100,7 +103,7 @@ export const SelectInput = ({
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
-      <SelectEl name={name} id={name} onChange={() => onChange}>
+      <SelectEl name={name} id={name} onChange={e => onChange(e)}>
         {options.map((el, index) => {
           return (
             <option key={index} value={el}>

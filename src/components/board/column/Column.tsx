@@ -124,7 +124,6 @@ function Column({ docs }: IColumnProps) {
       dragSrc.innerHTML = element.innerHTML;
       element.innerHTML = srcHTML;
     }
-    console.log('src: ', isDraggableIndex);
   }
 
   let color = useRef(getRandomColor());

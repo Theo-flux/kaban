@@ -26,9 +26,9 @@ function AddNewTaskModal({
   open,
   handleDispatchAddTaskModal,
 }: IAddNewTaskModalProps) {
-  const { allStatus } = useAppSelector(state => state.allStatus);
-  const { activeboard } = useAppSelector(state => state.board);
-  const [subtaskArr, setSubtaskArr] = useState<Array<string>>([]);
+  let { allStatus } = useAppSelector(state => state.allStatus);
+  let { activeboard } = useAppSelector(state => state.board);
+  let [subtaskArr, setSubtaskArr] = useState<Array<string>>([]);
 
   const formInitialState: TTask = {
     title: '',
@@ -41,18 +41,10 @@ function AddNewTaskModal({
   type TFormActions = {
     type: string;
     payload: string;
-    subtaskPayload: {
+    subtaskPayload: Array<{
       title: string;
       isCompleted: boolean;
-    };
-  };
-
-  type TFormsubtaskAction = {
-    type: string;
-    payload: {
-      title: string;
-      isCompleted: boolean;
-    };
+    }>;
   };
 
   const formReducers = (state: TTask, action: TFormActions): TTask => {
@@ -76,10 +68,10 @@ function AddNewTaskModal({
           status: payload,
         };
 
-      case 'subtask':
+      case 'subtasks':
         return {
           ...state,
-          subtasks: [...state.subtasks, subtaskPayload],
+          subtasks: [...state.subtasks, ...subtaskPayload],
         };
       default:
         return state;
@@ -104,18 +96,32 @@ function AddNewTaskModal({
       return dispatchFormAction({
         type: name,
         payload: value,
-        subtaskPayload: { title: '', isCompleted: false },
+        subtaskPayload: [{ title: '', isCompleted: false }],
       });
     } else {
       return dispatchFormAction({
         type: name,
         payload: value,
-        subtaskPayload: { title: '', isCompleted: false },
+        subtaskPayload: [{ title: '', isCompleted: false }],
       });
     }
   };
 
-  console.log(formData);
+  const handleSubtaskchange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { value } = event.target;
+    setSubtaskArr(prevState =>
+      prevState.map((el, id) => (id === index ? (prevState[id] = value) : el))
+    );
+  };
+
+  const handleDelete = (index: number) => {
+    const newArr = subtaskArr.filter((el, id, array) => id !== index);
+    setSubtaskArr(newArr);
+  };
+
 
   return (
     <ModalContainer open={open}>
@@ -127,7 +133,7 @@ function AddNewTaskModal({
               label="Title"
               name="title"
               placeholder="e.g Take coffee break"
-              onChange={e => handleOnChange(e)}
+              onChange={handleOnChange}
             />
 
             <TextAreaInput
@@ -135,7 +141,7 @@ function AddNewTaskModal({
               name="description"
               placeholder="e.g. It’s always good to take a break. This 15 minute break will 
               recharge the batteries a little."
-              onChange={e => handleOnChange(e)}
+              onChange={handleOnChange}
             />
           </Group>
 
@@ -144,8 +150,11 @@ function AddNewTaskModal({
               return (
                 <DeletableInput
                   key={index}
-                  name={`${activeboard}-subtask-${index}`}
-                  onChange={e => handleOnChange(e)}
+                  index={index}
+                  id={'subtasks'}
+                  name={`subtask-${index}`}
+                  onChange={handleSubtaskchange}
+                  handleDelete={handleDelete}
                 />
               );
             })}
@@ -154,7 +163,9 @@ function AddNewTaskModal({
               text="Add New Subtask"
               hideTextOnMobile={false}
               btnType="secondary"
-              
+              onClick={() => {
+                setSubtaskArr(prevState => [...prevState, 'subtask']);
+              }}
             />
           </Group>
 
@@ -163,7 +174,7 @@ function AddNewTaskModal({
               label="Status"
               name="status"
               options={allStatus || []}
-              onChange={e => handleOnChange(e)}
+              onChange={handleOnChange}
             />
             <Button text="Create Task" btnType="primary" />
           </Group>

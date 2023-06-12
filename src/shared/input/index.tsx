@@ -39,9 +39,12 @@ interface IUnEditableDeletableInputProps {
 }
 
 interface IDeletableInputProps {
+  id: string;
+  index: number;
   name: string;
   error?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleDelete: (id: number) => void;
 }
 
 interface ICheckInputProps {
@@ -131,15 +134,23 @@ export const UnEditableDeletableInput = ({
 };
 
 export const DeletableInput = ({
+  id,
+  index,
   name,
   error,
   onChange,
+  handleDelete,
 }: IDeletableInputProps) => {
   return (
     <InputWrapper>
       <DeletableInputWrapper>
-        <InputEl type="text" name={name} onChange={onChange} />
-        <StyledCloseIcon />
+        <InputEl
+          id={id}
+          type="text"
+          name={name}
+          onChange={e => onChange(e, index)}
+        />
+        <StyledCloseIcon onClick={() => handleDelete(index)} />
       </DeletableInputWrapper>
       {error && <InputError>{error}</InputError>}
     </InputWrapper>

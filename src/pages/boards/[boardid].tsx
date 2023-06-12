@@ -51,7 +51,6 @@ export default function Home() {
     // setopenmobilenav(!openmobilenav);
   };
 
-  console.log(boardid);
   return (
     <React.Fragment>
       <Head>

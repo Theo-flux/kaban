@@ -65,9 +65,6 @@ function AddNewBoardModal({
 
           <Group>
             <Text>Board Columns</Text>
-            <DeletableInput name="todo" onChange={() => {}} />
-            <DeletableInput name="doing" onChange={() => {}} />
-            <DeletableInput name="done" onChange={() => {}} />
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
               text="Add New Column"

@@ -5,6 +5,7 @@ export type TCollections = {
 
 export type TCreateBoard = {
   name: string;
+  cols: Array<string>;
   message: string;
 };
 

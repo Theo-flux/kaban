@@ -33,7 +33,7 @@ function DeleteBoardModal({
 
   const handleDeleteBoard = async () => {
     await deleteBoard({ name: activeboard });
-    handleSetActiveBoard('');
+    handleSetActiveBoard('Home');
     router.push('/');
     handleDispatchDeleteModal();
   };

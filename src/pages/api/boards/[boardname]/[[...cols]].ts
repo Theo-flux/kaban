@@ -7,7 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { boardname } = req.query;
+  const { boardname, cols } = req.query;
   const { method } = req;
 
   try {
@@ -20,7 +20,9 @@ export default async function handler(
 
     await NewBoard.createCollection();
 
-    res.status(200).json({ name: req.query, message: 'board created!' });
+    res
+      .status(200)
+      .json({ name: boardname, cols: cols, message: 'board created!' });
   } catch (error) {
     res.status(400).json({ error });
   }

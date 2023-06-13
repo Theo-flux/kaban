@@ -67,11 +67,6 @@ function EditBoardModal({
                 />
               );
             })}
-            {addNewColumn.map((status, index) => {
-              return (
-                <DeletableInput key={index} name={status} onChange={() => {}} />
-              );
-            })}
             <ButtonIcon
               leftIcon={<StyledPlusIcon btnType="secondary" />}
               text="Add New Column"

@@ -14,7 +14,14 @@ export const kanbanApiSlice = kanbanApi.injectEndpoints({
       providesTags: ['Boards'],
     }),
     createNewBoard: builder.mutation<TCreateBoard, TBoard>({
-      query: board => `/boards/${board.name}/createboard`,
+      query: board => {
+        const { name, cols } = board;
+
+        if (cols && cols.length > 0) {
+          return `/boards/${name}/${cols.join('/')}`;
+        }
+        return `/boards/${name}`;
+      },
       invalidatesTags: ['Boards'],
     }),
     deleteBoard: builder.mutation<TDeleteBoard, TBoard>({

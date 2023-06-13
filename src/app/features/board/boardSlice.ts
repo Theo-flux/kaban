@@ -5,7 +5,7 @@ type TInitialState = {
 };
 
 const initialState: TInitialState = {
-  activeboard: '',
+  activeboard: 'Home',
 };
 
 type TBoardAction = {

@@ -122,7 +122,6 @@ function AddNewTaskModal({
     setSubtaskArr(newArr);
   };
 
-
   return (
     <ModalContainer open={open}>
       <ModalCard open={open}>

@@ -15,6 +15,7 @@ export type TDeleteBoard = {
 
 export type TBoard = {
   name: string;
+  cols?: Array<string>;
 };
 
 export type TSubtasks = {

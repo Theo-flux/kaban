@@ -20,7 +20,7 @@ export default async function handler(
 
     await NewBoard.createCollection();
 
-    res.status(200).json({ name: boardname, message: 'board created!' });
+    res.status(200).json({ name: req.query, message: 'board created!' });
   } catch (error) {
     res.status(400).json({ error });
   }

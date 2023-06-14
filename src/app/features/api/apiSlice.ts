@@ -19,8 +19,9 @@ export const kanbanApiSlice = kanbanApi.injectEndpoints({
 
         if (cols && cols.length > 0) {
           return `/boards/${name}/${cols.join('/')}`;
+        } else {
+          return `/boards/${name}`;
         }
-        return `/boards/${name}`;
       },
       invalidatesTags: ['Boards'],
     }),

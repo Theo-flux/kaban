@@ -46,7 +46,7 @@ function AddNewBoardModal({
       return setError("Board name can't be empty");
     } else setError('');
     const colsArr = columnArr.map(el => el.name);
-    const res = await updateBoard({ name: boardName.name });
+    const res = await updateBoard({ name: boardName.name, cols: colsArr });
     console.log(res);
     router.push(`/boards/${boardName.name}`);
     handleSetActiveBoard(boardName.name);
